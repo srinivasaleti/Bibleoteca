@@ -55,7 +55,7 @@ class Biblioteca {
                     this.printBooks();
                     break;
                 case "0":
-                    io.display("Quit");
+                    io.display("Thank you for your valuable time");
                     break label;
                 default:
                     io.display("Invalid Option");
