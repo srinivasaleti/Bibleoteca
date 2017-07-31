@@ -43,17 +43,24 @@ class Biblioteca {
         io.display(menu);
     }
 
-    void selectAOptionFromMenu() {
-        menu();
-        io.display("Select an Option From Menu::");
-        String option = io.getInput();
-        if (option.equals("1")) {
-            this.printBooks();
-        }
-        else if (option.equals("0")) {
-            io.display("Quit");
-        } else {
-            io.display("Invalid Option");
+    void selectMenu() {
+        String menuOption;
+        label:
+        while (true) {
+            menu();
+            io.display("Select an Option From Menu::");
+            menuOption = io.getInput();
+            switch (menuOption) {
+                case "1":
+                    this.printBooks();
+                    break;
+                case "0":
+                    io.display("Quit");
+                    break label;
+                default:
+                    io.display("Invalid Option");
+                    break;
+            }
         }
     }
 

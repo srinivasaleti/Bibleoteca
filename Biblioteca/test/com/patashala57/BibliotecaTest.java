@@ -90,22 +90,32 @@ class BibliotecaTest {
                 loveStory.stringRepresentation() + "\n" +
                 firstLove.stringRepresentation() + "\n";
 
-        when(mockIO.getInput()).thenReturn("1");
-        library.selectAOptionFromMenu();
+        when(mockIO.getInput()).thenReturn("1").thenReturn("0");
+        library.selectMenu();
 
         verify(mockIO).display(expectedMessage);
     }
 
     @Test
-    void expectedInvalidOptionAndTake() {
+    void expectedInvalidOption() {
         IO mockIO = mock(IO.class);
         Biblioteca library = new Biblioteca(mockIO, null);
         String expectedMessage = "Invalid Option";
 
-        when(mockIO.getInput()).thenReturn("3");
-        library.selectAOptionFromMenu();
+        when(mockIO.getInput()).thenReturn("3").thenReturn("0");
+        library.selectMenu();
 
         verify(mockIO).display(expectedMessage);
+    }
+
+    @Test
+    void executeUntilQuit() {
+        IO mockIO = mock(IO.class);
+        Biblioteca library = new Biblioteca(mockIO, null);
+
+        when(mockIO.getInput()).thenReturn("0");
+
+        library.selectMenu();
     }
 
 }

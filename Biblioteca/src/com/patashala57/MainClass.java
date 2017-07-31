@@ -17,7 +17,7 @@ class MainClass {
     public static void main(String args[]) {
         IO consoleIO = new ConsoleIO(System.out);
         Biblioteca library = new Biblioteca(consoleIO, listOfBooks());
-        library.selectAOptionFromMenu();
+        library.selectMenu();
     }
 
 }
