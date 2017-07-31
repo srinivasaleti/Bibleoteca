@@ -7,8 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class BibliotecaTest {
 
@@ -61,6 +60,50 @@ class BibliotecaTest {
                 firstLove.stringRepresentation() + "\n";
 
         library.printBooks();
+
+        verify(mockIO).display(expectedMessage);
+    }
+
+    @Test
+    void displayMenu() {
+        IO mockIO = mock(IO.class);
+        Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+        Book loveStory = new Book("Love Story", "Erich Segal", 1970);
+        Book firstLove = new Book("First Love", "Ivan Turgenev", 1860);
+        List<Book> books = Arrays.asList(halfGirlFriend, loveStory, firstLove);
+        Biblioteca library = new Biblioteca(mockIO, books);
+
+        library.menu();
+        verify(mockIO).display("Menu::\n1->List Books\n0->Quit\n");
+    }
+
+    @Test
+    void displayListOfBooks() {
+        IO mockIO = mock(IO.class);
+        Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+        Book loveStory = new Book("Love Story", "Erich Segal", 1970);
+        Book firstLove = new Book("First Love", "Ivan Turgenev", 1860);
+        List<Book> books = Arrays.asList(halfGirlFriend, loveStory, firstLove);
+        Biblioteca library = new Biblioteca(mockIO, books);
+        String expectedMessage = String.format("Books::\n%-35s %-35s %-35s", "Name", "Author", "Year") +
+                "\n\n" + halfGirlFriend.stringRepresentation() + "\n" +
+                loveStory.stringRepresentation() + "\n" +
+                firstLove.stringRepresentation() + "\n";
+
+        when(mockIO.getInput()).thenReturn("1");
+        library.selectAOptionFromMenu();
+
+        verify(mockIO).display(expectedMessage);
+    }
+
+    @Test
+    void expectedInvalidOptionAndTake() {
+        IO mockIO = mock(IO.class);
+        Biblioteca library = new Biblioteca(mockIO, null);
+        String expectedMessage = "Invalid Option";
+
+        when(mockIO.getInput()).thenReturn("3");
+        library.selectAOptionFromMenu();
 
         verify(mockIO).display(expectedMessage);
     }
