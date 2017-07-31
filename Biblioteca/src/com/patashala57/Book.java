@@ -4,14 +4,18 @@ package com.patashala57;
 class Book {
 
     private final String name;
+    private final String author;
+    private final Integer year;
 
-    Book(String name) {
+
+    Book(String name, String author, int year) {
         this.name = name;
+        this.author = author;
+        this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return name;
+    String stringRepresentation() {
+        return String.format("%-35s %-35s %-35s", this.name, this.author, this.year);
     }
 
 }

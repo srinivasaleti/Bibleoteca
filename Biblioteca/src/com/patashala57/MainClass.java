@@ -6,13 +6,12 @@ import java.util.List;
 //Responsible for executing Biblioteca
 class MainClass {
 
-    static List<Book> listOfBooks() {
-        Book halfGirlFriend = new Book("Half GirlFriend");
-        Book loveStory = new Book("Love Story");
-        Book firstLove = new Book("First Love");
-        List<Book> books = Arrays.asList(halfGirlFriend, loveStory, firstLove);
+    private static List<Book> listOfBooks() {
+        Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+        Book loveStory = new Book("Love Story", "Erich Segal", 1970);
+        Book firstLove = new Book("First Love", "Ivan Turgenev", 1860);
 
-        return books;
+        return Arrays.asList(halfGirlFriend, loveStory, firstLove);
     }
 
     public static void main(String args[]) {

@@ -28,10 +28,11 @@ class Biblioteca {
             return;
         }
 
-        StringBuilder result = new StringBuilder("Books::\n");
+        StringBuilder result = new StringBuilder(String.format("Books::\n%-35s %-35s %-35s","Name",
+                                                                "Author","Year")+"\n\n");
 
         for (Book book : books) {
-            result.append(book).append("\n");
+            result.append(book.stringRepresentation()).append("\n");
         }
 
         io.display(result.toString());

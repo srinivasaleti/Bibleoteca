@@ -2,6 +2,7 @@ package com.patashala57;
 
 import java.io.PrintStream;
 
+//Responsible for print something on given stream
 class ConsoleIO implements IO {
 
     private PrintStream out;
