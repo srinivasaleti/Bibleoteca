@@ -2,8 +2,6 @@ package com.patashala57;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.PrintStream;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -11,12 +9,10 @@ class BibliotecaTest {
 
     @Test
     void printWelcomeMessage() {
-        PrintStream out = mock(System.out.getClass());
-        Biblioteca biblioteca = new Biblioteca();
+        IO mockIO = mock(IO.class);
+        new Biblioteca(mockIO);
 
-        biblioteca.printWelcomeMessage(out);
-
-        verify(out).println("Welcome To Bangalore Public Library");
+        verify(mockIO).display("Welcome To Bangalore Public Library");
     }
 
 }
