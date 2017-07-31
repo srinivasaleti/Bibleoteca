@@ -42,7 +42,7 @@ class Biblioteca {
         String menu = "Menu::\n1->List Books\n0->Quit\n";
         io.display(menu);
     }
-    
+
     void selectAOptionFromMenu() {
         menu();
         io.display("Select an Option From Menu::");
@@ -50,7 +50,7 @@ class Biblioteca {
         if (option.equals("1")) {
             this.printBooks();
         }
-        if (option.equals("0")) {
+        else if (option.equals("0")) {
             io.display("Quit");
         } else {
             io.display("Invalid Option");
