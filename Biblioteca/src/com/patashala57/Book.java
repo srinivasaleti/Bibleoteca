@@ -8,10 +8,10 @@ class Book {
     private final int yearPublished;
 
 
-    Book(String name, String author, int year) {
+    Book(String name, String author, int yearPublished) {
         this.name = name;
         this.author = author;
-        this.yearPublished = year;
+        this.yearPublished = yearPublished;
     }
 
     String stringRepresentation() {

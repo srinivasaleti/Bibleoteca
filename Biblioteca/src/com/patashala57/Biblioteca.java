@@ -3,7 +3,7 @@ package com.patashala57;
 import java.util.ArrayList;
 import java.util.List;
 
-//Represents a room containing collections of books,\
+//Represents a room containing collections of books
 class Biblioteca {
 
     private final IO io;
@@ -41,14 +41,19 @@ class Biblioteca {
     }
 
     void menu() {
+        io.println("");
         io.println("Menu::");
         io.println("1->List Books");
         io.println("2->CheckOut a Book");
         io.println("quit to EXIT");
+        io.println("");
     }
 
     void selectMenu() {
         String menuOption;
+        final String LISTBOOKS = "1";
+        final String CHECKOUT = "2";
+        final String QUIT = "quit";
         label:
         while (true) {
             menu();
@@ -56,18 +61,20 @@ class Biblioteca {
             menuOption = io.getInput();
             menuOption = menuOption.toLowerCase();
             switch (menuOption) {
-                case "1":
+                case LISTBOOKS:
                     this.printBooks();
                     break;
-                case "2":
+                case CHECKOUT:
                     if (books == null || books.isEmpty()) {
                         io.println("No Books Available");
                     }
-                    io.print("Enter a Book Name to check Out::");
-                    String bookName = io.getInput();
-                    this.checkOutABook(bookName);
+                    else {
+                        io.print("Enter a Book Name to check Out::");
+                        String bookName = io.getInput();
+                        this.checkOutABook(bookName);
+                    }
                     break;
-                case "quit":
+                case QUIT:
                     io.println("Thank you for your valuable time");
                     break label;
                 default:

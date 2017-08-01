@@ -11,7 +11,7 @@ import static org.mockito.Mockito.verify;
 class ConsoleIOTest {
 
     @Test
-    void printHello() {
+    void displayHello() {
         PrintStream out = mock(System.out.getClass());
         Scanner scanner = new Scanner(System.in);
         ConsoleIO console = new ConsoleIO(out, scanner);
@@ -21,7 +21,7 @@ class ConsoleIOTest {
     }
 
     @Test
-    void printWorld() {
+    void displayWorld() {
         PrintStream out = mock(System.out.getClass());
         Scanner scanner = new Scanner(System.in);
         ConsoleIO console = new ConsoleIO(out, scanner);
@@ -31,7 +31,7 @@ class ConsoleIOTest {
     }
 
     @Test
-    void printHi(){
+    void displayHi() {
         PrintStream out = mock(System.out.getClass());
         Scanner scanner = new Scanner(System.in);
         ConsoleIO console = new ConsoleIO(out, scanner);
