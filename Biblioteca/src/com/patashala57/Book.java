@@ -5,17 +5,17 @@ class Book {
 
     private final String name;
     private final String author;
-    private final Integer year;
+    private final Integer yearPublished;
 
 
     Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
-        this.year = year;
+        this.yearPublished = year;
     }
 
     String stringRepresentation() {
-        return String.format("%-35s %-35s %-35s", this.name, this.author, this.year);
+        return String.format("%-35s %-35s %-35s", this.name, this.author, this.yearPublished);
     }
 
 }

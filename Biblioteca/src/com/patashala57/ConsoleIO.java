@@ -7,9 +7,11 @@ import java.util.Scanner;
 class ConsoleIO implements IO {
 
     private PrintStream out;
+    private Scanner scanner;
 
-    ConsoleIO(PrintStream out) {
+    ConsoleIO(PrintStream out, Scanner scanner) {
         this.out = out;
+        this.scanner = scanner;
     }
 
     @Override
@@ -19,7 +21,6 @@ class ConsoleIO implements IO {
 
     @Override
     public String getInput() {
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 

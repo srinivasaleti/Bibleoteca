@@ -1,5 +1,6 @@
 package com.patashala57;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Represents a room containing collections of books,\
@@ -13,8 +14,8 @@ class Biblioteca {
         this.books = books;
     }
 
-    Biblioteca(IO mockIO) {
-        this(mockIO, null);
+    Biblioteca(IO io) {
+        this(io, new ArrayList<>());
     }
 
     void printWelcomeMessage() {
@@ -22,8 +23,7 @@ class Biblioteca {
     }
 
     void printBooks() {
-
-        if (books == null || books.size() == 0) {
+        if (books == null || books.isEmpty()) {
             io.display("No Books Available\n");
             return;
         }
@@ -39,11 +39,12 @@ class Biblioteca {
     }
 
     void menu() {
-        String menu = "Menu::\n1->List Books\n0->Quit\n";
+        String menu = "Menu::\n1->List Books\n2->Quit\n";
         io.display(menu);
     }
 
     void selectMenu() {
+        printWelcomeMessage();
         String menuOption;
         label:
         while (true) {
@@ -54,7 +55,7 @@ class Biblioteca {
                 case "1":
                     this.printBooks();
                     break;
-                case "0":
+                case "2":
                     io.display("Thank you for your valuable time");
                     break label;
                 default:
