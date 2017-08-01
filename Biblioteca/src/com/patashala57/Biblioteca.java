@@ -51,11 +51,12 @@ class Biblioteca {
             menu();
             io.display("Select an Option From Menu::");
             menuOption = io.getInput();
+            menuOption.toLowerCase();
             switch (menuOption) {
                 case "1":
                     this.printBooks();
                     break;
-                case "2":
+                case "quit":
                     io.display("Thank you for your valuable time");
                     break label;
                 default:
