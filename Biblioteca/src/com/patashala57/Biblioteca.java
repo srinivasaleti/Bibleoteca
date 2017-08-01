@@ -7,11 +7,11 @@ import java.util.List;
 class Biblioteca {
 
     private final IO io;
-    private final List<Book> books;
+    private List<Book> books;
 
     Biblioteca(IO io, List<Book> books) {
         this.io = io;
-        this.books = books;
+        this.books = new ArrayList<>(books);
     }
 
     Biblioteca(IO io) {
@@ -22,7 +22,7 @@ class Biblioteca {
         io.display("Welcome To Bangalore Public Library");
     }
 
-    void printBooks() {
+    private void printBooks() {
         if (books == null || books.isEmpty()) {
             io.display("No Books Available\n");
             return;
@@ -39,22 +39,27 @@ class Biblioteca {
     }
 
     void menu() {
-        String menu = "Menu::\n1->List Books\n2->Quit\n";
+        String menu = "Menu::\n1->List Books\n2->checkout a book\nquit->Quit\n";
         io.display(menu);
     }
 
     void selectMenu() {
-        printWelcomeMessage();
         String menuOption;
         label:
         while (true) {
             menu();
             io.display("Select an Option From Menu::");
             menuOption = io.getInput();
-            menuOption.toLowerCase();
+
+
+            menuOption = menuOption.toLowerCase();
+
             switch (menuOption) {
                 case "1":
                     this.printBooks();
+                    break;
+                case "2":
+                    this.checkOutABook();
                     break;
                 case "quit":
                     io.display("Thank you for your valuable time");
@@ -64,6 +69,23 @@ class Biblioteca {
                     break;
             }
         }
+    }
+
+    Book checkOutABook() {
+        io.display("Enter a Book Name to check Out::");
+        String bookName = io.getInput();
+        bookName = bookName.toLowerCase();
+        Book checkedOut;
+        for (Book book : books) {
+            if (book.name().toLowerCase().equals(bookName)) {
+                checkedOut=book;
+                books.remove(book);
+                io.display("Thank you! Enjoy the book");
+                return checkedOut;
+            }
+        }
+        io.display("That book is not available");
+        return null;
     }
 
 }

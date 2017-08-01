@@ -18,6 +18,7 @@ class MainClass {
     public static void main(String args[]) {
         ConsoleIO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
         Biblioteca library = new Biblioteca(consoleIO, generateBooks());
+        library.printWelcomeMessage();
         library.selectMenu();
     }
 
