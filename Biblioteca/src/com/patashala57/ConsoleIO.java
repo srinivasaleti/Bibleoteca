@@ -15,13 +15,18 @@ class ConsoleIO implements IO {
     }
 
     @Override
-    public void display(String message) {
+    public void println(String message) {
         out.println(message);
     }
 
     @Override
     public String getInput() {
         return scanner.nextLine();
+    }
+
+    @Override
+    public void print(String message) {
+        out.print(message);
     }
 
 }

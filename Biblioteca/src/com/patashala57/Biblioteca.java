@@ -19,28 +19,32 @@ class Biblioteca {
     }
 
     void printWelcomeMessage() {
-        io.display("Welcome To Bangalore Public Library");
+        io.println("Welcome To Bangalore Public Library");
     }
 
     private void printBooks() {
         if (books == null || books.isEmpty()) {
-            io.display("No Books Available\n");
+            io.println("No Books Available\n");
             return;
         }
 
-        StringBuilder result = new StringBuilder(String.format("Books::\n%-35s %-35s %-35s", "Name",
-                "Author", "Year") + "\n\n");
+        io.println("Books::");
+        String headding = String.format("%-35s %-35s %-35s", "Name",
+                "Author", "Year");
+
+        io.println(headding);
 
         for (Book book : books) {
-            result.append(book.stringRepresentation()).append("\n");
+            io.println(book.stringRepresentation());
         }
 
-        io.display(result.toString());
     }
 
     void menu() {
-        String menu = "Menu::\n1->List Books\n2->checkout a book\nquit->Quit\n";
-        io.display(menu);
+        io.println("Menu::");
+        io.println("1->List Books");
+        io.println("2->CheckOut a Book");
+        io.println("quit to EXIT");
     }
 
     void selectMenu() {
@@ -48,43 +52,43 @@ class Biblioteca {
         label:
         while (true) {
             menu();
-            io.display("Select an Option From Menu::");
+            io.print("Select an Option From Menu::");
             menuOption = io.getInput();
-
-
             menuOption = menuOption.toLowerCase();
-
             switch (menuOption) {
                 case "1":
                     this.printBooks();
                     break;
                 case "2":
-                    this.checkOutABook();
+                    if (books == null || books.isEmpty()) {
+                        io.println("No Books Available");
+                    }
+                    io.print("Enter a Book Name to check Out::");
+                    String bookName = io.getInput();
+                    this.checkOutABook(bookName);
                     break;
                 case "quit":
-                    io.display("Thank you for your valuable time");
+                    io.println("Thank you for your valuable time");
                     break label;
                 default:
-                    io.display("Invalid Option");
+                    io.println("Invalid Option");
                     break;
             }
         }
     }
 
-    Book checkOutABook() {
-        io.display("Enter a Book Name to check Out::");
-        String bookName = io.getInput();
+    Book checkOutABook(String bookName) {
         bookName = bookName.toLowerCase();
         Book checkedOut;
         for (Book book : books) {
             if (book.name().toLowerCase().equals(bookName)) {
-                checkedOut=book;
+                checkedOut = book;
                 books.remove(book);
-                io.display("Thank you! Enjoy the book");
+                io.print("Thank you! Enjoy the book");
                 return checkedOut;
             }
         }
-        io.display("That book is not available");
+        io.println("That book is not available");
         return null;
     }
 
