@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 //Responsible for executing Biblioteca
-class MainClass {
+class Runner {
 
     private static List<Book> generateBooks() {
         Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
@@ -16,9 +16,8 @@ class MainClass {
 
     public static void main(String args[]) {
         ConsoleIO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
-        Biblioteca library = new Biblioteca(consoleIO, generateBooks());
-        library.displayWelcomeMessage();
-        library.selectMenu();
+        Biblioteca biblioteca = new Biblioteca(consoleIO, generateBooks());
+        biblioteca.launch();
     }
 
 }

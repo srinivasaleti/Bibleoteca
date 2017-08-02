@@ -33,22 +33,24 @@ class BookTest {
     @Test
     void displayTrueLoveForTrueLoveBook() {
         Book aBook = new Book("True Love", "Segal", 1975);
+        String expected = "True Love";
 
-        assertEquals("True Love", aBook.name());
+        assertEquals(expected, aBook.name());
     }
 
     @Test
     void bookNotEqualToNull() {
         Book aBook = new Book("Love Story", "Segal", 1970);
 
-        assertNotEquals(aBook, null);
+        assertNotEquals(null, aBook);
     }
 
     @Test
     void bookNotEqualToString() {
         Book aBook = new Book("Love Story", "Segal", 1970);
+        String unexpected = "srinu";
 
-        assertNotEquals(aBook, "srinu");
+        assertNotEquals(unexpected,aBook);
     }
 
     @Test

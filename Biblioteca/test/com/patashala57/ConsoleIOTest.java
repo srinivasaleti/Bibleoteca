@@ -15,9 +15,11 @@ class ConsoleIOTest {
         PrintStream out = mock(System.out.getClass());
         Scanner scanner = new Scanner(System.in);
         ConsoleIO console = new ConsoleIO(out, scanner);
+        String hello = "Hello";
 
-        console.println("Hello");
-        verify(out).println("Hello");
+        console.println(hello);
+
+        verify(out).println(hello);
     }
 
     @Test
@@ -25,9 +27,10 @@ class ConsoleIOTest {
         PrintStream out = mock(System.out.getClass());
         Scanner scanner = new Scanner(System.in);
         ConsoleIO console = new ConsoleIO(out, scanner);
+        String world = "World";
 
-        console.println("Hello");
-        verify(out).println("Hello");
+        console.println(world);
+        verify(out).println(world);
     }
 
     @Test
@@ -35,9 +38,10 @@ class ConsoleIOTest {
         PrintStream out = mock(System.out.getClass());
         Scanner scanner = new Scanner(System.in);
         ConsoleIO console = new ConsoleIO(out, scanner);
+        String hi = "hi";
 
-        console.print("Srinu");
-        verify(out).print("Srinu");
+        console.print(hi);
+        verify(out).print(hi);
     }
 
 }

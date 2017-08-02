@@ -22,10 +22,10 @@ class BibliotecaTest {
 
     @Test
     void displayWelcomeMessage() {
-        Biblioteca aBiblioteca = new Biblioteca(mockIO);
+        Biblioteca biblioteca = new Biblioteca(mockIO);
         String welcomeMessage = "Welcome To Bangalore Public Library";
 
-        aBiblioteca.displayWelcomeMessage();
+        biblioteca.displayWelcomeMessage();
 
         verify(mockIO).println(welcomeMessage);
     }
@@ -33,7 +33,7 @@ class BibliotecaTest {
     @Test
     void displayNoBooksAvailableWhenThereAreNoBooks() {
         List<Book> books = new ArrayList<>();
-        Biblioteca library = new Biblioteca(mockIO, books);
+        Biblioteca biblioteca = new Biblioteca(mockIO, books);
         String listBooks = "1";
         String quit = "quit";
         String noBooksAvailale = "No Books Available";
@@ -41,7 +41,7 @@ class BibliotecaTest {
         when(mockIO.getInput())
                 .thenReturn(listBooks)
                 .thenReturn(quit);
-        library.selectMenu();
+        biblioteca.selectMenu();
 
         verify(mockIO).println(noBooksAvailale);
     }
@@ -50,7 +50,7 @@ class BibliotecaTest {
     void displaySingleBook() {
         Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
         List<Book> books = Collections.singletonList(halfGirlFriend);
-        Biblioteca library = new Biblioteca(mockIO, books);
+        Biblioteca biblioteca = new Biblioteca(mockIO, books);
         String format = "%-35s %-35s %-35s";
         String headding = String.format(format, "Name", "Author", "Year");
         String listBooks = "1";
@@ -60,7 +60,7 @@ class BibliotecaTest {
         when(mockIO.getInput())
                 .thenReturn(listBooks)
                 .thenReturn(quit);
-        library.selectMenu();
+        biblioteca.selectMenu();
 
         verify(mockIO).println(booksMessage);
         verify(mockIO).println(headding);
@@ -68,13 +68,13 @@ class BibliotecaTest {
     }
 
     @Test
-    void displayMenu() {;
-        List<Book> books = null;
-        Biblioteca library = new Biblioteca(mockIO, books);
+    void displayMenu() {
+        Biblioteca library = new Biblioteca(mockIO, null);
+        int wantedNumberOfInvocations = 2;
 
         library.menu();
 
-        verify(mockIO,times(2)).println("");
+        verify(mockIO, times(wantedNumberOfInvocations)).println("");
         verify(mockIO).println("Menu::");
         verify(mockIO).println("1->List Books");
         verify(mockIO).println("2->CheckOut a Book");
@@ -95,13 +95,14 @@ class BibliotecaTest {
         String quit = "quit";
         String BooksMessage = "Books::";
         String selectOption = "Select an Option From Menu::";
+        int wantedNumberOfInvocations = 2;
 
         when(mockIO.getInput())
                 .thenReturn(listBooks)
                 .thenReturn(quit);
         library.selectMenu();
 
-        verify(mockIO, times(2)).print(selectOption);
+        verify(mockIO, times(wantedNumberOfInvocations)).print(selectOption);
         verify(mockIO).println(BooksMessage);
         verify(mockIO).println(headding);
         verify(mockIO).println(halfGirlFriend.stringRepresentation());
@@ -127,13 +128,13 @@ class BibliotecaTest {
 
     @Test
     void executeUntilQuit() {
-        Biblioteca library = new Biblioteca(mockIO, new ArrayList<>());
+        Biblioteca biblioteca = new Biblioteca(mockIO, new ArrayList<>());
         String quit = "quit";
         String selectAnOption = "Select an Option From Menu::";
         int wantedNumberOfInvocations = 1;
 
         when(mockIO.getInput()).thenReturn(quit);
-        library.selectMenu();
+        biblioteca.selectMenu();
 
         verify(mockIO, times(wantedNumberOfInvocations)).print(selectAnOption);
     }
@@ -152,6 +153,7 @@ class BibliotecaTest {
             String selectOptionMenu = "Select an Option From Menu::";
             String enterBookNameToCheckOut = "Enter a Book Name to check Out::";
             String thankYouEnjoyBook = "Thank you! Enjoy the book";
+            int wantedNumberOfInvocations = 2;
 
             when(mockIO.getInput()).
                     thenReturn(checkOutBooks).
@@ -159,7 +161,7 @@ class BibliotecaTest {
                     thenReturn(quit);
             library.selectMenu();
 
-            verify(mockIO, times(2)).print(selectOptionMenu);
+            verify(mockIO, times(wantedNumberOfInvocations)).print(selectOptionMenu);
             verify(mockIO).print(enterBookNameToCheckOut);
             verify(mockIO).println(thankYouEnjoyBook);
         }
@@ -179,6 +181,7 @@ class BibliotecaTest {
             String enterBookName = "Enter a Book Name to check Out::";
             String booksString = "Books::";
             String selectOptionFromMenu = "Select an Option From Menu::";
+            int wantedNumberOfInvocations = 3;
 
             when(mockIO.getInput()).
                     thenReturn(checkOutBooks).
@@ -187,7 +190,7 @@ class BibliotecaTest {
                     thenReturn(quit);
             library.selectMenu();
 
-            verify(mockIO, times(3)).print(selectOptionFromMenu);
+            verify(mockIO, times(wantedNumberOfInvocations)).print(selectOptionFromMenu);
             verify(mockIO).print(enterBookName);
             verify(mockIO).println(booksString);
             verify(mockIO).println(headding);
