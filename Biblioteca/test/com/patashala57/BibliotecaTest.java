@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class BibliotecaTest {
@@ -24,21 +23,27 @@ class BibliotecaTest {
     @Test
     void displayWelcomeMessage() {
         Biblioteca aBiblioteca = new Biblioteca(mockIO);
+        String welcomeMessage = "Welcome To Bangalore Public Library";
 
-        aBiblioteca.printWelcomeMessage();
+        aBiblioteca.displayWelcomeMessage();
 
-        verify(mockIO).println("Welcome To Bangalore Public Library");
+        verify(mockIO).println(welcomeMessage);
     }
 
     @Test
     void displayNoBooksAvailableWhenThereAreNoBooks() {
         List<Book> books = new ArrayList<>();
         Biblioteca library = new Biblioteca(mockIO, books);
+        String listBooks = "1";
+        String quit = "quit";
+        String noBooksAvailale = "No Books Available";
 
-        when(mockIO.getInput()).thenReturn("1").thenReturn("quit");
+        when(mockIO.getInput())
+                .thenReturn(listBooks)
+                .thenReturn(quit);
         library.selectMenu();
 
-        verify(mockIO).println("No Books Available\n");
+        verify(mockIO).println(noBooksAvailale);
     }
 
     @Test
@@ -48,28 +53,32 @@ class BibliotecaTest {
         Biblioteca library = new Biblioteca(mockIO, books);
         String format = "%-35s %-35s %-35s";
         String headding = String.format(format, "Name", "Author", "Year");
+        String listBooks = "1";
+        String quit = "quit";
+        String booksMessage = "Books::";
 
-        when(mockIO.getInput()).thenReturn("1").thenReturn("quit");
+        when(mockIO.getInput())
+                .thenReturn(listBooks)
+                .thenReturn(quit);
         library.selectMenu();
 
-        verify(mockIO).println("Books::");
+        verify(mockIO).println(booksMessage);
         verify(mockIO).println(headding);
         verify(mockIO).println(halfGirlFriend.stringRepresentation());
     }
 
     @Test
-    void displayMenu() {
-        Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
-        Book loveStory = new Book("Love Story", "Erich Segal", 1970);
-        Book firstLove = new Book("First Love", "Ivan Turgenev", 1860);
-        List<Book> books = Arrays.asList(halfGirlFriend, loveStory, firstLove);
+    void displayMenu() {;
+        List<Book> books = null;
         Biblioteca library = new Biblioteca(mockIO, books);
 
         library.menu();
 
+        verify(mockIO,times(2)).println("");
         verify(mockIO).println("Menu::");
         verify(mockIO).println("1->List Books");
         verify(mockIO).println("2->CheckOut a Book");
+        verify(mockIO).println("3->Return a Book");
         verify(mockIO).println("quit to EXIT");
     }
 
@@ -82,12 +91,18 @@ class BibliotecaTest {
         Biblioteca library = new Biblioteca(mockIO, books);
         String format = "%-35s %-35s %-35s";
         String headding = String.format(format, "Name", "Author", "Year");
+        String listBooks = "1";
+        String quit = "quit";
+        String BooksMessage = "Books::";
+        String selectOption = "Select an Option From Menu::";
 
-        when(mockIO.getInput()).thenReturn("1").thenReturn("quit");
+        when(mockIO.getInput())
+                .thenReturn(listBooks)
+                .thenReturn(quit);
         library.selectMenu();
 
-        verify(mockIO, times(2)).print("Select an Option From Menu::");
-        verify(mockIO).println("Books::");
+        verify(mockIO, times(2)).print(selectOption);
+        verify(mockIO).println(BooksMessage);
         verify(mockIO).println(headding);
         verify(mockIO).println(halfGirlFriend.stringRepresentation());
         verify(mockIO).println(loveStory.stringRepresentation());
@@ -98,51 +113,55 @@ class BibliotecaTest {
     void displayInvalidOption() {
         Biblioteca library = new Biblioteca(mockIO, new ArrayList<>());
         String expectedMessage = "Invalid Option";
+        String invalidOption = "5";
+        String selelctAnOptionFromMenu = "Select an Option From Menu::";
+        int wantedNumberOfInvocations = 2;
+        String QUIT = "quit";
 
-        when(mockIO.getInput()).thenReturn("3").thenReturn("quit");
+        when(mockIO.getInput()).thenReturn(invalidOption).thenReturn(QUIT);
         library.selectMenu();
 
-        verify(mockIO, times(2)).print("Select an Option From Menu::");
+        verify(mockIO, times(wantedNumberOfInvocations)).print(selelctAnOptionFromMenu);
         verify(mockIO).println(expectedMessage);
     }
 
     @Test
     void executeUntilQuit() {
         Biblioteca library = new Biblioteca(mockIO, new ArrayList<>());
+        String quit = "quit";
+        String selectAnOption = "Select an Option From Menu::";
+        int wantedNumberOfInvocations = 1;
 
-        when(mockIO.getInput()).thenReturn("quit");
-
+        when(mockIO.getInput()).thenReturn(quit);
         library.selectMenu();
-        verify(mockIO, times(1)).print("Select an Option From Menu::");
+
+        verify(mockIO, times(wantedNumberOfInvocations)).print(selectAnOption);
     }
 
     @Nested
     class CheckOut {
 
         @Test
-        void checkOutABook() {
-            Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
-            Book loveStory = new Book("Love Story", "Erich Segal", 1970);
-            Book firstLove = new Book("First Love", "Ivan Turgenev", 1860);
-            List<Book> books = Arrays.asList(halfGirlFriend, loveStory, firstLove);
-            Biblioteca library = new Biblioteca(mockIO, books);
-
-            Book checkOutABook = library.checkOutABook("Love Story");
-            assertEquals(loveStory, checkOutABook);
-        }
-
-        @Test
-        void displayThankYouMessageAfterSuccessfulCheckOutABook() {
+        void successFullCheckout() {
             Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
             List<Book> books = Collections.singletonList(halfGirlFriend);
             Biblioteca library = new Biblioteca(mockIO, books);
+            String checkOutBooks = "2";
+            String halfGirlFriendBookName = "half girlFriend";
+            String quit = "quit";
+            String selectOptionMenu = "Select an Option From Menu::";
+            String enterBookNameToCheckOut = "Enter a Book Name to check Out::";
+            String thankYouEnjoyBook = "Thank you! Enjoy the book";
 
-            when(mockIO.getInput()).thenReturn("2").thenReturn("half girlFriend").thenReturn("quit");
+            when(mockIO.getInput()).
+                    thenReturn(checkOutBooks).
+                    thenReturn(halfGirlFriendBookName).
+                    thenReturn(quit);
             library.selectMenu();
 
-            verify(mockIO, times(2)).print("Select an Option From Menu::");
-            verify(mockIO).print("Enter a Book Name to check Out::");
-            verify(mockIO).print("Thank you! Enjoy the book");
+            verify(mockIO, times(2)).print(selectOptionMenu);
+            verify(mockIO).print(enterBookNameToCheckOut);
+            verify(mockIO).println(thankYouEnjoyBook);
         }
 
         @Test
@@ -153,14 +172,24 @@ class BibliotecaTest {
             Biblioteca library = new Biblioteca(mockIO, books);
             String format = "%-35s %-35s %-35s";
             String headding = String.format(format, "Name", "Author", "Year");
+            String checkOutBooks = "2";
+            String loveStoryBookName = "Love Story";
+            String listBooks = "1";
+            String quit = "quit";
+            String enterBookName = "Enter a Book Name to check Out::";
+            String booksString = "Books::";
+            String selectOptionFromMenu = "Select an Option From Menu::";
 
-            when(mockIO.getInput()).thenReturn("2").thenReturn("Love Story").thenReturn("1").
-                    thenReturn("quit");
+            when(mockIO.getInput()).
+                    thenReturn(checkOutBooks).
+                    thenReturn(loveStoryBookName).
+                    thenReturn(listBooks).
+                    thenReturn(quit);
             library.selectMenu();
 
-            verify(mockIO, times(3)).print("Select an Option From Menu::");
-            verify(mockIO).print("Enter a Book Name to check Out::");
-            verify(mockIO).println("Books::");
+            verify(mockIO, times(3)).print(selectOptionFromMenu);
+            verify(mockIO).print(enterBookName);
+            verify(mockIO).println(booksString);
             verify(mockIO).println(headding);
             verify(mockIO).println(halfGirlFriend.stringRepresentation());
         }
@@ -170,13 +199,77 @@ class BibliotecaTest {
             Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
             List<Book> books = Collections.singletonList(halfGirlFriend);
             Biblioteca library = new Biblioteca(mockIO, books);
+            String checkOutBooks = "2";
+            String girlFriendBookName = "girlFriend";
+            String quit = "quit";
+            String selectOption = "Select an Option From Menu::";
+            String enterBookToCheckout = "Enter a Book Name to check Out::";
+            String bookNotAvailable = "That book is not available";
+            int wantedNumberOfInvocations = 2;
 
-            when(mockIO.getInput()).thenReturn("2").thenReturn("girlFriend").thenReturn("quit");
+            when(mockIO.getInput()).
+                    thenReturn(checkOutBooks).
+                    thenReturn(girlFriendBookName).
+                    thenReturn(quit);
             library.selectMenu();
 
-            verify(mockIO, times(2)).print("Select an Option From Menu::");
-            verify(mockIO).print("Enter a Book Name to check Out::");
-            verify(mockIO).println("That book is not available");
+            verify(mockIO, times(wantedNumberOfInvocations)).print(selectOption);
+            verify(mockIO).print(enterBookToCheckout);
+            verify(mockIO).println(bookNotAvailable);
+        }
+
+    }
+
+    @Nested
+    class ReturnBook {
+
+        @Test
+        void successFullReturnBook() {
+            Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+            Book loveStory = new Book("Love Story", "Erich Segal", 1970);
+            List<Book> books = Arrays.asList(halfGirlFriend, loveStory);
+            Biblioteca library = new Biblioteca(mockIO, books);
+            String format = "%-35s %-35s %-35s";
+            String headding = String.format(format, "Name", "Author", "Year");
+            String returnBook = "3";
+            String halfGirlFriendBookName = "half girlFriend";
+            String quit = "quit";
+            String listBooks = "1";
+            String greetingMessage = "Thank you for returning the book";
+            String checkOut = "2";
+
+            when(mockIO.getInput())
+                    .thenReturn(checkOut)
+                    .thenReturn(halfGirlFriendBookName)
+                    .thenReturn(returnBook)
+                    .thenReturn(halfGirlFriendBookName)
+                    .thenReturn(listBooks)
+                    .thenReturn(quit);
+            library.selectMenu();
+
+            verify(mockIO).println(greetingMessage);
+            verify(mockIO).println(headding);
+            verify(mockIO).println(loveStory.stringRepresentation());
+            verify(mockIO).println(halfGirlFriend.stringRepresentation());
+        }
+
+        @Test
+        void displayUnSuccessFullReturnMessage() {
+            Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+            List<Book> books = Collections.singletonList(halfGirlFriend);
+            Biblioteca library = new Biblioteca(mockIO, books);
+            String halfGirlFriendBookName = "half girlFriend";
+            String returnBook = "3";
+            String quit = "quit";
+            String notValidBook = "That is not a valid book to return";
+
+            when(mockIO.getInput()).
+                    thenReturn(returnBook)
+                    .thenReturn(halfGirlFriendBookName)
+                    .thenReturn(quit);
+            library.selectMenu();
+
+            verify(mockIO).println(notValidBook);
         }
 
     }
