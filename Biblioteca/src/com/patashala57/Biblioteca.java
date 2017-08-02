@@ -1,6 +1,7 @@
 package com.patashala57;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 //Represents a room containing collections of books
@@ -67,8 +68,7 @@ class Biblioteca {
                 case CHECKOUT:
                     if (books == null || books.isEmpty()) {
                         io.println("No Books Available");
-                    }
-                    else {
+                    } else {
                         io.print("Enter a Book Name to check Out::");
                         String bookName = io.getInput();
                         this.checkOutABook(bookName);
@@ -86,13 +86,14 @@ class Biblioteca {
 
     Book checkOutABook(String bookName) {
         bookName = bookName.toLowerCase();
-        Book checkedOut;
-        for (Book book : books) {
+        Book book;
+        Iterator iterator = this.books.iterator();
+        while (iterator.hasNext()) {
+            book = (Book) iterator.next();
             if (book.name().toLowerCase().equals(bookName)) {
-                checkedOut = book;
                 books.remove(book);
                 io.print("Thank you! Enjoy the book");
-                return checkedOut;
+                return book;
             }
         }
         io.println("That book is not available");
