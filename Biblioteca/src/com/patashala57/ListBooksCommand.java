@@ -5,6 +5,6 @@ class ListBooksCommand implements Command{
 
     @Override
     public void execute(Biblioteca biblioteca) {
-        biblioteca.displayAllBooks();
+        biblioteca.displayAllItems();
     }
 }

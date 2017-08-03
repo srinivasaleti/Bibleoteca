@@ -5,7 +5,7 @@ class ReturnBookCommand implements Command{
 
     @Override
     public void execute(Biblioteca biblioteca) {
-        biblioteca.readInputFromUserToReturnABook();
+        biblioteca.readInputToReturn();
     }
 
 }

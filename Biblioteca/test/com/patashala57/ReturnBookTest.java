@@ -14,7 +14,7 @@ class ReturnBookTest {
 
         returnBook.execute(biblioteca);
 
-        verify(biblioteca).readInputFromUserToReturnABook();
+        verify(biblioteca).readInputToReturn();
     }
 
 }

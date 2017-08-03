@@ -14,7 +14,7 @@ class ListBooksTest {
 
         listBooks.execute(bibilotica);
 
-        verify(bibilotica).displayAllBooks();
+        verify(bibilotica).displayAllItems();
     }
 
 }

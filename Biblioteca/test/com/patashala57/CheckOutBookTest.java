@@ -14,7 +14,7 @@ class CheckOutBookTest {
 
         checkOutBook.execute(biblioteca);
 
-        verify(biblioteca).checkOut();
+        verify(biblioteca).checkout();
     }
 
 }

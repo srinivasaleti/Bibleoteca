@@ -2,8 +2,7 @@ package com.patashala57;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BookTest {
 
@@ -24,21 +23,6 @@ class BookTest {
     }
 
     @Test
-    void displayBookName() {
-        Book aBook = new Book("Love Story", "Segal", 1970);
-
-        assertEquals("Love Story", aBook.name());
-    }
-
-    @Test
-    void displayTrueLoveForTrueLoveBook() {
-        Book aBook = new Book("True Love", "Segal", 1975);
-        String expected = "True Love";
-
-        assertEquals(expected, aBook.name());
-    }
-
-    @Test
     void bookNotEqualToNull() {
         Book aBook = new Book("Love Story", "Segal", 1970);
 
@@ -50,7 +34,7 @@ class BookTest {
         Book aBook = new Book("Love Story", "Segal", 1970);
         String unexpected = "srinu";
 
-        assertNotEquals(unexpected,aBook);
+        assertNotEquals(unexpected, aBook);
     }
 
     @Test
@@ -61,13 +45,28 @@ class BookTest {
         assertEquals(aBook, sameBook);
     }
 
-
     @Test
     void trueLoveBookEqualToTrueLove() {
         Book aBook = new Book("True Love", "Segal", 1970);
         Book sameBook = new Book("True Love", "Segal", 1970);
 
         assertEquals(aBook, sameBook);
+    }
+
+    @Test
+    void givenNameEqualToBookName() {
+        Book aBook = new Book("True Love", "Segal", 1970);
+        String bookName = "True Love";
+
+        assertTrue(aBook.isSameName(bookName));
+    }
+
+    @Test
+    void givenNameIsNotEqualToBookName() {
+        Book aBook = new Book("True Love", "Segal", 1970);
+        String bookName = "First Love";
+
+        assertFalse(aBook.isSameName(bookName));
     }
 
 }

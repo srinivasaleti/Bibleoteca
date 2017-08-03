@@ -3,12 +3,12 @@ package com.patashala57;
 import java.util.ArrayList;
 import java.util.List;
 
-//Represents a room containing collections of allBooks
+//Represents a room containing collections of Things
 class Biblioteca {
 
     private final IO io;
-    private List<Book> allBooks;
-    private List<Book> checkedOutBooks;
+    private List<LibraryItem> allItems;
+    private List<LibraryItem> checkedOutItems;
 
     private static final String SUCCESSFUL_RETURN = "Thank you for returning the book";
     private static final String PRINT_MESSAGE = "Welcome To Bangalore Public Library";
@@ -29,14 +29,14 @@ class Biblioteca {
     private static final String SELECT_MENU_OPTION = "Select an Option From Menu::";
     private static final String INVALID_BOOK_RETURN = "That is not a valid book to return";
 
-    Biblioteca(IO io, List<Book> books) {
+    Biblioteca(IO io, List<LibraryItem> items) {
         this.io = io;
-        if (books == null) {
-            this.allBooks = new ArrayList<>();
+        if (items == null) {
+            this.allItems = new ArrayList<>();
         } else {
-            this.allBooks = new ArrayList<>(books);
+            this.allItems = new ArrayList<>(items);
         }
-        this.checkedOutBooks = new ArrayList<>();
+        this.checkedOutItems = new ArrayList<>();
     }
 
     Biblioteca(IO io) {
@@ -52,8 +52,8 @@ class Biblioteca {
         io.println(PRINT_MESSAGE);
     }
 
-    void displayAllBooks() {
-        if (allBooks.isEmpty()) {
+    void displayAllItems() {
+        if (allItems.isEmpty()) {
             io.println(NO_BOOK_AVAILABLE_MESSAGE);
             return;
         }
@@ -61,8 +61,8 @@ class Biblioteca {
         String format = "%-35s %-35s %-35s";
         String headding = String.format(format, "Name", "Author", "Year");
         io.println(headding);
-        for (Book book : allBooks) {
-            io.println(book.stringRepresentation());
+        for (LibraryItem item : allItems) {
+            io.println(item.stringRepresentation());
         }
     }
 
@@ -103,8 +103,8 @@ class Biblioteca {
         return menuOption;
     }
 
-    void checkOut() {
-        if (allBooks.isEmpty()) {
+    void checkout() {
+        if (allItems.isEmpty()) {
             io.println(NO_BOOK_AVAILABLE_MESSAGE);
         } else {
             io.print(ENTER_BOOK_NAME_TO_CHECK_OUT);
@@ -113,48 +113,48 @@ class Biblioteca {
         }
     }
 
-    private void checkoutABook(String bookName) {
-        Book checkOutBook = findBook(this.allBooks, bookName);
-        moveBook(checkOutBook, allBooks, checkedOutBooks);
-        displayMessage(THANK_YOU_ENJOY_BOOK,THIS_BOOK_NOT_AVAILABLE,checkOutBook);
+    private void checkoutABook(String itemName) {
+        LibraryItem checkoutItem = findItem(this.allItems, itemName);
+        moveBook(checkoutItem, allItems, checkedOutItems);
+        displayMessage(THANK_YOU_ENJOY_BOOK,THIS_BOOK_NOT_AVAILABLE,checkoutItem);
     }
 
-    void readInputFromUserToReturnABook() {
+    void readInputToReturn() {
         io.print(ENTER_RETURN_BOOK_NAME);
         String bookName = io.getInput();
-        this.returnABook(bookName);
+        this.returnAItem(bookName);
     }
 
-    private void returnABook(String bookName) {
-        Book book = findBook(this.checkedOutBooks, bookName);
+    private void returnAItem(String bookName) {
+        LibraryItem book = findItem(this.checkedOutItems, bookName);
         displayMessage(SUCCESSFUL_RETURN, INVALID_BOOK_RETURN,book);
-        moveBook(book, checkedOutBooks, allBooks);
+        moveBook(book, checkedOutItems, allItems);
     }
 
-    private Book findBook(List<Book> booksList, String bookName) {
-        Book bookWithGivenName = null;
+    private LibraryItem findItem(List<LibraryItem> libraryItems, String bookName) {
+        LibraryItem itemWithGivenName = null;
         bookName = bookName.toLowerCase();
-        for (Book book : booksList) {
-            if (book.name().toLowerCase().equals(bookName)) {
-                bookWithGivenName = book;
+        for (LibraryItem item : libraryItems) {
+            if (item.isSameName(bookName)) {
+                itemWithGivenName = item;
                 break;
             }
         }
-        return bookWithGivenName;
+        return itemWithGivenName;
     }
 
-    private void displayMessage(String successMessage, String unSuccessMessage, Book book) {
-        if (book != null) {
+    private void displayMessage(String successMessage, String unSuccessMessage, LibraryItem item) {
+        if (item != null) {
             io.println(successMessage);
         } else {
             io.println(unSuccessMessage);
         }
     }
 
-    private void moveBook(Book book, List<Book> fromList, List<Book> toList) {
-        if (book != null) {
-            fromList.remove(book);
-            toList.add(book);
+    private void moveBook(LibraryItem item, List<LibraryItem> fromList, List<LibraryItem> toList) {
+        if (item != null) {
+            fromList.remove(item);
+            toList.add(item);
         }
     }
 

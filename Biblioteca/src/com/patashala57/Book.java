@@ -1,7 +1,7 @@
 package com.patashala57;
 
 //Represent a Written or printed work consisting of pages.
-class Book {
+class Book implements LibraryItem {
 
     private final String name;
     private final String author;
@@ -14,12 +14,9 @@ class Book {
         this.yearPublished = yearPublished;
     }
 
-    String stringRepresentation() {
+    @Override
+    public String stringRepresentation() {
         return String.format("%-35s %-35s %-35s", this.name, this.author, this.yearPublished);
-    }
-
-    String name() {
-        return this.name;
     }
 
     @Override
@@ -33,6 +30,11 @@ class Book {
         Book that = (Book) other;
         return this.name.equals(that.name) && this.author.equals(that.author)
                 && this.yearPublished == that.yearPublished;
+    }
+
+    @Override
+    public boolean isSameName(String bookName) {
+        return this.name.equalsIgnoreCase(bookName);
     }
 
 }

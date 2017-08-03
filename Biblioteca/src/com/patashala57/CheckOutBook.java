@@ -4,7 +4,7 @@ class CheckOutBook implements Command{
 
     @Override
     public void execute(Biblioteca biblioteca) {
-        biblioteca.checkOut();
+        biblioteca.checkout();
     }
 
 }

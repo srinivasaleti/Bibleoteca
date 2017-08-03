@@ -34,7 +34,7 @@ class BibliotecaTest {
 
     @Test
     void displayNoBooksAvailableWhenThereAreNoBooks() {
-        List<Book> books = new ArrayList<>();
+        List<LibraryItem> books = new ArrayList<>();
         Biblioteca biblioteca = new Biblioteca(mockIO, books);
         String listBooks = "1";
         String quit = "quit";
@@ -51,7 +51,7 @@ class BibliotecaTest {
     @Test
     void displaySingleBook() {
         Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
-        List<Book> books = Collections.singletonList(halfGirlFriend);
+        List<LibraryItem> books = Collections.singletonList(halfGirlFriend);
         Biblioteca biblioteca = new Biblioteca(mockIO, books);
         String format = "%-35s %-35s %-35s";
         String headding = String.format(format, "Name", "Author", "Year");
@@ -89,7 +89,7 @@ class BibliotecaTest {
         Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
         Book loveStory = new Book("Love Story", "Erich Segal", 1970);
         Book firstLove = new Book("First Love", "Ivan Turgenev", 1860);
-        List<Book> books = Arrays.asList(halfGirlFriend, loveStory, firstLove);
+        List<LibraryItem> books = Arrays.asList(halfGirlFriend, loveStory, firstLove);
         Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
         String format = "%-35s %-35s %-35s";
         String headding = String.format(format, "Name", "Author", "Year");
@@ -147,7 +147,7 @@ class BibliotecaTest {
         @Test
         void successFullCheckout() {
             Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
-            List<Book> books = Collections.singletonList(halfGirlFriend);
+            List<LibraryItem> books = Collections.singletonList(halfGirlFriend);
             Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
             String checkOutBooks = "2";
             String halfGirlFriendBookName = "half girlFriend";
@@ -172,7 +172,7 @@ class BibliotecaTest {
         void removeBookFromaBibliotecaAfterCheckOut() {
             Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
             Book loveStory = new Book("Love Story", "Erich Segal", 1970);
-            List<Book> books = Arrays.asList(halfGirlFriend, loveStory);
+            List<LibraryItem> books = Arrays.asList(halfGirlFriend, loveStory);
             Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
             String format = "%-35s %-35s %-35s";
             String headding = String.format(format, "Name", "Author", "Year");
@@ -202,7 +202,7 @@ class BibliotecaTest {
         @Test
         void displayBookNotAvailableAfterUnSuccessfulCheckOutABook() {
             Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
-            List<Book> books = Collections.singletonList(halfGirlFriend);
+            List<LibraryItem> books = Collections.singletonList(halfGirlFriend);
             Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
             String checkOutBooks = "2";
             String girlFriendBookName = "girlFriend";
@@ -232,7 +232,7 @@ class BibliotecaTest {
         void successFullReturnBook() {
             Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
             Book loveStory = new Book("Love Story", "Erich Segal", 1970);
-            List<Book> books = Arrays.asList(halfGirlFriend, loveStory);
+            List<LibraryItem> books = Arrays.asList(halfGirlFriend, loveStory);
             Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
             String format = "%-35s %-35s %-35s";
             String headding = String.format(format, "Name", "Author", "Year");
@@ -259,7 +259,7 @@ class BibliotecaTest {
         @Test
         void displaySuccessfulReturnMessage() {
             Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
-            List<Book> books = Collections.singletonList(halfGirlFriend);
+            List<LibraryItem> books = Collections.singletonList(halfGirlFriend);
             Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
             String returnBook = "3";
             String halfGirlFriendBookName = "half girlFriend";
@@ -283,7 +283,7 @@ class BibliotecaTest {
         @Test
         void displayUnSuccessFullReturnMessage() {
             Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
-            List<Book> books = Collections.singletonList(halfGirlFriend);
+            List<LibraryItem> books = Collections.singletonList(halfGirlFriend);
             Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
             String halfGirlFriendBookName = "half girlFriend";
             String returnBook = "3";
