@@ -109,29 +109,29 @@ class Biblioteca {
         } else {
             io.print(ENTER_BOOK_NAME_TO_CHECK_OUT);
             String bookName = io.getInput();
-            this.checkOutABook(bookName);
+            this.checkoutABook(bookName);
         }
     }
 
-    private void checkOutABook(String bookName) {
-        Book checkOutBook = findBook(this.allBooks, bookName, THANK_YOU_ENJOY_BOOK,
-                THIS_BOOK_NOT_AVAILABLE);
+    private void checkoutABook(String bookName) {
+        Book checkOutBook = findBook(this.allBooks, bookName);
         moveBook(checkOutBook, allBooks, checkedOutBooks);
+        displayMessage(THANK_YOU_ENJOY_BOOK,THIS_BOOK_NOT_AVAILABLE,checkOutBook);
     }
 
-    void returnABook() {
+    void readInputFromUserToReturnABook() {
         io.print(ENTER_RETURN_BOOK_NAME);
         String bookName = io.getInput();
         this.returnABook(bookName);
     }
 
     private void returnABook(String bookName) {
-        Book book = findBook(this.checkedOutBooks, bookName, SUCCESSFUL_RETURN, INVALID_BOOK_RETURN);
+        Book book = findBook(this.checkedOutBooks, bookName);
+        displayMessage(SUCCESSFUL_RETURN, INVALID_BOOK_RETURN,book);
         moveBook(book, checkedOutBooks, allBooks);
     }
 
-    private Book findBook(List<Book> booksList, String bookName, String succesMessage,
-                          String unSuccessMessage) {
+    private Book findBook(List<Book> booksList, String bookName) {
         Book bookWithGivenName = null;
         bookName = bookName.toLowerCase();
         for (Book book : booksList) {
@@ -140,12 +140,15 @@ class Biblioteca {
                 break;
             }
         }
-        if (bookWithGivenName != null) {
-            io.println(succesMessage);
+        return bookWithGivenName;
+    }
+
+    private void displayMessage(String successMessage, String unSuccessMessage, Book book) {
+        if (book != null) {
+            io.println(successMessage);
         } else {
             io.println(unSuccessMessage);
         }
-        return bookWithGivenName;
     }
 
     private void moveBook(Book book, List<Book> fromList, List<Book> toList) {
