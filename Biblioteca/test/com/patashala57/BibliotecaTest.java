@@ -301,4 +301,36 @@ class BibliotecaTest {
 
     }
 
+    @Test
+    void displayNoMovies(){
+        List<LibraryItem> Movies = new ArrayList<>();
+        Biblioteca biblioteca = new Biblioteca(mockIO, Movies);
+        String listMovies = "4";
+        String quit = "quit";
+        String noBooksAvailale = "No Books Available";
+
+        when(mockIO.getInput())
+                .thenReturn(listMovies)
+                .thenReturn(quit);
+        biblioteca.launch();
+
+        verify(mockIO).println(noBooksAvailale);
+    }
+
+    @Test
+    void displayASingleMovie() {
+        Movie aMovie = new Movie("Twilight", 2009, "HardWicke", "8");
+        List<LibraryItem> movie = Collections.singletonList(aMovie);
+        Biblioteca biblioteca = new Biblioteca(mockIO, movie);
+        String listBooks = "1";
+        String quit = "quit";
+
+        when(mockIO.getInput())
+                .thenReturn(listBooks)
+                .thenReturn(quit);
+        biblioteca.launch();
+
+        verify(mockIO).println(aMovie.stringRepresentation());
+    }
+
 }

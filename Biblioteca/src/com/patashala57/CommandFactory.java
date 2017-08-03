@@ -8,15 +8,19 @@ class CommandFactory {
 
     private static Map<String,Command> factory;
     private static final String LIST_BOOKS = "1";
-    private static final String CHECKOUT = "2";
+    private static final String CHECKOUT_BOOK = "2";
     private static final String QUIT = "quit";
     private static final String RETURN_BOOK = "3";
+    private static final String LIST_MOVIES="4";
+    private static final String CHECKOUT_MOVIE="5";
 
     static {
         factory=new HashMap<>();
         factory.put(LIST_BOOKS,new ListBooksCommand());
-        factory.put(CHECKOUT,new CheckOutBook());
+        factory.put(CHECKOUT_BOOK,new CheckOutBook());
         factory.put(RETURN_BOOK,new ReturnBookCommand());
+        factory.put(LIST_MOVIES,new ListMoviesCommand());
+        factory.put(CHECKOUT_MOVIE,new CheckOutMovieCommand());
         factory.put(QUIT,new QuitCommand());
     }
 

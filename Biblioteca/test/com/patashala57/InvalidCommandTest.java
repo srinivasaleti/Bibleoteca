@@ -8,9 +8,9 @@ import static org.mockito.Mockito.verify;
 class InvalidCommandTest {
 
     @Test
-    void shouldCallInvalidMethod(){
-        Biblioteca biblioteca=mock(Biblioteca.class);
-        InvalidCommand invalid=new InvalidCommand();
+    void shouldCallInvalidMethod() {
+        Biblioteca biblioteca = mock(Biblioteca.class);
+        InvalidCommand invalid = new InvalidCommand();
 
         invalid.execute(biblioteca);
 

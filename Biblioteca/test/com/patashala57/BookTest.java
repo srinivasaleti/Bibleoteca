@@ -69,4 +69,22 @@ class BookTest {
         assertFalse(aBook.isSameName(bookName));
     }
 
+    @Test
+    void stringRepresentationOfHalfGirlFriend() {
+        Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+        String format = "%-35s %-35s %-35s";
+        String expected = String.format(format, "Half GirlFriend", "Chetan Bhagat", 2014);
+
+        assertEquals(halfGirlFriend.stringRepresentation(), expected);
+    }
+
+    @Test
+    void stringRepresentationOfTrueLove() {
+        Book trueLove = new Book("True Love", "Chetan Bhagat", 2014);
+        String format = "%-35s %-35s %-35s";
+        String expected = String.format(format, "True Love", "Chetan Bhagat", 2014);
+
+        assertEquals(trueLove.stringRepresentation(), expected);
+    }
+
 }

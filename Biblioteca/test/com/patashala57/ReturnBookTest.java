@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 class ReturnBookTest {
 
     @Test
-    void shouldCallReturnBookMethod(){
+    void shouldCallReturnBookMethod() {
         Biblioteca biblioteca = mock(Biblioteca.class);
         ReturnBookCommand returnBook = new ReturnBookCommand();
 
