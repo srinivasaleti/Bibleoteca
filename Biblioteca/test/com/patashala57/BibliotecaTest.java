@@ -33,7 +33,7 @@ class BibliotecaTest {
     }
 
     @Test
-    void displayNoBooksAvailableWhenThereAreNoBooks() {
+    void displayNoBooksAvailable() {
         List<LibraryItem> books = new ArrayList<>();
         Biblioteca biblioteca = new Biblioteca(mockIO, books);
         String listBooks = "1";
@@ -54,7 +54,7 @@ class BibliotecaTest {
         List<LibraryItem> books = Collections.singletonList(halfGirlFriend);
         Biblioteca biblioteca = new Biblioteca(mockIO, books);
         String format = "%-35s %-35s %-35s";
-        String headding = String.format(format, "Name", "Author", "Year");
+        String header = String.format(format, "Name", "Author", "Year");
         String listBooks = "1";
         String quit = "quit";
         String booksMessage = "Books::";
@@ -65,7 +65,7 @@ class BibliotecaTest {
         biblioteca.launch();
 
         verify(mockIO).println(booksMessage);
-        verify(mockIO).println(headding);
+        verify(mockIO).println(header);
         verify(mockIO).println(halfGirlFriend.stringRepresentation());
     }
 
@@ -92,7 +92,7 @@ class BibliotecaTest {
         List<LibraryItem> books = Arrays.asList(halfGirlFriend, loveStory, firstLove);
         Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
         String format = "%-35s %-35s %-35s";
-        String headding = String.format(format, "Name", "Author", "Year");
+        String header = String.format(format, "Name", "Author", "Year");
         String listBooks = "1";
         String quit = "quit";
         String BooksMessage = "Books::";
@@ -106,7 +106,7 @@ class BibliotecaTest {
 
         verify(mockIO, times(wantedNumberOfInvocations)).print(selectOption);
         verify(mockIO).println(BooksMessage);
-        verify(mockIO).println(headding);
+        verify(mockIO).println(header);
         verify(mockIO).println(halfGirlFriend.stringRepresentation());
         verify(mockIO).println(loveStory.stringRepresentation());
         verify(mockIO).println(firstLove.stringRepresentation());
@@ -116,7 +116,7 @@ class BibliotecaTest {
     void displayInvalidOption() {
         Biblioteca aBiblioteca = new Biblioteca(mockIO, new ArrayList<>());
         String expectedMessage = "Invalid Option";
-        String invalidOption = "5";
+        String invalidOption = "invalid";
         String selelctAnOptionFromMenu = "Select an Option From Menu::";
         int wantedNumberOfInvocations = 2;
         String QUIT = "quit";
@@ -142,7 +142,7 @@ class BibliotecaTest {
     }
 
     @Nested
-    class CheckOut {
+    class CheckOutBook {
 
         @Test
         void successFullCheckout() {
@@ -175,7 +175,7 @@ class BibliotecaTest {
             List<LibraryItem> books = Arrays.asList(halfGirlFriend, loveStory);
             Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
             String format = "%-35s %-35s %-35s";
-            String headding = String.format(format, "Name", "Author", "Year");
+            String header = String.format(format, "Name", "Author", "Year");
             String checkOutBooks = "2";
             String loveStoryBookName = "Love Story";
             String listBooks = "1";
@@ -195,7 +195,7 @@ class BibliotecaTest {
             verify(mockIO, times(wantedNumberOfInvocations)).print(selectOptionFromMenu);
             verify(mockIO).print(enterBookName);
             verify(mockIO).println(booksString);
-            verify(mockIO).println(headding);
+            verify(mockIO).println(header);
             verify(mockIO).println(halfGirlFriend.stringRepresentation());
         }
 
@@ -235,7 +235,7 @@ class BibliotecaTest {
             List<LibraryItem> books = Arrays.asList(halfGirlFriend, loveStory);
             Biblioteca aBiblioteca = new Biblioteca(mockIO, books);
             String format = "%-35s %-35s %-35s";
-            String headding = String.format(format, "Name", "Author", "Year");
+            String header = String.format(format, "Name", "Author", "Year");
             String returnBook = "3";
             String halfGirlFriendBookName = "half girlFriend";
             String quit = "quit";
@@ -251,7 +251,7 @@ class BibliotecaTest {
                     .thenReturn(quit);
             aBiblioteca.launch();
 
-            verify(mockIO).println(headding);
+            verify(mockIO).println(header);
             verify(mockIO).println(loveStory.stringRepresentation());
             verify(mockIO).println(halfGirlFriend.stringRepresentation());
         }
