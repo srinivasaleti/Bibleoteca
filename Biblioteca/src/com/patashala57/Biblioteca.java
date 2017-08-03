@@ -45,10 +45,10 @@ class Biblioteca {
 
     void launch() {
         displayWelcomeMessage();
-        selectMenu();
+        menuSelection();
     }
 
-    void displayWelcomeMessage() {
+    private void displayWelcomeMessage() {
         io.println(PRINT_MESSAGE);
     }
 
@@ -66,7 +66,7 @@ class Biblioteca {
         }
     }
 
-    void menu() {
+    void displayMenu() {
         String options[] = {EMPTY_LINE, MENU, LIST_OPTION, CHECKOUT_OPTION, RETURN_OPTION,
                 QUIT_OPTION, EMPTY_LINE};
         for (String option : options) {
@@ -74,10 +74,10 @@ class Biblioteca {
         }
     }
 
-    void selectMenu() {
+    private void menuSelection() {
         String menuOption;
         while (true) {
-            menu();
+            displayMenu();
             menuOption = readMenuOptionFromUser();
             Command command = CommandFactory.getCommand(menuOption);
             command.execute(this);
@@ -119,13 +119,13 @@ class Biblioteca {
         moveBook(checkOutBook, allBooks, checkedOutBooks);
     }
 
-    void returnBook() {
+    void returnABook() {
         io.print(ENTER_RETURN_BOOK_NAME);
         String bookName = io.getInput();
-        this.returnBook(bookName);
+        this.returnABook(bookName);
     }
 
-    private void returnBook(String bookName) {
+    private void returnABook(String bookName) {
         Book book = findBook(this.checkedOutBooks, bookName, SUCCESSFUL_RETURN, INVALID_BOOK_RETURN);
         moveBook(book, checkedOutBooks, allBooks);
     }
