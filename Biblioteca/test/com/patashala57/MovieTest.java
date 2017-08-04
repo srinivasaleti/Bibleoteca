@@ -67,7 +67,7 @@ class MovieTest {
     }
 
     @Test
-    void stringRepresentationLoveTwilight() {
+    void stringRepresentationOfTwilight() {
         String format = "%-35s %-35s %-35s %-35d";
         Movie aMovie = new Movie("Twilight", 2009, "HardWicke", "8");
         String name = "Twilight";

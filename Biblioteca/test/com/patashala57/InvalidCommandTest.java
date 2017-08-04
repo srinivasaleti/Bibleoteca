@@ -8,13 +8,14 @@ import static org.mockito.Mockito.verify;
 class InvalidCommandTest {
 
     @Test
-    void shouldCallInvalidMethod() {
-        Biblioteca biblioteca = mock(Biblioteca.class);
-        InvalidCommand invalid = new InvalidCommand();
+    void shouldPrintInvalidMessage() {
+        IO mockIO=mock(IO.class);
+        InvalidCommand invalid = new InvalidCommand(mockIO);
+        String invalidBook = "Invalid Option";
 
-        invalid.execute(biblioteca);
+        invalid.execute();
 
-        verify(biblioteca).invalid();
+        verify(mockIO).println(invalidBook);
     }
 
 }

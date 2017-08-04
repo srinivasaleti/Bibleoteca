@@ -14,22 +14,26 @@ class CommandFactory {
     private static final String LIST_MOVIES="4";
     private static final String CHECKOUT_MOVIE="5";
 
-    static {
+    private Biblioteca biblioteca;
+    private IO io;
+    CommandFactory(Biblioteca biblioteca,IO io){
+        this.biblioteca=biblioteca;
+        this.io=io;
         factory=new HashMap<>();
-        factory.put(LIST_BOOKS,new ListBooksCommand());
-        factory.put(CHECKOUT_BOOK,new CheckOutBook());
-        factory.put(RETURN_BOOK,new ReturnBookCommand());
-        factory.put(LIST_MOVIES,new ListMoviesCommand());
-        factory.put(CHECKOUT_MOVIE,new CheckOutMovieCommand());
-        factory.put(QUIT,new QuitCommand());
+        factory.put(LIST_BOOKS,new ListBooksCommand(biblioteca,io));
+        factory.put(CHECKOUT_BOOK,new CheckoutBookCommand(biblioteca,io));
+        factory.put(RETURN_BOOK,new ReturnBookCommand(biblioteca,io));
+        factory.put(LIST_MOVIES,new ListMoviesCommand(biblioteca,io));
+        factory.put(CHECKOUT_MOVIE,new CheckoutMovieCommand(biblioteca,io));
+        factory.put(QUIT,new QuitCommand(io));
     }
 
-    static Command getCommand(String commandString){
+    Command getCommand(String commandString){
         if(factory.containsKey(commandString)) {
             return factory.get(commandString);
         }
         else{
-            return new InvalidCommand();
+            return new InvalidCommand(io);
         }
     }
 
