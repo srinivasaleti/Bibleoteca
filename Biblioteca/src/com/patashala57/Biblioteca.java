@@ -1,5 +1,7 @@
 package com.patashala57;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,7 @@ class Biblioteca {
     private static final String RETURN_BOOK_OPTION = "3->Return a Book";
     private static final String LIST_MOVIES = "4->List Movies";
     private static final String CHECKOUT_MOVIES = "5->Checkout Movie";
+    private static final String RETURN_MOVIES = "6->Return Movie";
     private static final String QUIT_OPTION = "quit to EXIT";
     private static final String EMPTY_LINE = "";
     private static final String SELECT_MENU_OPTION = "Select an Option From Menu::";
@@ -63,7 +66,7 @@ class Biblioteca {
 
     void displayMenu() {
         String options[] = {EMPTY_LINE, MENU, LIST_OPTION, CHECKOUT_BOOK_OPTION, RETURN_BOOK_OPTION,
-                LIST_MOVIES, CHECKOUT_MOVIES, QUIT_OPTION, EMPTY_LINE};
+                LIST_MOVIES, CHECKOUT_MOVIES, RETURN_MOVIES , QUIT_OPTION, EMPTY_LINE};
         for (String option : options) {
             io.println(option);
         }

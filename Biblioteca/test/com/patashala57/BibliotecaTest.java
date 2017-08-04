@@ -57,6 +57,7 @@ class BibliotecaTest {
         verify(mockIO).println("3->Return a Book");
         verify(mockIO).println("4->List Movies");
         verify(mockIO).println("5->Checkout Movie");
+        verify(mockIO).println("6->Return Movie");
         verify(mockIO).println("quit to EXIT");
     }
 
