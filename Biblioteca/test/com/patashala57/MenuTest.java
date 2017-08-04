@@ -37,10 +37,13 @@ class MenuTest {
 
     @Test
     void displayWelcomeMessage() {
+        String welcomeMessage = "Welcome To Bangalore Public Library";
         when(mockIO.getInput())
                 .thenReturn("quit");
+        menu.launch();
 
-        verify(mockIO).print("displayWelcomeMessage");
+        verify(mockIO).println(welcomeMessage);
+
     }
 
     @Test
@@ -61,7 +64,7 @@ class MenuTest {
                 .thenReturn("quit");
         menu.menuSelection();
 
-        verify(biblioteca).displayItems(Book.class);
+        verify(biblioteca).stringRepresentationOfItems(Book.class);
     }
 
     @Test
@@ -94,7 +97,7 @@ class MenuTest {
                 .thenReturn("quit");
         menu.menuSelection();
 
-        verify(biblioteca).displayItems(Movie.class);
+        verify(biblioteca).stringRepresentationOfItems(Movie.class);
     }
 
 }

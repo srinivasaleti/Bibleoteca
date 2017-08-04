@@ -28,7 +28,7 @@ class ListMoviesCommand implements Command {
         String year = "Year";
         String header = String.format(format, name, director, rating, year);
         consoleIO.println(header);
-        biblioteca.displayItems(Movie.class);
+        consoleIO.println(biblioteca.stringRepresentationOfItems(Movie.class));
     }
 
 }

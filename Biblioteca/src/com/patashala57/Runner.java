@@ -7,7 +7,7 @@ import java.util.Scanner;
 //Responsible for executing Biblioteca
 class Runner {
 
-    private static List<LibraryItem> generateBooks() {
+    private static List<LibraryItem> generateItems() {
         Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
         Book loveStory = new Book("Love Story", "Erich Segal", 1970);
         Book firstLove = new Book("First Love", "Ivan Turgenev", 1860);
@@ -18,7 +18,7 @@ class Runner {
 
     public static void main(String args[]) {
         ConsoleIO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
-        Biblioteca biblioteca = new Biblioteca(consoleIO, generateBooks());
+        Biblioteca biblioteca = new Biblioteca(generateItems());
         Menu menu=new Menu(biblioteca,consoleIO);
 
         menu.launch();

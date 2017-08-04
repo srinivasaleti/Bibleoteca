@@ -25,6 +25,11 @@ class ConsoleIO implements IO {
     }
 
     @Override
+    public String lineSeparator() {
+        return System.lineSeparator();
+    }
+
+    @Override
     public void print(String message) {
         out.print(message);
     }

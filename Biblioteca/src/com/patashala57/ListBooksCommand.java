@@ -27,7 +27,7 @@ class ListBooksCommand implements Command {
         String year = "Year Published";
         String header = String.format(format, name, author, year);
         consoleIO.println(header);
-        biblioteca.displayItems(Book.class);
+        consoleIO.println(biblioteca.stringRepresentationOfItems(Book.class));
     }
 
 }

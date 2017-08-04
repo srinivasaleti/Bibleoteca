@@ -23,6 +23,9 @@ class Book implements LibraryItem {
         if (other == null) {
             return false;
         }
+        if (this == other) {
+            return true;
+        }
         if (this.getClass() != other.getClass()) {
             return false;
         }

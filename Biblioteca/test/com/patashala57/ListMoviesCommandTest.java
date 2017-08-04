@@ -16,7 +16,7 @@ class ListMoviesCommandTest {
     void beforeEach() {
         biblioteca = mock(Biblioteca.class);
         mockIO = mock(IO.class);
-        listMoviesCommand = new ListMoviesCommand(biblioteca,mockIO);
+        listMoviesCommand = new ListMoviesCommand(biblioteca, mockIO);
 
     }
 
@@ -30,7 +30,7 @@ class ListMoviesCommandTest {
     }
 
     @Test
-    void displayHeading(){
+    void displayHeader() {
         String movies = "Movies::";
         String format = "%-35s %-35s %-35s %-35s";
         String name = "Name";
@@ -47,10 +47,15 @@ class ListMoviesCommandTest {
     }
 
     @Test
-    void shouldCallDisplayAllItemsBibiloteca() {
+    void displayMoviesInBiblioteca() {
+        Movie titanic = new Movie("Titanic", 1997, "Cameron", "9");
+
+        when(biblioteca.isNoItemsAvailable(Movie.class)).thenReturn(false);
+        when(biblioteca.stringRepresentationOfItems(Movie.class))
+                .thenReturn(titanic.stringRepresentation());
         listMoviesCommand.execute();
 
-        verify(biblioteca).displayItems(Movie.class);
+        verify(mockIO).println(titanic.stringRepresentation());
     }
 
 }

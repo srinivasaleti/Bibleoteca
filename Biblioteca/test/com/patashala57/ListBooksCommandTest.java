@@ -15,7 +15,7 @@ class ListBooksCommandTest {
     void beforeEach() {
         mockIO = mock(IO.class);
         biblioteca = mock(Biblioteca.class);
-        listBooks=new ListBooksCommand(biblioteca,mockIO);
+        listBooks = new ListBooksCommand(biblioteca, mockIO);
     }
 
     @Test
@@ -37,7 +37,6 @@ class ListBooksCommandTest {
         String yearPublished = "Year Published";
         String header = String.format(format, name, author, yearPublished);
 
-        when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
         listBooks.execute();
 
         verify(mockIO).println(BOOKS);
@@ -45,11 +44,15 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void shouldCallDisplayItems() {
+    void displayAllBooksInBiblioteca() {
+        Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+
         when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
+        when(biblioteca.stringRepresentationOfItems(Book.class)).
+                thenReturn(halfGirlFriend.stringRepresentation());
         listBooks.execute();
 
-        verify(biblioteca).displayItems(Book.class);
+        verify(mockIO).println(halfGirlFriend.stringRepresentation());
     }
 
 }

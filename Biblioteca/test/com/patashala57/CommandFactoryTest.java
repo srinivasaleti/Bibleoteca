@@ -17,7 +17,7 @@ class CommandFactoryTest {
     @BeforeEach
     void beforeEach() {
         mockIO = mock(IO.class);
-        biblioteca = new Biblioteca(mockIO, null);
+        biblioteca = new Biblioteca(null);
         factory = new CommandFactory(biblioteca, mockIO);
     }
 
