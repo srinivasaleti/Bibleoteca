@@ -19,7 +19,9 @@ class Runner {
     public static void main(String args[]) {
         ConsoleIO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
         Biblioteca biblioteca = new Biblioteca(consoleIO, generateBooks());
-        biblioteca.launch();
+        Menu menu=new Menu(biblioteca,consoleIO);
+
+        menu.launch();
     }
 
 }

@@ -21,18 +21,6 @@ class BibliotecaTest {
     }
 
     @Test
-    void displayWelcomeMessage() {
-        Biblioteca biblioteca = new Biblioteca(mockIO, null);
-        String quit = "quit";
-        String welcomeMessage = "Welcome To Bangalore Public Library";
-
-        when(mockIO.getInput()).thenReturn(quit);
-        biblioteca.launch();
-
-        verify(mockIO).println(welcomeMessage);
-    }
-
-    @Test
     void displaySingleBook() {
         Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
         List<LibraryItem> books = Collections.singletonList(halfGirlFriend);
@@ -41,24 +29,6 @@ class BibliotecaTest {
         biblioteca.displayItems(Book.class);
 
         verify(mockIO).println(halfGirlFriend.stringRepresentation());
-    }
-
-    @Test
-    void displayMenu() {
-        Biblioteca aBiblioteca = new Biblioteca(mockIO, null);
-        int wantedNumberOfInvocations = 2;
-
-        aBiblioteca.displayMenu();
-
-        verify(mockIO, times(wantedNumberOfInvocations)).println("");
-        verify(mockIO).println("Menu::");
-        verify(mockIO).println("1->List Books");
-        verify(mockIO).println("2->CheckOut a Book");
-        verify(mockIO).println("3->Return a Book");
-        verify(mockIO).println("4->List Movies");
-        verify(mockIO).println("5->Checkout Movie");
-        verify(mockIO).println("6->Return Movie");
-        verify(mockIO).println("quit to EXIT");
     }
 
     @Test
@@ -75,34 +45,6 @@ class BibliotecaTest {
         verify(mockIO).println(firstLove.stringRepresentation());
     }
 
-    @Test
-    void displayInvalidOption() {
-        Biblioteca aBiblioteca = new Biblioteca(mockIO, new ArrayList<>());
-        String expectedMessage = "Invalid Option";
-        String invalidOption = "invalid";
-        String selelctAnOptionFromMenu = "Select an Option From Menu::";
-        int wantedNumberOfInvocations = 2;
-        String QUIT = "quit";
-
-        when(mockIO.getInput()).thenReturn(invalidOption).thenReturn(QUIT);
-        aBiblioteca.launch();
-
-        verify(mockIO, times(wantedNumberOfInvocations)).print(selelctAnOptionFromMenu);
-        verify(mockIO).println(expectedMessage);
-    }
-
-    @Test
-    void executeUntilQuit() {
-        Biblioteca biblioteca = new Biblioteca(mockIO, new ArrayList<>());
-        String quit = "quit";
-        String selectAnOption = "Select an Option From Menu::";
-        int wantedNumberOfInvocations = 1;
-
-        when(mockIO.getInput()).thenReturn(quit);
-        biblioteca.launch();
-
-        verify(mockIO, times(wantedNumberOfInvocations)).print(selectAnOption);
-    }
 
     @Nested
     class CheckOutBook {
@@ -124,7 +66,7 @@ class BibliotecaTest {
                     thenReturn(checkOutBooks).
                     thenReturn(halfGirlFriendBookName).
                     thenReturn(quit);
-            aBiblioteca.launch();
+            //aBiblioteca.launch();
 
             verify(mockIO, times(wantedNumberOfInvocations)).print(selectOptionMenu);
             verify(mockIO).print(enterBookNameToCheckOut);
@@ -153,7 +95,7 @@ class BibliotecaTest {
                     thenReturn(loveStoryBookName).
                     thenReturn(listBooks).
                     thenReturn(quit);
-            aBiblioteca.launch();
+            //aBiblioteca.launch();
 
             verify(mockIO, times(wantedNumberOfInvocations)).print(selectOptionFromMenu);
             verify(mockIO).print(enterBookName);
@@ -179,7 +121,7 @@ class BibliotecaTest {
                     thenReturn(checkOutBooks).
                     thenReturn(girlFriendBookName).
                     thenReturn(quit);
-            aBiblioteca.launch();
+            //aBiblioteca.launch();
 
             verify(mockIO, times(wantedNumberOfInvocations)).print(selectOption);
             verify(mockIO).print(enterBookToCheckout);
