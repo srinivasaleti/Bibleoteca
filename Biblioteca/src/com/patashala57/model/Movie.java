@@ -3,10 +3,10 @@ package com.patashala57.model;
 //Represents a film
 public class Movie implements LibraryItem {
 
-    private String name;
-    private int yearReleased;
-    private String director;
-    private String rating;
+    private final String name;
+    private final int yearReleased;
+    private final String director;
+    private final String rating;
 
     public Movie(String name, int yearReleased, String director, String rating) {
         this.name = name;
@@ -27,8 +27,10 @@ public class Movie implements LibraryItem {
             return false;
         }
         Movie that = (Movie) other;
-        return this.name.equals(that.name) && that.director.equals(that.director) &&
-                this.yearReleased == that.yearReleased && this.rating.equals(that.rating);
+        return this.name.equals(that.name) &&
+                this.director.equals(that.director) &&
+                this.yearReleased == that.yearReleased &&
+                this.rating.equals(that.rating);
     }
 
     @Override
@@ -41,4 +43,5 @@ public class Movie implements LibraryItem {
     public boolean isSameName(String name) {
         return this.name.equalsIgnoreCase(name);
     }
+
 }

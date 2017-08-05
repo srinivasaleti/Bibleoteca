@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 //Represents a room containing collections of items
 public class Biblioteca implements Library {
 
-    private List<LibraryItem> allItems;
-    private List<LibraryItem> checkedOutItems;
+    private final List<LibraryItem> allItems;
+    private final List<LibraryItem> checkedOutItems;
 
     public Biblioteca(List<LibraryItem> items) {
         if (items == null) {
@@ -33,20 +33,22 @@ public class Biblioteca implements Library {
     }
 
     @Override
-    public Optional<LibraryItem> checkoutItem(Class<? extends LibraryItem> itemClass, String itemName) {
+    public Optional<LibraryItem> checkoutItem(Class<? extends LibraryItem> itemClass,
+                                              String itemName) {
         Optional<LibraryItem> itemWithGivenName = findItem(itemClass, this.allItems, itemName);
-        itemWithGivenName.ifPresent(libraryItem -> moveItem(libraryItem, this.allItems, this.checkedOutItems));
+        itemWithGivenName.ifPresent(libraryItem -> moveItem(libraryItem, this.allItems,
+                this.checkedOutItems));
         return itemWithGivenName;
     }
 
     @Override
     public boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName) {
         Optional<LibraryItem> item = findItem(itemClass, this.checkedOutItems, itemName);
-        if (item.isPresent()) {
-            moveItem(item.get(), this.checkedOutItems, this.allItems);
-            return true;
+        if (!item.isPresent()) {
+            return false;
         }
-        return false;
+        moveItem(item.get(), this.checkedOutItems, this.allItems);
+        return true;
     }
 
     @Override

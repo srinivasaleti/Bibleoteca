@@ -33,7 +33,7 @@ class ListBooksCommandTest {
 
     @Test
     void displayHeader() {
-        String BOOKS = "Books::";
+        String Books = "Books::";
         String format = "%-35s %-35s %-35s";
         String name = "Name";
         String author = "Author";
@@ -42,13 +42,16 @@ class ListBooksCommandTest {
 
         listBooks.execute();
 
-        verify(mockIO).println(BOOKS);
+        verify(mockIO).println(Books);
         verify(mockIO).println(header);
     }
 
     @Test
     void displayAllBooksInBiblioteca() {
-        Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+        String name = "Half GirlFriend";
+        String author = "Chetan Bhagat";
+        int yearPublished = 2014;
+        Book halfGirlFriend = new Book(name, author, yearPublished);
 
         when(library.isNoItemsAvailable(Book.class)).thenReturn(false);
         when(library.stringRepresentationOfItems(Book.class)).

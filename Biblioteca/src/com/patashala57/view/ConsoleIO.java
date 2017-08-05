@@ -6,8 +6,8 @@ import java.util.Scanner;
 //Responsible for print something on given stream
 public class ConsoleIO implements IO {
 
-    private PrintStream out;
-    private Scanner scanner;
+    private final PrintStream out;
+    private final Scanner scanner;
 
     public ConsoleIO(PrintStream out, Scanner scanner) {
         this.out = out;

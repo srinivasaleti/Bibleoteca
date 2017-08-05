@@ -10,8 +10,8 @@ public class ListBooksCommand implements Command {
     private static final String NO_BOOK_AVAILABLE_MESSAGE = "No Books Available";
     private static final String BOOKS = "Books::";
 
-    private Library library;
-    private IO consoleIO;
+    private final Library library;
+    private final IO consoleIO;
 
     ListBooksCommand(Library library, IO io) {
         this.library = library;

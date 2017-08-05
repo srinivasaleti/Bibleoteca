@@ -8,14 +8,22 @@ class MovieTest {
 
     @Test
     void movieIsNotEqualToNull() {
-        Movie movie = new Movie("Titanic", 1997, "Cameron", "9");
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie movie = new Movie(name, yearReleased, director, rating);
 
         assertNotEquals(movie, null);
     }
 
     @Test
     void movieIsNotEqualToString() {
-        Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie aMovie = new Movie(name, yearReleased, director, rating);
         String movie = "movie";
 
         assertNotEquals(movie, aMovie);
@@ -23,31 +31,47 @@ class MovieTest {
 
     @Test
     void movieIsEqualToItSelf() {
-        Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie aMovie = new Movie(name, yearReleased, director, rating);
 
         assertEquals(aMovie, aMovie);
     }
 
     @Test
     void movieIsEqualToSameMovie() {
-        Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
-        Movie sameMovie = new Movie("Titanic", 1997, "Cameron", "9");
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie aMovie = new Movie(name, yearReleased, director, rating);
+        Movie sameMovie = new Movie(name, yearReleased, director, rating);
 
         assertEquals(aMovie, sameMovie);
     }
 
     @Test
     void givenNameIsEqualToMovieName() {
-        Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
-        String givenName = "TitanIc";
+        String givenName = "Titanic";
+        String titanic = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie aMovie = new Movie(titanic, yearReleased, director, rating);
 
         assertTrue(aMovie.isSameName(givenName));
     }
 
     @Test
     void givenNameIsNotEqualToMovieName() {
-        Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
         String givenName = "Love fail";
+        String titanic = "Titanic";
+        int yearReleased = 1997;
+        String director = "Cameron";
+        String rating = "9";
+        Movie aMovie = new Movie(titanic, yearReleased, director, rating);
 
         assertFalse(aMovie.isSameName(givenName));
     }

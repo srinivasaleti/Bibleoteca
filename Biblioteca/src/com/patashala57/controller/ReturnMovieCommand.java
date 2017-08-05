@@ -10,8 +10,8 @@ public class ReturnMovieCommand implements Command {
     private static final String SUCCESS_MESSAGE = "Thank you for returning the Movie";
     private static final String UNSUCCESS_MESSAGE = "That is not a valid Movie to return";
 
-    private Library library;
-    private IO consoleIO;
+    private final Library library;
+    private final IO consoleIO;
 
     ReturnMovieCommand(Library library, IO consoleIO) {
         this.library = library;
@@ -23,10 +23,10 @@ public class ReturnMovieCommand implements Command {
         consoleIO.print(ENTER_MOVIE_NAME);
         String movieName = consoleIO.getInput();
         boolean isReturn = library.returnItem(Movie.class, movieName);
-        displayMessage(isReturn);
+        displayMessageBasedOnReturnItemOutcome(isReturn);
     }
 
-    private void displayMessage(boolean isReturn) {
+    private void displayMessageBasedOnReturnItemOutcome(boolean isReturn) {
         if (isReturn) {
             consoleIO.println(SUCCESS_MESSAGE);
         } else {

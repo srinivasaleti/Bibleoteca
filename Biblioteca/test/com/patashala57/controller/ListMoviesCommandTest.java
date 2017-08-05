@@ -18,7 +18,6 @@ class ListMoviesCommandTest {
         library = mock(Library.class);
         mockIO = mock(IO.class);
         listMoviesCommand = new ListMoviesCommand(library, mockIO);
-
     }
 
     @Test
@@ -49,7 +48,11 @@ class ListMoviesCommandTest {
 
     @Test
     void displayMoviesInBiblioteca() {
-        Movie titanic = new Movie("Titanic", 1997, "Cameron", "9");
+        String name = "Titanic";
+        int yearReleased = 1997;
+        String cameron = "Cameron";
+        String rating = "9";
+        Movie titanic = new Movie(name, yearReleased, cameron, rating);
 
         when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
         when(library.stringRepresentationOfItems(Movie.class))

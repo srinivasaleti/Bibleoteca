@@ -10,8 +10,8 @@ public class ListMoviesCommand implements Command {
     private static final String NO_MOVIES_AVAILABLE_MESSAGE = "No Movies Available";
     private static final String MOVIES = "Movies::";
 
-    private Library biblioteca;
-    private IO consoleIO;
+    private final Library biblioteca;
+    private final IO consoleIO;
 
     ListMoviesCommand(Library library, IO consoleIO) {
         this.biblioteca = library;

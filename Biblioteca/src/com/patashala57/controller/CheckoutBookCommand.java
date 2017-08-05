@@ -15,8 +15,8 @@ public class CheckoutBookCommand implements Command {
     private static final String SUCCESS_MESSAGE = "Thank you! Enjoy the book";
     private static final String UNSUCCESS_MESSAGE = "That book is not available";
 
-    private Library library;
-    private IO consoleIO;
+    private final Library library;
+    private final IO consoleIO;
 
     CheckoutBookCommand(Library library, IO consoleIO) {
         this.library = library;
@@ -31,10 +31,10 @@ public class CheckoutBookCommand implements Command {
         }
         consoleIO.print(ENTER_BOOK_NAME_TO_CHECK_OUT);
         String bookName = consoleIO.getInput();
-        displayMessage(library.checkoutItem(Book.class, bookName));
+        displayMessageBasedOnOutCome(library.checkoutItem(Book.class, bookName));
     }
 
-    private void displayMessage(Optional<LibraryItem> item) {
+    private void displayMessageBasedOnOutCome(Optional<LibraryItem> item) {
         if (item.isPresent()) {
             consoleIO.println(SUCCESS_MESSAGE);
         } else {

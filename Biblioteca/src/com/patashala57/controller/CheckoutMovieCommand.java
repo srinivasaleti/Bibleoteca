@@ -15,8 +15,8 @@ public class CheckoutMovieCommand implements Command {
     private static final String SUCCESS_MESSAGE = "Thank You Enjoy the Movie";
     private static final String UNSUCCESS_MESSAGE = "That Movie is not available";
 
-    private Library library;
-    private IO consoleIO;
+    private final Library library;
+    private final IO consoleIO;
 
     CheckoutMovieCommand(Library library, IO consoleIO) {
         this.library = library;
@@ -31,10 +31,10 @@ public class CheckoutMovieCommand implements Command {
         }
         consoleIO.print(ENTER_MOVIE_NAME_TO_CHECK_OUT);
         String movieName = consoleIO.getInput();
-        displayMessage(library.checkoutItem(Movie.class, movieName));
+        displayMessageBasedOnOutcome(library.checkoutItem(Movie.class, movieName));
     }
 
-    private void displayMessage(Optional<LibraryItem> item) {
+    private void displayMessageBasedOnOutcome(Optional<LibraryItem> item) {
         if (item.isPresent()) {
             consoleIO.println(SUCCESS_MESSAGE);
         } else {

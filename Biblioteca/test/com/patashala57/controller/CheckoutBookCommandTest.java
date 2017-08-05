@@ -22,21 +22,23 @@ class CheckoutBookCommandTest {
     }
 
     @Test
-    void displayNoBooksAvailableMessage() {
+    void displayNoBooksAvailable() {
+        String noBooksAvailable = "No Books Available";
+
         when(library.isNoItemsAvailable(Book.class)).thenReturn(true);
         checkoutBookCommand.execute();
 
-        verify(mockIO).println("No Books Available");
+        verify(mockIO).println(noBooksAvailable);
     }
 
     @Test
-    void checkOutABook() {
-        String bookNameToCheckOut = "BookName";
+    void checkoutABook() {
+        String bookNameToCheckout = "BookName";
 
         when(library.isNoItemsAvailable(Book.class)).thenReturn(false);
-        when(library.checkoutItem(Book.class, bookNameToCheckOut))
+        when(library.checkoutItem(Book.class, bookNameToCheckout))
                 .thenReturn(java.util.Optional.empty());
-        when(mockIO.getInput()).thenReturn(bookNameToCheckOut);
+        when(mockIO.getInput()).thenReturn(bookNameToCheckout);
         checkoutBookCommand.execute();
 
         verify(library).checkoutItem(Book.class, "BookName");

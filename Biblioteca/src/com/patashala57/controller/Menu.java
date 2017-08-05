@@ -17,8 +17,8 @@ public class Menu {
     private static final String EMPTY_LINE = "";
     private static final String SELECT_OPTION = "Select an Option From Menu::";
 
-    private IO io;
-    private Factory commandFactory;
+    private final IO io;
+    private final Factory commandFactory;
 
     public Menu(Factory commandFactory, IO io) {
         this.io = io;
@@ -37,14 +37,15 @@ public class Menu {
     private void menuSelection() {
         String menuOption;
         Command command;
-        while (true) {
+        boolean isQuit = false;
+        while (!isQuit) {
             displayMenu();
             menuOption = readMenuOptionFromUser();
             menuOption = menuOption.toLowerCase();
             command = commandFactory.getCommand(menuOption);
             command.execute();
             if (command.getClass().equals(QuitCommand.class)) {
-                break;
+                isQuit = true;
             }
         }
     }

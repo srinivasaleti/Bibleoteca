@@ -22,7 +22,7 @@ class CheckoutMovieCommandTest {
     }
 
     @Test
-    void displayNoMoviesAvailableMessage() {
+    void displayNoMoviesAvailable() {
         String noMoviesAvailable = "No Movies Available";
 
         when(library.isNoItemsAvailable(Movie.class)).thenReturn(true);
@@ -32,7 +32,7 @@ class CheckoutMovieCommandTest {
     }
 
     @Test
-    void checkOutAMovie() {
+    void checkoutAMovie() {
         String movieName = "BookName";
 
         when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
@@ -46,13 +46,16 @@ class CheckoutMovieCommandTest {
 
     @Test
     void successFulReturn() {
-        String movieName = "Movie Name";
-        Movie movie = new Movie("name", 1000, "director", "unrated");
+        String name = "Movie Name";
+        int yearReleased = 1000;
+        String director = "director";
+        String rating = "unrated";
+        Movie movie = new Movie(name, yearReleased, director, rating);
         String successMessage = "Thank You Enjoy the Movie";
 
         when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
-        when(mockIO.getInput()).thenReturn(movieName);
-        when(library.checkoutItem(Movie.class, movieName))
+        when(mockIO.getInput()).thenReturn(name);
+        when(library.checkoutItem(Movie.class, name))
                 .thenReturn(java.util.Optional.of(movie));
         checkoutMovieCommand.execute();
 

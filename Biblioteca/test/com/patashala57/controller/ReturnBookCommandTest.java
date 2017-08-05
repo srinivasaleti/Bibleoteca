@@ -15,7 +15,7 @@ class ReturnBookCommandTest {
     private ReturnBookCommand returnBookCommand;
 
     @BeforeEach
-    void before() {
+    void beforeEach() {
         mockIO = mock(IO.class);
         library = mock(Library.class);
         returnBookCommand = new ReturnBookCommand(library, mockIO);
@@ -32,17 +32,19 @@ class ReturnBookCommandTest {
 
     @Test
     void returnBookToBiblioteca() {
-        when(mockIO.getInput()).thenReturn("Book");
+        String bookName = "name";
+
+        when(mockIO.getInput()).thenReturn(bookName);
         returnBookCommand.execute();
 
-        verify(library).returnItem(Book.class, "Book");
+        verify(library).returnItem(Book.class, bookName);
     }
 
     @Test
     void displaySuccessMessage() {
         String successMessage = "Thank you for returning the book";
-
         String bookName = "Harry Poter";
+
         when(mockIO.getInput()).thenReturn(bookName);
         when(library.returnItem(Book.class, bookName)).thenReturn(true);
         returnBookCommand.execute();
@@ -53,8 +55,8 @@ class ReturnBookCommandTest {
     @Test
     void displayUnSuccessMessage() {
         String unSuccessMessage = "That is not a valid book to return";
-
         String bookName = "Harry Poter";
+
         when(mockIO.getInput()).thenReturn(bookName);
         when(library.returnItem(Book.class, bookName)).thenReturn(false);
         returnBookCommand.execute();

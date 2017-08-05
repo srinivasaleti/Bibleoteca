@@ -23,25 +23,35 @@ class MenuTest {
     @Test
     void displayMenu() {
         int wantedNumberOfInvocations = 2;
+        String header = "Menu::";
+        String quit = "quit to EXIT";
+        String listBooks = "1->List Books";
+        String checkoutBook = "2->CheckOut a Book";
+        String returnBook = "3->Return a Book";
+        String listMovies = "4->List Movies";
+        String checkoutMovie = "5->Checkout Movie";
+        String returnMovie = "6->Return Movie";
 
         menu.displayMenu();
 
         verify(mockIO, times(wantedNumberOfInvocations)).println("");
-        verify(mockIO).println("Menu::");
-        verify(mockIO).println("1->List Books");
-        verify(mockIO).println("2->CheckOut a Book");
-        verify(mockIO).println("3->Return a Book");
-        verify(mockIO).println("4->List Movies");
-        verify(mockIO).println("5->Checkout Movie");
-        verify(mockIO).println("6->Return Movie");
-        verify(mockIO).println("quit to EXIT");
+        verify(mockIO).println(header);
+        verify(mockIO).println(listBooks);
+        verify(mockIO).println(checkoutBook);
+        verify(mockIO).println(returnBook);
+        verify(mockIO).println(listMovies);
+        verify(mockIO).println(checkoutMovie);
+        verify(mockIO).println(returnMovie);
+        verify(mockIO).println(quit);
     }
 
     @Test
     void displayWelcomeMessage() {
         String welcomeMessage = "Welcome To Bangalore Public Library";
+        String quit = "quit";
+
         when(mockIO.getInput())
-                .thenReturn("quit");
+                .thenReturn(quit);
         menu.launch();
 
         verify(mockIO).println(welcomeMessage);

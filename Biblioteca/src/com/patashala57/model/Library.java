@@ -2,6 +2,7 @@ package com.patashala57.model;
 
 import java.util.Optional;
 
+//Represents a room containing collection of items
 public interface Library {
 
     String stringRepresentationOfItems(Class<? extends LibraryItem> className);

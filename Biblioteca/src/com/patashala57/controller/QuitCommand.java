@@ -7,7 +7,7 @@ public class QuitCommand implements Command {
 
     private static final String THANKS_FOR_YOUR_VALUABLE_TIME = "Thank you for your valuable time";
 
-    private IO io;
+    private final IO io;
 
     QuitCommand(IO io) {
         this.io = io;

@@ -8,14 +8,20 @@ class BookTest {
 
     @Test
     void bookNotEqualToNull() {
-        Book aBook = new Book("Love Story", "Segal", 1970);
+        String name = "Love Story";
+        String author = "Segal";
+        int yearPublished = 1970;
+        Book aBook = new Book(name, author, yearPublished);
 
         assertNotEquals(null, aBook);
     }
 
     @Test
     void bookNotEqualToString() {
-        Book aBook = new Book("Love Story", "Segal", 1970);
+        String name = "Love Story";
+        String author = "Segal";
+        int yearPublished = 1970;
+        Book aBook = new Book(name, author, yearPublished);
         String unexpected = "aBook";
 
         assertNotEquals(unexpected, aBook);
@@ -23,50 +29,71 @@ class BookTest {
 
     @Test
     void bookEqualToItSelf() {
-        Book aBook = new Book("True Love", "Segal", 1970);
-        Book sameBook = new Book("True Love", "Segal", 1970);
+        String name = "True Love";
+        String author = "Segal";
+        int yearPublished = 1970;
+        String sameName = "True Love";
+        String sameAuthor = "Segal";
+        int sameYearPusblished = 1970;
+        Book aBook = new Book(name, author, yearPublished);
+        Book sameBook = new Book(sameName, sameAuthor, sameYearPusblished);
 
         assertEquals(aBook, sameBook);
     }
 
     @Test
     void trueLoveBookEqualToTrueLove() {
-        Book aBook = new Book("True Love", "Segal", 1970);
-        Book sameBook = new Book("True Love", "Segal", 1970);
+        String name = "True Love";
+        String author = "Segal";
+        int yearPublished = 1970;
+        Book aBook = new Book(name, author, yearPublished);
+        Book sameBook = new Book(name, author, yearPublished);
 
         assertEquals(aBook, sameBook);
     }
 
     @Test
     void givenNameEqualToBookName() {
-        Book aBook = new Book("True Love", "Segal", 1970);
         String givenName = "True Love";
+        String name = "True Love";
+        String author = "Segal";
+        int yearPublished = 1970;
+        Book aBook = new Book(name, author, yearPublished);
 
         assertTrue(aBook.isSameName(givenName));
     }
 
     @Test
     void givenNameIsNotEqualToBookName() {
-        Book aBook = new Book("True Love", "Segal", 1970);
+        String name = "True Love";
+        String author = "Segal";
+        int yearPublished = 1970;
         String givenName = "First Love";
+        Book aBook = new Book(name, author, yearPublished);
 
         assertFalse(aBook.isSameName(givenName));
     }
 
     @Test
     void stringRepresentationOfHalfGirlFriend() {
-        Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
+        String name = "Half GirlFriend";
+        String author = "Chetan Bhagat";
+        int yearPublished = 2014;
+        Book halfGirlFriend = new Book(name, author, yearPublished);
         String format = "%-35s %-35s %-35s";
-        String expected = String.format(format, "Half GirlFriend", "Chetan Bhagat", 2014);
+        String expected = String.format(format, name, author, yearPublished);
 
         assertEquals(halfGirlFriend.stringRepresentation(), expected);
     }
 
     @Test
     void stringRepresentationOfTrueLove() {
-        Book trueLove = new Book("True Love", "Chetan Bhagat", 2014);
+        String name = "True Love";
+        String author = "Chetan Bhagat";
+        int yearPublished = 2014;
+        Book trueLove = new Book(name, author, yearPublished);
         String format = "%-35s %-35s %-35s";
-        String expected = String.format(format, "True Love", "Chetan Bhagat", 2014);
+        String expected = String.format(format, name, author, yearPublished);
 
         assertEquals(trueLove.stringRepresentation(), expected);
     }

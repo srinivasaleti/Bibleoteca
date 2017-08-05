@@ -2,7 +2,7 @@ package com.patashala57.controller;
 
 import com.patashala57.model.Biblioteca;
 import com.patashala57.model.Library;
-import com.patashala57.view.*;
+import com.patashala57.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ class CommandFactoryTest {
     }
 
     @Test
-    void expectedCheckOutBookCommand() {
+    void expectedCheckoutBookCommand() {
         String checkOutBookCommand = "2";
         Class expected = CheckoutBookCommand.class;
 
@@ -53,7 +53,7 @@ class CommandFactoryTest {
     }
 
     @Test
-    void expectedCheckOutMovieCommand() {
+    void expectedCheckoutMovieCommand() {
         String checkoutMovie = "5";
         Class expected = CheckoutMovieCommand.class;
 

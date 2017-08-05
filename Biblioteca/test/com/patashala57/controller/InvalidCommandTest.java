@@ -9,7 +9,7 @@ import static org.mockito.Mockito.verify;
 class InvalidCommandTest {
 
     @Test
-    void shouldPrintInvalidMessage() {
+    void displayInvalidMessage() {
         IO mockIO = mock(IO.class);
         InvalidCommand invalid = new InvalidCommand(mockIO);
         String invalidBook = "Invalid Option";

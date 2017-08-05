@@ -44,4 +44,15 @@ class ConsoleIOTest {
         verify(out).print(hi);
     }
 
+    @Test
+    void displayBye() {
+        PrintStream out = mock(System.out.getClass());
+        Scanner scanner = new Scanner(System.in);
+        ConsoleIO console = new ConsoleIO(out, scanner);
+        String bye = "bye";
+
+        console.print(bye);
+        verify(out).print(bye);
+    }
+
 }

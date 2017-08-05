@@ -9,7 +9,7 @@ import static org.mockito.Mockito.verify;
 class QuitCommandTest {
 
     @Test
-    void displayQuitMessage() {
+    void displayThankYouMessage() {
         IO mockIO = mock(IO.class);
         QuitCommand quitCommand = new QuitCommand(mockIO);
         String message = "Thank you for your valuable time";

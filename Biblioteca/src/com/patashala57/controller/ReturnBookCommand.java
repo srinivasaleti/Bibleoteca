@@ -11,8 +11,8 @@ public class ReturnBookCommand implements Command {
     private static final String SUCCESS_MESSAGE = "Thank you for returning the book";
     private static final String UNSUCCESS_MESSAGE = "That is not a valid book to return";
 
-    private Library library;
-    private IO consoleIO;
+    private final Library library;
+    private final IO consoleIO;
 
     ReturnBookCommand(Library library, IO consoleIO) {
         this.library = library;
@@ -24,10 +24,10 @@ public class ReturnBookCommand implements Command {
         consoleIO.print(ENTER_BOOK_Name);
         String bookName = consoleIO.getInput();
         boolean isReturn = library.returnItem(Book.class, bookName);
-        displayMessage(isReturn);
+        displayMessageBasedOnReturnItemOutcome(isReturn);
     }
 
-    private void displayMessage(boolean isReturn) {
+    private void displayMessageBasedOnReturnItemOutcome(boolean isReturn) {
         if (isReturn) {
             consoleIO.println(SUCCESS_MESSAGE);
         } else {

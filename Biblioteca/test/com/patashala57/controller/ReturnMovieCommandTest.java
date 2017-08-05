@@ -42,8 +42,8 @@ class ReturnMovieCommandTest {
     @Test
     void displaySuccessMessage() {
         String successMessage = "Thank you for returning the Movie";
-
         String movieName = "Harry Poter";
+
         when(mockIO.getInput()).thenReturn(movieName);
         when(library.returnItem(Movie.class, movieName)).thenReturn(true);
         returnMovieCommand.execute();
@@ -54,8 +54,8 @@ class ReturnMovieCommandTest {
     @Test
     void displayUnSuccessMessage() {
         String unSuccessMessage = "That is not a valid Movie to return";
-
         String movieName = "Harry Poter";
+
         when(mockIO.getInput()).thenReturn(movieName);
         when(library.returnItem(Movie.class, movieName)).thenReturn(false);
         returnMovieCommand.execute();
