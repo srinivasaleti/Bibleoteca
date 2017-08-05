@@ -18,12 +18,12 @@ public class CommandFactory implements Factory {
     private static final String CHECKOUT_MOVIE = "5";
     private static final String RETURN_MOVE = "6";
 
-    private final IO io;
+    private final IO consoleIO;
     private final Library library;
 
-    public CommandFactory(Library library, IO io) {
+    public CommandFactory(Library library, IO consoleIO) {
         this.library = library;
-        this.io = io;
+        this.consoleIO = consoleIO;
         this.commandMap = new HashMap<>();
         this.loadCommands();
     }
@@ -33,19 +33,19 @@ public class CommandFactory implements Factory {
         if (this.commandMap.containsKey(commandString)) {
             return this.commandMap.get(commandString);
         } else {
-            return new InvalidCommand(io);
+            return new InvalidCommand(consoleIO);
         }
     }
 
     @Override
     public void loadCommands() {
-        this.commandMap.put(LIST_BOOKS, new ListBooksCommand(library, io));
-        this.commandMap.put(CHECKOUT_BOOK, new CheckoutBookCommand(library, io));
-        this.commandMap.put(RETURN_BOOK, new ReturnBookCommand(library, io));
-        this.commandMap.put(LIST_MOVIES, new ListMoviesCommand(library, io));
-        this.commandMap.put(CHECKOUT_MOVIE, new CheckoutMovieCommand(library, io));
-        this.commandMap.put(RETURN_MOVE, new ReturnMovieCommand(library, io));
-        this.commandMap.put(QUIT, new QuitCommand(io));
+        this.commandMap.put(LIST_BOOKS, new ListBooksCommand(library, consoleIO));
+        this.commandMap.put(CHECKOUT_BOOK, new CheckoutBookCommand(library, consoleIO));
+        this.commandMap.put(RETURN_BOOK, new ReturnBookCommand(library, consoleIO));
+        this.commandMap.put(LIST_MOVIES, new ListMoviesCommand(library, consoleIO));
+        this.commandMap.put(CHECKOUT_MOVIE, new CheckoutMovieCommand(library, consoleIO));
+        this.commandMap.put(RETURN_MOVE, new ReturnMovieCommand(library, consoleIO));
+        this.commandMap.put(QUIT, new QuitCommand(consoleIO));
     }
 
 }

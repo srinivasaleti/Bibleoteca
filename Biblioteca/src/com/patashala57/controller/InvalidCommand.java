@@ -7,15 +7,15 @@ public class InvalidCommand implements Command {
 
     private static final String INVALID_OPTION = "Invalid Option";
 
-    private IO io;
+    private IO consoleIO;
 
-    InvalidCommand(IO io) {
-        this.io = io;
+    InvalidCommand(IO consoleIO) {
+        this.consoleIO = consoleIO;
     }
 
     @Override
     public void execute() {
-        this.io.println(INVALID_OPTION);
+        this.consoleIO.println(INVALID_OPTION);
     }
 
 }
