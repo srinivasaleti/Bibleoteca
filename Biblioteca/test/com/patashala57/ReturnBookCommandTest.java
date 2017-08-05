@@ -21,7 +21,7 @@ class ReturnBookCommandTest {
     }
 
     @Test
-    void shouldReadInputFromUser(){
+    void readInputFromUserForReturnABook(){
         String enterBookName = "Enter Book Name to return::";
         returnBookCommand.execute();
 
@@ -30,7 +30,7 @@ class ReturnBookCommandTest {
     }
 
     @Test
-    void shouldCallReturnBookMethod() {
+    void returnBookToBiblioteca() {
         when(mockIO.getInput()).thenReturn("Book");
         returnBookCommand.execute();
 

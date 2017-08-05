@@ -43,11 +43,10 @@ class MenuTest {
         menu.launch();
 
         verify(mockIO).println(welcomeMessage);
-
     }
 
     @Test
-    void readInputFromUser() {
+    void selectAOptionFromMenu() {
         String selectOption = "Select an Option From Menu::";
 
         menu.readMenuOptionFromUser();
@@ -58,7 +57,7 @@ class MenuTest {
 
 
     @Test
-    void listBookInLibrary() {
+    void listBooksInLibrary() {
         when(mockIO.getInput())
                 .thenReturn("1")
                 .thenReturn("quit");
@@ -98,6 +97,30 @@ class MenuTest {
         menu.menuSelection();
 
         verify(biblioteca).stringRepresentationOfItems(Movie.class);
+    }
+
+    @Test
+    void checkoutAMovieInLibrary(){
+        String movieName = "MovieName";
+        when(mockIO.getInput())
+                .thenReturn("5")
+                .thenReturn(movieName)
+                .thenReturn("quit");
+        menu.menuSelection();
+
+        verify(biblioteca).checkoutItem(Movie.class,movieName);
+    }
+
+    @Test
+    void returnAMovieToLibrary(){
+        String movieName="MovieName";
+        when(mockIO.getInput())
+                .thenReturn("6")
+                .thenReturn(movieName)
+                .thenReturn("quit");
+        menu.menuSelection();
+
+        verify(biblioteca).returnItem(Movie.class,movieName);
     }
 
 }

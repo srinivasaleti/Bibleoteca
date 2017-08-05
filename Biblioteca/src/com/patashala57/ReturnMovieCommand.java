@@ -2,7 +2,7 @@ package com.patashala57;
 
 class ReturnMovieCommand implements Command{
 
-    private static final String ENTER_RETURN_MOVIE_NAME = "Enter Movie Name to return::";
+    private static final String ENTER_MOVIE_NAME = "Enter Movie Name to return::";
     private static final String SUCCESS_MESSAGE = "Thank you for returning the Movie";
     private static final String UNSUCCESS_MESSAGE = "That is not a valid Movie to return";
 
@@ -16,7 +16,7 @@ class ReturnMovieCommand implements Command{
 
     @Override
     public void execute() {
-        consoleIO.print(ENTER_RETURN_MOVIE_NAME);
+        consoleIO.print(ENTER_MOVIE_NAME);
         String movieName = consoleIO.getInput();
         boolean isReturn=biblioteca.returnItem(Movie.class,movieName);
         displayMessage(isReturn);

@@ -21,7 +21,7 @@ class ReturnMovieCommandTest {
     }
 
     @Test
-    void shouldReadInputFromUser(){
+    void readInputFromUserToReturnMovie(){
         String enterMovieName = "Enter Movie Name to return::";
         returnMovieCommand.execute();
 
@@ -30,7 +30,7 @@ class ReturnMovieCommandTest {
     }
 
     @Test
-    void shouldCallReturnItemMethod() {
+    void returnMovieToBiblioteca() {
         when(mockIO.getInput()).thenReturn("Movie");
         returnMovieCommand.execute();
 

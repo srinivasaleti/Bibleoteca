@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 //Represents a room containing collections of items
-class Biblioteca {
+class Biblioteca implements Library {
 
     private List<LibraryItem> allItems;
     private List<LibraryItem> checkedOutItems;
@@ -20,7 +20,8 @@ class Biblioteca {
         this.checkedOutItems = new ArrayList<>();
     }
 
-    String stringRepresentationOfItems(Class<? extends LibraryItem> className) {
+    @Override
+    public String stringRepresentationOfItems(Class<? extends LibraryItem> className) {
         StringBuilder result = new StringBuilder();
         List<LibraryItem> items = filterRequiredItemsInAList(this.allItems, className);
         for (LibraryItem item : items) {
@@ -29,30 +30,32 @@ class Biblioteca {
         return result.toString();
     }
 
-    LibraryItem checkoutItem(Class<? extends LibraryItem> itemClass, String itemName) {
+    @Override
+    public LibraryItem checkoutItem(Class<? extends LibraryItem> itemClass, String itemName) {
         LibraryItem itemWithGivenName = findItem(itemClass, this.allItems, itemName);
         if (itemWithGivenName == null) {
             return null;
         }
-        moveItem(itemWithGivenName, allItems, checkedOutItems);
+        moveItem(itemWithGivenName, this.allItems, this.checkedOutItems);
         return itemWithGivenName;
     }
 
-    boolean isNoItemsAvailable(Class<? extends LibraryItem> itemClass) {
-        return this.filterRequiredItemsInAList(this.allItems, itemClass).isEmpty();
+    @Override
+    public boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName) {
+        LibraryItem item = findItem(itemClass, this.checkedOutItems, itemName);
+        moveItem(item, this.checkedOutItems, this.allItems);
+        return item != null;
     }
 
-
-    boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName) {
-        LibraryItem item = findItem(itemClass, this.checkedOutItems, itemName);
-        moveItem(item, checkedOutItems, allItems);
-        return item != null;
+    @Override
+    public boolean isNoItemsAvailable(Class<? extends LibraryItem> itemClass) {
+        return this.filterRequiredItemsInAList(this.allItems, itemClass).isEmpty();
     }
 
     private LibraryItem findItem(Class<? extends LibraryItem> itemClass,
                                  List<LibraryItem> list,
                                  String itemName) {
-        Optional<LibraryItem> item = filterRequiredItemsInAList(list, itemClass)
+        Optional<LibraryItem> item = this.filterRequiredItemsInAList(list, itemClass)
                 .stream()
                 .filter(y -> y.isSameName(itemName))
                 .findFirst();

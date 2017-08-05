@@ -22,14 +22,14 @@ class MovieTest {
     }
 
     @Test
-    void movieIsEqualToSameMovie() {
+    void movieIsEqualToItSelf() {
         Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
 
         assertEquals(aMovie, aMovie);
     }
 
     @Test
-    void movieIsEqualSameMovie() {
+    void movieIsEqualToSameMovie() {
         Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
         Movie sameMovie = new Movie("Titanic", 1997, "Cameron", "9");
 
@@ -39,17 +39,17 @@ class MovieTest {
     @Test
     void givenNameIsEqualToMovieName() {
         Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
-        String titanic = "TitanIc";
+        String givenName = "TitanIc";
 
-        assertTrue(aMovie.isSameName(titanic));
+        assertTrue(aMovie.isSameName(givenName));
     }
 
     @Test
     void givenNameIsNotEqualToMovieName() {
         Movie aMovie = new Movie("Titanic", 1997, "Cameron", "9");
-        String loveFail = "Love fail";
+        String givenName = "Love fail";
 
-        assertFalse(aMovie.isSameName(loveFail));
+        assertFalse(aMovie.isSameName(givenName));
     }
 
     @Test
