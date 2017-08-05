@@ -1,5 +1,7 @@
 package com.patashala57;
 
+import java.util.Optional;
+
 //Responsible for checkout movies from biblioteca
 class CheckoutMovieCommand implements Command {
 
@@ -24,11 +26,11 @@ class CheckoutMovieCommand implements Command {
         }
         consoleIO.print(ENTER_MOVIE_NAME_TO_CHECK_OUT);
         String movieName = consoleIO.getInput();
-        displayMessage((Movie) biblioteca.checkoutItem(Movie.class,movieName));
+        displayMessage(biblioteca.checkoutItem(Movie.class,movieName));
     }
 
-    private void displayMessage(Movie item) {
-        if (item != null) {
+    private void displayMessage(Optional<LibraryItem> item) {
+        if (item.isPresent()) {
             consoleIO.println(SUCCESS_MESSAGE);
         } else {
             consoleIO.println(UNSUCCESS_MESSAGE);

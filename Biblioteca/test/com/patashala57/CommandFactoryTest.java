@@ -26,6 +26,7 @@ class CommandFactoryTest {
         String listBooksCommand = "1";
         Class expected = ListBooksCommand.class;
 
+        factory.loadMaps();
         Command listBooks = factory.getCommand(listBooksCommand);
 
         assertEquals(expected, listBooks.getClass());
@@ -36,6 +37,7 @@ class CommandFactoryTest {
         String checkOutBookCommand = "2";
         Class expected = CheckoutBookCommand.class;
 
+        factory.loadMaps();
         Command checkOutBook = factory.getCommand(checkOutBookCommand);
 
         assertEquals(expected, checkOutBook.getClass());
@@ -46,6 +48,7 @@ class CommandFactoryTest {
         String returnBookCommand = "3";
         Class expected = ReturnBookCommand.class;
 
+        factory.loadMaps();
         Command returnBook = factory.getCommand(returnBookCommand);
 
         assertEquals(expected, returnBook.getClass());
@@ -56,6 +59,7 @@ class CommandFactoryTest {
         String listMovies = "4";
         Class expected = ListMoviesCommand.class;
 
+        factory.loadMaps();
         Command listMoviesCommand = factory.getCommand(listMovies);
 
         assertEquals(expected, listMoviesCommand.getClass());
@@ -66,6 +70,7 @@ class CommandFactoryTest {
         String checkoutMovie = "5";
         Class expected = CheckoutMovieCommand.class;
 
+        factory.loadMaps();
         Command checkoutMovieCommand = factory.getCommand(checkoutMovie);
 
         assertEquals(expected, checkoutMovieCommand.getClass());
@@ -76,6 +81,7 @@ class CommandFactoryTest {
         String quitCommand = "quit";
         Class expected = QuitCommand.class;
 
+        factory.loadMaps();
         Command quit = factory.getCommand(quitCommand);
 
         assertEquals(expected, quit.getClass());
@@ -86,6 +92,7 @@ class CommandFactoryTest {
         String invalidCommand = "invalid";
         Class expected = InvalidCommand.class;
 
+        factory.loadMaps();
         Command invalid = factory.getCommand(invalidCommand);
 
         assertEquals(expected, invalid.getClass());

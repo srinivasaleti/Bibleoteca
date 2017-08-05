@@ -55,7 +55,8 @@ class CheckoutBookCommandTest {
         String successMessage = "Thank you! Enjoy the book";
 
         when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
-        when(biblioteca.checkoutItem(Book.class,bookNameToCheckOut)).thenReturn(book);
+        when(biblioteca.checkoutItem(Book.class,bookNameToCheckOut))
+                .thenReturn(java.util.Optional.of(book));
         when(mockIO.getInput()).thenReturn(bookNameToCheckOut);
         checkoutBookCommand.execute();
 

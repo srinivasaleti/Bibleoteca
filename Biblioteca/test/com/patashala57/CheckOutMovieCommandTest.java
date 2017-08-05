@@ -60,7 +60,8 @@ class CheckoutMovieCommandTest {
 
         when(biblioteca.isNoItemsAvailable(Movie.class)).thenReturn(false);
         when(mockIO.getInput()).thenReturn(movieName);
-        when(biblioteca.checkoutItem(Movie.class,movieName)).thenReturn(movie);
+        when(biblioteca.checkoutItem(Movie.class,movieName))
+                .thenReturn(java.util.Optional.of(movie));
         checkoutMovieCommand.execute();
 
         verify(mockIO).println(successMessage);

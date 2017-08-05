@@ -10,12 +10,14 @@ class MenuTest {
     private IO mockIO;
     private Biblioteca biblioteca;
     private Menu menu;
+    private CommandFactory commandFactory;
 
     @BeforeEach
     void beforeEach() {
         this.mockIO = mock(IO.class);
         this.biblioteca = mock(Biblioteca.class);
-        this.menu = new Menu(this.biblioteca, this.mockIO);
+        this.commandFactory=mock(CommandFactory.class);
+        this.menu = new Menu(this.commandFactory, this.mockIO);
     }
 
     @Test

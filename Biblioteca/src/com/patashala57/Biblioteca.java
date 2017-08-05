@@ -31,20 +31,20 @@ class Biblioteca implements Library {
     }
 
     @Override
-    public LibraryItem checkoutItem(Class<? extends LibraryItem> itemClass, String itemName) {
-        LibraryItem itemWithGivenName = findItem(itemClass, this.allItems, itemName);
-        if (itemWithGivenName == null) {
-            return null;
-        }
-        moveItem(itemWithGivenName, this.allItems, this.checkedOutItems);
+    public Optional<LibraryItem> checkoutItem(Class<? extends LibraryItem> itemClass, String itemName) {
+        Optional<LibraryItem> itemWithGivenName = findItem(itemClass, this.allItems, itemName);
+        itemWithGivenName.ifPresent(libraryItem -> moveItem(libraryItem, this.allItems, this.checkedOutItems));
         return itemWithGivenName;
     }
 
     @Override
     public boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName) {
-        LibraryItem item = findItem(itemClass, this.checkedOutItems, itemName);
-        moveItem(item, this.checkedOutItems, this.allItems);
-        return item != null;
+        Optional<LibraryItem> item = findItem(itemClass, this.checkedOutItems, itemName);
+        if (item.isPresent()) {
+            moveItem(item.get(), this.checkedOutItems, this.allItems);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -52,14 +52,13 @@ class Biblioteca implements Library {
         return this.filterRequiredItemsInAList(this.allItems, itemClass).isEmpty();
     }
 
-    private LibraryItem findItem(Class<? extends LibraryItem> itemClass,
-                                 List<LibraryItem> list,
-                                 String itemName) {
-        Optional<LibraryItem> item = this.filterRequiredItemsInAList(list, itemClass)
+    private Optional<LibraryItem> findItem(Class<? extends LibraryItem> itemClass,
+                                           List<LibraryItem> list,
+                                           String itemName) {
+        return this.filterRequiredItemsInAList(list, itemClass)
                 .stream()
                 .filter(y -> y.isSameName(itemName))
                 .findFirst();
-        return item.orElse(null);
     }
 
     private List<LibraryItem> filterRequiredItemsInAList(List<LibraryItem> items,

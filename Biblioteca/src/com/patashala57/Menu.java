@@ -17,9 +17,9 @@ class Menu {
     private IO io;
     private CommandFactory commandFactory;
 
-    Menu(Biblioteca biblioteca, IO io) {
+    Menu(CommandFactory commandFactory, IO io) {
         this.io = io;
-        this.commandFactory = new CommandFactory(biblioteca, io);
+        this.commandFactory = commandFactory;
     }
 
     void displayMenu() {

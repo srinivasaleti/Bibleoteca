@@ -1,5 +1,7 @@
 package com.patashala57;
 
+import java.util.Optional;
+
 //Responsible for checkout books from biblioteca
 class CheckoutBookCommand implements Command {
 
@@ -27,8 +29,8 @@ class CheckoutBookCommand implements Command {
         displayMessage(biblioteca.checkoutItem(Book.class, bookName));
     }
 
-    private void displayMessage(LibraryItem item) {
-        if (item != null) {
+    private void displayMessage(Optional<LibraryItem> item) {
+        if (item.isPresent()) {
             consoleIO.println(SUCCESS_MESSAGE);
         } else {
             consoleIO.println(UNSUCCESS_MESSAGE);
