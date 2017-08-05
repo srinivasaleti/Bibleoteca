@@ -62,7 +62,7 @@ class BibliotecaTest {
         biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
         String checkoutBook = "Love Story";
 
-        assertEquals(loveStory, biblioteca.checkoutItem(Book.class, checkoutBook));
+        assertEquals(loveStory, biblioteca.checkoutItem(Book.class, checkoutBook).get());
     }
 
     @Test
@@ -70,7 +70,7 @@ class BibliotecaTest {
         biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
         String checkoutMovie = "titanic";
 
-        assertEquals(this.titanic, biblioteca.checkoutItem(Movie.class, checkoutMovie));
+        assertEquals(this.titanic, biblioteca.checkoutItem(Movie.class, checkoutMovie).get());
     }
 
     @Test

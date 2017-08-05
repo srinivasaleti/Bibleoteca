@@ -27,21 +27,12 @@ class CheckoutBookCommandTest {
     }
 
     @Test
-    void readInputFromUser() {
-        String enterBookNameToCheckout = "Enter a Book Name to check Out::";
-
-        when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
-        checkoutBookCommand.execute();
-
-        verify(mockIO).getInput();
-        verify(mockIO).print(enterBookNameToCheckout);
-    }
-
-    @Test
-    void shouldCallCheckoutItemInBibioletca() {
+    void checkOutABook() {
         String bookNameToCheckOut = "BookName";
 
         when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
+        when(biblioteca.checkoutItem(Book.class, bookNameToCheckOut))
+                .thenReturn(java.util.Optional.empty());
         when(mockIO.getInput()).thenReturn(bookNameToCheckOut);
         checkoutBookCommand.execute();
 
@@ -49,13 +40,13 @@ class CheckoutBookCommandTest {
     }
 
     @Test
-    void displaySuccessMessage() {
+    void successfulCheckout() {
         String bookNameToCheckOut = "BookName";
         Book book = new Book("name", "author", 1999);
         String successMessage = "Thank you! Enjoy the book";
 
         when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
-        when(biblioteca.checkoutItem(Book.class,bookNameToCheckOut))
+        when(biblioteca.checkoutItem(Book.class, bookNameToCheckOut))
                 .thenReturn(java.util.Optional.of(book));
         when(mockIO.getInput()).thenReturn(bookNameToCheckOut);
         checkoutBookCommand.execute();
@@ -64,12 +55,13 @@ class CheckoutBookCommandTest {
     }
 
     @Test
-    void displayUnSuccessfulMessage(){
-        String bookName="BookName";
+    void unSuccessfulCheckout() {
+        String bookName = "BookName";
         String unSuccessMessage = "That book is not available";
 
         when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
-        when(biblioteca.checkoutItem(Book.class,bookName)).thenReturn(null);
+        when(biblioteca.checkoutItem(Book.class, bookName))
+                .thenReturn(java.util.Optional.empty());
         when(mockIO.getInput()).thenReturn(bookName);
         checkoutBookCommand.execute();
 

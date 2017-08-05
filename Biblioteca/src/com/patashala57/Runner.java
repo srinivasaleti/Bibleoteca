@@ -19,7 +19,7 @@ class Runner {
     public static void main(String args[]) {
         ConsoleIO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
         Biblioteca biblioteca = new Biblioteca(generateItems());
-        CommandFactory commandFactory=new CommandFactory(biblioteca,consoleIO);
+        Factory commandFactory=new CommandFactory(biblioteca,consoleIO);
         Menu menu=new Menu(commandFactory,consoleIO);
 
         menu.launch();

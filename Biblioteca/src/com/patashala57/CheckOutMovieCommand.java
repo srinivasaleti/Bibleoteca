@@ -13,7 +13,7 @@ class CheckoutMovieCommand implements Command {
     private Biblioteca biblioteca;
     private IO consoleIO;
 
-    CheckoutMovieCommand(Biblioteca biblioteca,IO consoleIO){
+    CheckoutMovieCommand(Biblioteca biblioteca, IO consoleIO){
         this.biblioteca=biblioteca;
         this.consoleIO=consoleIO;
     }

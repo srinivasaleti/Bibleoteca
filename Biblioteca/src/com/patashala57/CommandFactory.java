@@ -6,7 +6,7 @@ import java.util.Map;
 //Represents maping between String to command
 class CommandFactory implements Factory {
 
-    private static Map<String, Command> factory;
+    private static Map<String, Command> commandMap;
     private static final String LIST_BOOKS = "1";
     private static final String CHECKOUT_BOOK = "2";
     private static final String QUIT = "quit";
@@ -26,8 +26,8 @@ class CommandFactory implements Factory {
 
     @Override
     public Command getCommand(String commandString) {
-        if (factory.containsKey(commandString)) {
-            return factory.get(commandString);
+        if (commandMap.containsKey(commandString)) {
+            return commandMap.get(commandString);
         } else {
             return new InvalidCommand(io);
         }
@@ -35,14 +35,14 @@ class CommandFactory implements Factory {
 
     @Override
     public void loadMaps() {
-        factory = new HashMap<>();
-        factory.put(LIST_BOOKS, new ListBooksCommand(biblioteca, io));
-        factory.put(CHECKOUT_BOOK, new CheckoutBookCommand(biblioteca, io));
-        factory.put(RETURN_BOOK, new ReturnBookCommand(biblioteca, io));
-        factory.put(LIST_MOVIES, new ListMoviesCommand(biblioteca, io));
-        factory.put(CHECKOUT_MOVIE, new CheckoutMovieCommand(biblioteca, io));
-        factory.put(RETURN_MOVE, new ReturnMovieCommand(biblioteca, io));
-        factory.put(QUIT, new QuitCommand(io));
+        commandMap = new HashMap<>();
+        commandMap.put(LIST_BOOKS, new ListBooksCommand(biblioteca, io));
+        commandMap.put(CHECKOUT_BOOK, new CheckoutBookCommand(biblioteca, io));
+        commandMap.put(RETURN_BOOK, new ReturnBookCommand(biblioteca, io));
+        commandMap.put(LIST_MOVIES, new ListMoviesCommand(biblioteca, io));
+        commandMap.put(CHECKOUT_MOVIE, new CheckoutMovieCommand(biblioteca, io));
+        commandMap.put(RETURN_MOVE, new ReturnMovieCommand(biblioteca, io));
+        commandMap.put(QUIT, new QuitCommand(io));
     }
 
 }

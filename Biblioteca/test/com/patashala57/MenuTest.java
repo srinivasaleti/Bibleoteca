@@ -2,6 +2,8 @@ package com.patashala57;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.omg.CORBA.CODESET_INCOMPATIBLE;
+import org.omg.CORBA.COMM_FAILURE;
 
 import static org.mockito.Mockito.*;
 
@@ -10,13 +12,14 @@ class MenuTest {
     private IO mockIO;
     private Biblioteca biblioteca;
     private Menu menu;
-    private CommandFactory commandFactory;
+    private Factory commandFactory;
+    private Command command;
 
     @BeforeEach
     void beforeEach() {
         this.mockIO = mock(IO.class);
         this.biblioteca = mock(Biblioteca.class);
-        this.commandFactory=mock(CommandFactory.class);
+        this.commandFactory = new CommandFactory(biblioteca, mockIO);
         this.menu = new Menu(this.commandFactory, this.mockIO);
     }
 
@@ -55,74 +58,6 @@ class MenuTest {
 
         verify(mockIO).print(selectOption);
         verify(mockIO).getInput();
-    }
-
-
-    @Test
-    void listBooksInLibrary() {
-        when(mockIO.getInput())
-                .thenReturn("1")
-                .thenReturn("quit");
-        menu.menuSelection();
-
-        verify(biblioteca).stringRepresentationOfItems(Book.class);
-    }
-
-    @Test
-    void checkoutBookFromLibrary() {
-        String bookName = "BookName";
-
-        when(mockIO.getInput())
-                .thenReturn("2")
-                .thenReturn(bookName)
-                .thenReturn("quit");
-        menu.menuSelection();
-
-        verify(biblioteca).checkoutItem(Book.class, bookName);
-    }
-
-    @Test
-    void returnBookToLibrary() {
-        String bookName = "BookName";
-
-        when(mockIO.getInput())
-                .thenReturn("3")
-                .thenReturn(bookName)
-                .thenReturn("quit");
-    }
-
-    @Test
-    void listMoviesInLibrary() {
-        when(mockIO.getInput())
-                .thenReturn("4")
-                .thenReturn("quit");
-        menu.menuSelection();
-
-        verify(biblioteca).stringRepresentationOfItems(Movie.class);
-    }
-
-    @Test
-    void checkoutAMovieInLibrary(){
-        String movieName = "MovieName";
-        when(mockIO.getInput())
-                .thenReturn("5")
-                .thenReturn(movieName)
-                .thenReturn("quit");
-        menu.menuSelection();
-
-        verify(biblioteca).checkoutItem(Movie.class,movieName);
-    }
-
-    @Test
-    void returnAMovieToLibrary(){
-        String movieName="MovieName";
-        when(mockIO.getInput())
-                .thenReturn("6")
-                .thenReturn(movieName)
-                .thenReturn("quit");
-        menu.menuSelection();
-
-        verify(biblioteca).returnItem(Movie.class,movieName);
     }
 
 }

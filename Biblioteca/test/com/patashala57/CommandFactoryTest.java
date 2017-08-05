@@ -5,19 +5,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class CommandFactoryTest {
 
     IO mockIO;
-    Biblioteca biblioteca;
-    CommandFactory factory;
+    private CommandFactory factory;
 
     @BeforeEach
     void beforeEach() {
         mockIO = mock(IO.class);
-        biblioteca = new Biblioteca(null);
+        Biblioteca biblioteca = new Biblioteca(null);
         factory = new CommandFactory(biblioteca, mockIO);
     }
 
