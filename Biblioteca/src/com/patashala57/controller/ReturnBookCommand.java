@@ -1,7 +1,8 @@
-package com.patashala57.view;
+package com.patashala57.controller;
 
 import com.patashala57.model.Book;
 import com.patashala57.model.Library;
+import com.patashala57.view.IO;
 
 //Responsible to ReturnBook to bibiloteca
 public class ReturnBookCommand implements Command {
@@ -13,16 +14,16 @@ public class ReturnBookCommand implements Command {
     private Library library;
     private IO consoleIO;
 
-    public ReturnBookCommand(Library library, IO consoleIO) {
+    ReturnBookCommand(Library library, IO consoleIO) {
         this.library = library;
-        this.consoleIO=consoleIO;
+        this.consoleIO = consoleIO;
     }
 
     @Override
     public void execute() {
         consoleIO.print(ENTER_BOOK_Name);
         String bookName = consoleIO.getInput();
-        boolean isReturn= library.returnItem(Book.class,bookName);
+        boolean isReturn = library.returnItem(Book.class, bookName);
         displayMessage(isReturn);
     }
 

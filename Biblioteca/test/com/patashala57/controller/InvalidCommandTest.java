@@ -1,5 +1,6 @@
-package com.patashala57.view;
+package com.patashala57.controller;
 
+import com.patashala57.view.IO;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;

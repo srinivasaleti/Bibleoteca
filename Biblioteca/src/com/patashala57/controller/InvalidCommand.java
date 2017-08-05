@@ -1,13 +1,15 @@
-package com.patashala57.view;
+package com.patashala57.controller;
 
-//Represetns a Invalid Command to bibiloteca
+import com.patashala57.view.IO;
+
+//Represents Invalid Command to bibiloteca
 public class InvalidCommand implements Command {
 
     private static final String INVALID_OPTION = "Invalid Option";
 
     private IO io;
 
-    public InvalidCommand(IO io) {
+    InvalidCommand(IO io) {
         this.io = io;
     }
 

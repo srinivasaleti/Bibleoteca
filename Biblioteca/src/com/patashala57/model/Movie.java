@@ -1,7 +1,7 @@
 package com.patashala57.model;
 
-//Represet a cinema
-public class Movie implements LibraryItem{
+//Represents a film
+public class Movie implements LibraryItem {
 
     private String name;
     private int yearReleased;
@@ -34,7 +34,7 @@ public class Movie implements LibraryItem{
     @Override
     public String stringRepresentation() {
         String format = "%-35s %-35s %-35s %-35d";
-        return String.format(format, this.name, this.director,this.rating,this.yearReleased);
+        return String.format(format, this.name, this.director, this.rating, this.yearReleased);
     }
 
     @Override

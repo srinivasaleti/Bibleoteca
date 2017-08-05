@@ -1,8 +1,9 @@
-package com.patashala57.view;
+package com.patashala57.controller;
 
 import com.patashala57.model.Library;
 import com.patashala57.model.LibraryItem;
 import com.patashala57.model.Movie;
+import com.patashala57.view.IO;
 
 import java.util.Optional;
 
@@ -17,9 +18,9 @@ public class CheckoutMovieCommand implements Command {
     private Library library;
     private IO consoleIO;
 
-    public CheckoutMovieCommand(Library library, IO consoleIO){
+    CheckoutMovieCommand(Library library, IO consoleIO) {
         this.library = library;
-        this.consoleIO=consoleIO;
+        this.consoleIO = consoleIO;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class CheckoutMovieCommand implements Command {
         }
         consoleIO.print(ENTER_MOVIE_NAME_TO_CHECK_OUT);
         String movieName = consoleIO.getInput();
-        displayMessage(library.checkoutItem(Movie.class,movieName));
+        displayMessage(library.checkoutItem(Movie.class, movieName));
     }
 
     private void displayMessage(Optional<LibraryItem> item) {

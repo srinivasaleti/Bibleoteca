@@ -1,7 +1,8 @@
-package com.patashala57.view;
+package com.patashala57.controller;
 
 import com.patashala57.model.Library;
 import com.patashala57.model.Movie;
+import com.patashala57.view.IO;
 
 //Responsible for list moveis in biblioteca
 public class ListMoviesCommand implements Command {
@@ -12,14 +13,14 @@ public class ListMoviesCommand implements Command {
     private Library biblioteca;
     private IO consoleIO;
 
-    public ListMoviesCommand(Library library, IO consoleIO) {
-        this.biblioteca=library;
-        this.consoleIO=consoleIO;
+    ListMoviesCommand(Library library, IO consoleIO) {
+        this.biblioteca = library;
+        this.consoleIO = consoleIO;
     }
 
     @Override
     public void execute() {
-        if(biblioteca.isNoItemsAvailable(Movie.class)){
+        if (biblioteca.isNoItemsAvailable(Movie.class)) {
             consoleIO.println(NO_MOVIES_AVAILABLE_MESSAGE);
             return;
         }

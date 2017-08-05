@@ -1,8 +1,9 @@
-package com.patashala57.view;
+package com.patashala57.controller;
 
 import com.patashala57.model.Book;
 import com.patashala57.model.Library;
 import com.patashala57.model.LibraryItem;
+import com.patashala57.view.IO;
 
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public class CheckoutBookCommand implements Command {
     private Library library;
     private IO consoleIO;
 
-    public CheckoutBookCommand(Library library, IO consoleIO) {
+    CheckoutBookCommand(Library library, IO consoleIO) {
         this.library = library;
         this.consoleIO = consoleIO;
     }

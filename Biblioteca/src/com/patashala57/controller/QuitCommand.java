@@ -1,4 +1,6 @@
-package com.patashala57.view;
+package com.patashala57.controller;
+
+import com.patashala57.view.IO;
 
 //Represents quit the application
 public class QuitCommand implements Command {
@@ -7,7 +9,7 @@ public class QuitCommand implements Command {
 
     private IO io;
 
-    public QuitCommand(IO io) {
+    QuitCommand(IO io) {
         this.io = io;
     }
 

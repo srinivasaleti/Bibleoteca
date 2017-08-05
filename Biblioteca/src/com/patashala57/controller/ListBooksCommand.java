@@ -1,7 +1,8 @@
-package com.patashala57.view;
+package com.patashala57.controller;
 
 import com.patashala57.model.Book;
 import com.patashala57.model.Library;
+import com.patashala57.view.IO;
 
 //Responsible for listBooks in bibiloteca
 public class ListBooksCommand implements Command {
@@ -11,9 +12,10 @@ public class ListBooksCommand implements Command {
 
     private Library library;
     private IO consoleIO;
-    public ListBooksCommand(Library library, IO io) {
+
+    ListBooksCommand(Library library, IO io) {
         this.library = library;
-        this.consoleIO =io;
+        this.consoleIO = io;
     }
 
     @Override

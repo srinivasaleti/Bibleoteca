@@ -1,4 +1,4 @@
-package com.patashala57.view;
+package com.patashala57.controller;
 
 //Represents command for library application
 public interface Command {
