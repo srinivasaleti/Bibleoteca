@@ -22,8 +22,8 @@ public class ReturnMovieCommand implements Command {
     public void execute() {
         consoleIO.print(ENTER_MOVIE_NAME);
         String movieName = consoleIO.getInput();
-        boolean isReturn = library.returnItem(Movie.class, movieName);
-        displayMessageBasedOnReturnItemOutcome(isReturn);
+        boolean isSuccessfulReturn = library.returnItem(Movie.class, movieName);
+        displayMessageBasedOnReturnItemOutcome(isSuccessfulReturn);
     }
 
     private void displayMessageBasedOnReturnItemOutcome(boolean isReturn) {

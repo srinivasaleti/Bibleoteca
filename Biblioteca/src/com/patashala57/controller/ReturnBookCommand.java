@@ -23,8 +23,8 @@ public class ReturnBookCommand implements Command {
     public void execute() {
         consoleIO.print(ENTER_BOOK_Name);
         String bookName = consoleIO.getInput();
-        boolean isReturn = library.returnItem(Book.class, bookName);
-        displayMessageBasedOnReturnItemOutcome(isReturn);
+        boolean isSuccessfulReturn = library.returnItem(Book.class, bookName);
+        displayMessageBasedOnReturnItemOutcome(isSuccessfulReturn);
     }
 
     private void displayMessageBasedOnReturnItemOutcome(boolean isReturn) {

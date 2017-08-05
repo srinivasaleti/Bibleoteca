@@ -68,17 +68,33 @@ class MenuTest {
     }
 
     @Test
+    void getCommandFromCommandFactory() {
+        Factory commandFactory = mock(Factory.class);
+        QuitCommand quitCommand = new QuitCommand(mockIO);
+        Menu menu = new Menu(commandFactory, mockIO);
+        String quit = "quit";
+
+        when(mockIO.getInput()).thenReturn(quit);
+        when(commandFactory.getCommand(quit)).thenReturn(quitCommand);
+        menu.launch();
+
+        verify(commandFactory).getCommand(quit);
+    }
+
+    @Test
     void afterMenuSelectionProperCommandShouldExecute() {
         Command command = mock(Command.class);
         QuitCommand quitCommand = new QuitCommand(mockIO);
         Factory commandFactory = mock(CommandFactory.class);
         Menu menu = new Menu(commandFactory, mockIO);
+        String input = "1";
+        String quit = "quit";
 
-        when(commandFactory.getCommand("1")).thenReturn(command);
-        when(commandFactory.getCommand("quit")).thenReturn(quitCommand);
+        when(commandFactory.getCommand(input)).thenReturn(command);
+        when(commandFactory.getCommand(quit)).thenReturn(quitCommand);
         when(mockIO.getInput())
-                .thenReturn("1")
-                .thenReturn("quit");
+                .thenReturn(input)
+                .thenReturn(quit);
         menu.launch();
 
         verify(command).execute();

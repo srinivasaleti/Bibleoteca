@@ -20,7 +20,7 @@ public class ListMoviesCommand implements Command {
 
     @Override
     public void execute() {
-        if (biblioteca.isNoItemsAvailable(Movie.class)) {
+        if (biblioteca.isEmpty(Movie.class)) {
             consoleIO.println(NO_MOVIES_AVAILABLE_MESSAGE);
             return;
         }

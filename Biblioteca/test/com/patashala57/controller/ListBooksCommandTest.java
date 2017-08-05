@@ -25,7 +25,7 @@ class ListBooksCommandTest {
     void displayNoBooks() {
         String noBooksAvailable = "No Books Available";
 
-        when(library.isNoItemsAvailable(Book.class)).thenReturn(true);
+        when(library.isEmpty(Book.class)).thenReturn(true);
         listBooks.execute();
 
         verify(mockIO).println(noBooksAvailable);
@@ -53,7 +53,7 @@ class ListBooksCommandTest {
         int yearPublished = 2014;
         Book halfGirlFriend = new Book(name, author, yearPublished);
 
-        when(library.isNoItemsAvailable(Book.class)).thenReturn(false);
+        when(library.isEmpty(Book.class)).thenReturn(false);
         when(library.stringRepresentationOfItems(Book.class)).
                 thenReturn(halfGirlFriend.stringRepresentation());
         listBooks.execute();

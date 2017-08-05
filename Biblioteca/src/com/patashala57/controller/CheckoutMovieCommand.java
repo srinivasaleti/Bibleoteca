@@ -25,7 +25,7 @@ public class CheckoutMovieCommand implements Command {
 
     @Override
     public void execute() {
-        if (library.isNoItemsAvailable(Movie.class)) {
+        if (library.isEmpty(Movie.class)) {
             consoleIO.println(NO_MOVIE_AVAILABLE_MESSAGE);
             return;
         }

@@ -73,7 +73,7 @@ class BibliotecaTest {
         }
 
         @Test
-        void checkoutAMovieFromBinlioteca() {
+        void checkoutAMovieFromBiblioteca() {
             biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String checkoutMovie = "titanic";
 
@@ -133,28 +133,28 @@ class BibliotecaTest {
     void noBooksAvailableInBiblioteca() {
         biblioteca = new Biblioteca(null);
 
-        assertEquals(true, biblioteca.isNoItemsAvailable(Book.class));
+        assertEquals(true, biblioteca.isEmpty(Book.class));
     }
 
     @Test
     void noMoviesAvailableInBiblioteca() {
         biblioteca = new Biblioteca(null);
 
-        assertEquals(true, biblioteca.isNoItemsAvailable(Movie.class));
+        assertEquals(true, biblioteca.isEmpty(Movie.class));
     }
 
     @Test
-    void booksAreAvailableInBibioteca() {
+    void booksAreAvailableInBiblioteca() {
         biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic));
 
-        assertEquals(false, biblioteca.isNoItemsAvailable(Book.class));
+        assertEquals(false, biblioteca.isEmpty(Book.class));
     }
 
     @Test
-    void moviesAreAvailableInBibioteca() {
+    void moviesAreAvailableInBiblioteca() {
         biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic));
 
-        assertEquals(false, biblioteca.isNoItemsAvailable(Movie.class));
+        assertEquals(false, biblioteca.isEmpty(Movie.class));
     }
 
 }

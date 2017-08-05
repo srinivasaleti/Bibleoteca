@@ -22,7 +22,7 @@ class ListMoviesCommandTest {
 
     @Test
     void displayNoMoviesAvailable() {
-        when(library.isNoItemsAvailable(Movie.class)).thenReturn(true);
+        when(library.isEmpty(Movie.class)).thenReturn(true);
         listMoviesCommand.execute();
         String noMoviesAvailable = "No Movies Available";
 
@@ -39,7 +39,7 @@ class ListMoviesCommandTest {
         String year = "Year";
         String header = String.format(format, name, director, rating, year);
 
-        when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
+        when(library.isEmpty(Movie.class)).thenReturn(false);
         listMoviesCommand.execute();
 
         verify(mockIO).println(movies);
@@ -54,7 +54,7 @@ class ListMoviesCommandTest {
         String rating = "9";
         Movie titanic = new Movie(name, yearReleased, cameron, rating);
 
-        when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
+        when(library.isEmpty(Movie.class)).thenReturn(false);
         when(library.stringRepresentationOfItems(Movie.class))
                 .thenReturn(titanic.stringRepresentation());
         listMoviesCommand.execute();

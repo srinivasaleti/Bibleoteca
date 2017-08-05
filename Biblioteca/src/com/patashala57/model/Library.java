@@ -9,7 +9,7 @@ public interface Library {
 
     Optional<LibraryItem> checkoutItem(Class<? extends LibraryItem> itemClass, String itemName);
 
-    boolean isNoItemsAvailable(Class<? extends LibraryItem> itemClass);
+    boolean isEmpty(Class<? extends LibraryItem> itemClass);
 
     boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName);
 

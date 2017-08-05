@@ -25,7 +25,7 @@ class CheckoutMovieCommandTest {
     void displayNoMoviesAvailable() {
         String noMoviesAvailable = "No Movies Available";
 
-        when(library.isNoItemsAvailable(Movie.class)).thenReturn(true);
+        when(library.isEmpty(Movie.class)).thenReturn(true);
         checkoutMovieCommand.execute();
 
         verify(mockIO).println(noMoviesAvailable);
@@ -35,7 +35,7 @@ class CheckoutMovieCommandTest {
     void checkoutAMovie() {
         String movieName = "BookName";
 
-        when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
+        when(library.isEmpty(Movie.class)).thenReturn(false);
         when(library.checkoutItem(Movie.class, movieName))
                 .thenReturn(java.util.Optional.empty());
         when(mockIO.getInput()).thenReturn(movieName);
@@ -53,7 +53,7 @@ class CheckoutMovieCommandTest {
         Movie movie = new Movie(name, yearReleased, director, rating);
         String successMessage = "Thank You Enjoy the Movie";
 
-        when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
+        when(library.isEmpty(Movie.class)).thenReturn(false);
         when(mockIO.getInput()).thenReturn(name);
         when(library.checkoutItem(Movie.class, name))
                 .thenReturn(java.util.Optional.of(movie));
@@ -67,7 +67,7 @@ class CheckoutMovieCommandTest {
         String movieName = "Movie Name";
         String unSuccessMessage = "That Movie is not available";
 
-        when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
+        when(library.isEmpty(Movie.class)).thenReturn(false);
         when(mockIO.getInput()).thenReturn(movieName);
         when(library.checkoutItem(Movie.class, movieName))
                 .thenReturn(java.util.Optional.empty());

@@ -20,7 +20,7 @@ public class ListBooksCommand implements Command {
 
     @Override
     public void execute() {
-        if (library.isNoItemsAvailable(Book.class)) {
+        if (library.isEmpty(Book.class)) {
             consoleIO.println(NO_BOOK_AVAILABLE_MESSAGE);
             return;
         }

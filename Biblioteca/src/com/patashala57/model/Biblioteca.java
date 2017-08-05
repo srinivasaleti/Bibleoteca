@@ -1,11 +1,11 @@
 package com.patashala57.model;
 
-import com.patashala57.view.IO;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.patashala57.view.IO.LINE_SEPARATOR;
 
 //Represents a room containing collections of items
 public class Biblioteca implements Library {
@@ -27,7 +27,7 @@ public class Biblioteca implements Library {
         StringBuilder result = new StringBuilder();
         List<LibraryItem> items = filterRequiredItemsInAList(this.allItems, className);
         for (LibraryItem item : items) {
-            result.append(item.stringRepresentation()).append(IO.LINE_SEPARATOR);
+            result.append(item.stringRepresentation()).append(LINE_SEPARATOR);
         }
         return result.toString();
     }
@@ -52,7 +52,7 @@ public class Biblioteca implements Library {
     }
 
     @Override
-    public boolean isNoItemsAvailable(Class<? extends LibraryItem> itemClass) {
+    public boolean isEmpty(Class<? extends LibraryItem> itemClass) {
         return this.filterRequiredItemsInAList(this.allItems, itemClass).isEmpty();
     }
 
