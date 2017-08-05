@@ -15,7 +15,7 @@ public class InvalidCommand implements Command {
 
     @Override
     public void execute() {
-        io.println(INVALID_OPTION);
+        this.io.println(INVALID_OPTION);
     }
 
 }

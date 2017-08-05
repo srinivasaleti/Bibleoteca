@@ -17,7 +17,7 @@ class CommandFactoryTest {
     void beforeEach() {
         IO mockIO = mock(IO.class);
         Library library = new Biblioteca(null);
-        factory = new CommandFactory(library, mockIO);
+        this.factory = new CommandFactory(library, mockIO);
     }
 
     @Test
@@ -25,7 +25,7 @@ class CommandFactoryTest {
         String listBooksCommand = "1";
         Class expected = ListBooksCommand.class;
 
-        assertEquals(expected, factory.getCommand(listBooksCommand).getClass());
+        assertEquals(expected, this.factory.getCommand(listBooksCommand).getClass());
     }
 
     @Test
@@ -33,7 +33,7 @@ class CommandFactoryTest {
         String checkOutBookCommand = "2";
         Class expected = CheckoutBookCommand.class;
 
-        assertEquals(expected, factory.getCommand(checkOutBookCommand).getClass());
+        assertEquals(expected, this.factory.getCommand(checkOutBookCommand).getClass());
     }
 
     @Test
@@ -41,7 +41,7 @@ class CommandFactoryTest {
         String returnBookCommand = "3";
         Class expected = ReturnBookCommand.class;
 
-        assertEquals(expected, factory.getCommand(returnBookCommand).getClass());
+        assertEquals(expected, this.factory.getCommand(returnBookCommand).getClass());
     }
 
     @Test
@@ -49,7 +49,7 @@ class CommandFactoryTest {
         String listMovies = "4";
         Class expected = ListMoviesCommand.class;
 
-        assertEquals(expected, factory.getCommand(listMovies).getClass());
+        assertEquals(expected, this.factory.getCommand(listMovies).getClass());
     }
 
     @Test
@@ -57,7 +57,7 @@ class CommandFactoryTest {
         String checkoutMovie = "5";
         Class expected = CheckoutMovieCommand.class;
 
-        assertEquals(expected, factory.getCommand(checkoutMovie).getClass());
+        assertEquals(expected, this.factory.getCommand(checkoutMovie).getClass());
     }
 
     @Test
@@ -65,7 +65,7 @@ class CommandFactoryTest {
         String quitCommand = "quit";
         Class expected = QuitCommand.class;
 
-        assertEquals(expected, factory.getCommand(quitCommand).getClass());
+        assertEquals(expected, this.factory.getCommand(quitCommand).getClass());
     }
 
     @Test
@@ -73,7 +73,7 @@ class CommandFactoryTest {
         String invalidCommand = "invalid";
         Class expected = InvalidCommand.class;
 
-        assertEquals(expected, factory.getCommand(invalidCommand).getClass());
+        assertEquals(expected, this.factory.getCommand(invalidCommand).getClass());
     }
 
 }

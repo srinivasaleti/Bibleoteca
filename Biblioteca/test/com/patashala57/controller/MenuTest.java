@@ -16,7 +16,7 @@ class MenuTest {
     void beforeEach() {
         this.mockIO = mock(IO.class);
         Biblioteca biblioteca = new Biblioteca(null);
-        Factory commandFactory = new CommandFactory(biblioteca, mockIO);
+        Factory commandFactory = new CommandFactory(biblioteca, this.mockIO);
         this.menu = new Menu(commandFactory, this.mockIO);
     }
 
@@ -32,17 +32,17 @@ class MenuTest {
         String checkoutMovie = "5->Checkout Movie";
         String returnMovie = "6->Return Movie";
 
-        menu.displayMenu();
+        this.menu.displayMenu();
 
-        verify(mockIO, times(wantedNumberOfInvocations)).println("");
-        verify(mockIO).println(header);
-        verify(mockIO).println(listBooks);
-        verify(mockIO).println(checkoutBook);
-        verify(mockIO).println(returnBook);
-        verify(mockIO).println(listMovies);
-        verify(mockIO).println(checkoutMovie);
-        verify(mockIO).println(returnMovie);
-        verify(mockIO).println(quit);
+        verify(this.mockIO, times(wantedNumberOfInvocations)).println("");
+        verify(this.mockIO).println(header);
+        verify(this.mockIO).println(listBooks);
+        verify(this.mockIO).println(checkoutBook);
+        verify(this.mockIO).println(returnBook);
+        verify(this.mockIO).println(listMovies);
+        verify(this.mockIO).println(checkoutMovie);
+        verify(this.mockIO).println(returnMovie);
+        verify(this.mockIO).println(quit);
     }
 
     @Test
@@ -50,31 +50,31 @@ class MenuTest {
         String welcomeMessage = "Welcome To Bangalore Public Library";
         String quit = "quit";
 
-        when(mockIO.getInput())
+        when(this.mockIO.getInput())
                 .thenReturn(quit);
-        menu.launch();
+        this.menu.launch();
 
-        verify(mockIO).println(welcomeMessage);
+        verify(this.mockIO).println(welcomeMessage);
     }
 
     @Test
     void selectAOptionFromMenu() {
         String selectOption = "Select an Option From Menu::";
 
-        menu.readMenuOptionFromUser();
+        this.menu.readMenuOptionFromUser();
 
-        verify(mockIO).print(selectOption);
-        verify(mockIO).getInput();
+        verify(this.mockIO).print(selectOption);
+        verify(this.mockIO).getInput();
     }
 
     @Test
     void getCommandFromCommandFactory() {
         Factory commandFactory = mock(Factory.class);
-        QuitCommand quitCommand = new QuitCommand(mockIO);
-        Menu menu = new Menu(commandFactory, mockIO);
+        QuitCommand quitCommand = new QuitCommand(this.mockIO);
+        Menu menu = new Menu(commandFactory, this.mockIO);
         String quit = "quit";
 
-        when(mockIO.getInput()).thenReturn(quit);
+        when(this.mockIO.getInput()).thenReturn(quit);
         when(commandFactory.getCommand(quit)).thenReturn(quitCommand);
         menu.launch();
 
@@ -84,15 +84,15 @@ class MenuTest {
     @Test
     void afterMenuSelectionProperCommandShouldExecute() {
         Command command = mock(Command.class);
-        QuitCommand quitCommand = new QuitCommand(mockIO);
+        QuitCommand quitCommand = new QuitCommand(this.mockIO);
         Factory commandFactory = mock(CommandFactory.class);
-        Menu menu = new Menu(commandFactory, mockIO);
+        Menu menu = new Menu(commandFactory, this.mockIO);
         String input = "1";
         String quit = "quit";
 
         when(commandFactory.getCommand(input)).thenReturn(command);
         when(commandFactory.getCommand(quit)).thenReturn(quitCommand);
-        when(mockIO.getInput())
+        when(this.mockIO.getInput())
                 .thenReturn(input)
                 .thenReturn(quit);
         menu.launch();

@@ -35,19 +35,19 @@ public class Biblioteca implements Library {
     @Override
     public Optional<LibraryItem> checkoutItem(Class<? extends LibraryItem> itemClass,
                                               String itemName) {
-        Optional<LibraryItem> itemWithGivenName = findItem(itemClass, this.allItems, itemName);
-        itemWithGivenName.ifPresent(libraryItem -> moveItem(libraryItem, this.allItems,
+        Optional<LibraryItem> itemWithGivenName = this.findItem(itemClass, this.allItems, itemName);
+        itemWithGivenName.ifPresent(libraryItem -> this.moveItem(libraryItem, this.allItems,
                 this.checkedOutItems));
         return itemWithGivenName;
     }
 
     @Override
     public boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName) {
-        Optional<LibraryItem> item = findItem(itemClass, this.checkedOutItems, itemName);
+        Optional<LibraryItem> item = this.findItem(itemClass, this.checkedOutItems, itemName);
         if (!item.isPresent()) {
             return false;
         }
-        moveItem(item.get(), this.checkedOutItems, this.allItems);
+        this.moveItem(item.get(), this.checkedOutItems, this.allItems);
         return true;
     }
 

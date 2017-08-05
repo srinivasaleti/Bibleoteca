@@ -16,52 +16,52 @@ class ReturnBookCommandTest {
 
     @BeforeEach
     void beforeEach() {
-        mockIO = mock(IO.class);
-        library = mock(Library.class);
-        returnBookCommand = new ReturnBookCommand(library, mockIO);
+        this.mockIO = mock(IO.class);
+        this.library = mock(Library.class);
+        this.returnBookCommand = new ReturnBookCommand(this.library, this.mockIO);
     }
 
     @Test
     void readInputFromUserForReturnABook() {
         String enterBookName = "Enter Book Name to return::";
-        returnBookCommand.execute();
+        this.returnBookCommand.execute();
 
-        verify(mockIO).print(enterBookName);
-        verify(mockIO).getInput();
+        verify(this.mockIO).print(enterBookName);
+        verify(this.mockIO).getInput();
     }
 
     @Test
     void returnBookToBiblioteca() {
         String bookName = "name";
 
-        when(mockIO.getInput()).thenReturn(bookName);
-        returnBookCommand.execute();
+        when(this.mockIO.getInput()).thenReturn(bookName);
+        this.returnBookCommand.execute();
 
-        verify(library).returnItem(Book.class, bookName);
+        verify(this.library).returnItem(Book.class, bookName);
     }
 
     @Test
-    void displaySuccessMessage() {
+    void displaySuccessfulReturnMessage() {
         String successMessage = "Thank you for returning the book";
         String bookName = "Harry Poter";
 
-        when(mockIO.getInput()).thenReturn(bookName);
-        when(library.returnItem(Book.class, bookName)).thenReturn(true);
-        returnBookCommand.execute();
+        when(this.mockIO.getInput()).thenReturn(bookName);
+        when(this.library.returnItem(Book.class, bookName)).thenReturn(true);
+        this.returnBookCommand.execute();
 
-        verify(mockIO).println(successMessage);
+        verify(this.mockIO).println(successMessage);
     }
 
     @Test
-    void displayUnSuccessMessage() {
+    void displayUnSuccessfulReturnMessage() {
         String unSuccessMessage = "That is not a valid book to return";
         String bookName = "Harry Poter";
 
-        when(mockIO.getInput()).thenReturn(bookName);
-        when(library.returnItem(Book.class, bookName)).thenReturn(false);
-        returnBookCommand.execute();
+        when(this.mockIO.getInput()).thenReturn(bookName);
+        when(this.library.returnItem(Book.class, bookName)).thenReturn(false);
+        this.returnBookCommand.execute();
 
-        verify(mockIO).println(unSuccessMessage);
+        verify(this.mockIO).println(unSuccessMessage);
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.Map;
 //Represents factory which gives a command that is associated with input
 public class CommandFactory implements Factory {
 
-    private static Map<String, Command> commandMap;
+    private Map<String, Command> commandMap;
     private static final String LIST_BOOKS = "1";
     private static final String CHECKOUT_BOOK = "2";
     private static final String QUIT = "quit";
@@ -24,13 +24,14 @@ public class CommandFactory implements Factory {
     public CommandFactory(Library library, IO io) {
         this.library = library;
         this.io = io;
+        this.commandMap = new HashMap<>();
         this.loadCommands();
     }
 
     @Override
     public Command getCommand(String commandString) {
-        if (commandMap.containsKey(commandString)) {
-            return commandMap.get(commandString);
+        if (this.commandMap.containsKey(commandString)) {
+            return this.commandMap.get(commandString);
         } else {
             return new InvalidCommand(io);
         }
@@ -38,14 +39,13 @@ public class CommandFactory implements Factory {
 
     @Override
     public void loadCommands() {
-        commandMap = new HashMap<>();
-        commandMap.put(LIST_BOOKS, new ListBooksCommand(library, io));
-        commandMap.put(CHECKOUT_BOOK, new CheckoutBookCommand(library, io));
-        commandMap.put(RETURN_BOOK, new ReturnBookCommand(library, io));
-        commandMap.put(LIST_MOVIES, new ListMoviesCommand(library, io));
-        commandMap.put(CHECKOUT_MOVIE, new CheckoutMovieCommand(library, io));
-        commandMap.put(RETURN_MOVE, new ReturnMovieCommand(library, io));
-        commandMap.put(QUIT, new QuitCommand(io));
+        this.commandMap.put(LIST_BOOKS, new ListBooksCommand(library, io));
+        this.commandMap.put(CHECKOUT_BOOK, new CheckoutBookCommand(library, io));
+        this.commandMap.put(RETURN_BOOK, new ReturnBookCommand(library, io));
+        this.commandMap.put(LIST_MOVIES, new ListMoviesCommand(library, io));
+        this.commandMap.put(CHECKOUT_MOVIE, new CheckoutMovieCommand(library, io));
+        this.commandMap.put(RETURN_MOVE, new ReturnMovieCommand(library, io));
+        this.commandMap.put(QUIT, new QuitCommand(io));
     }
 
 }

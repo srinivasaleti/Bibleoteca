@@ -25,20 +25,20 @@ public class CheckoutMovieCommand implements Command {
 
     @Override
     public void execute() {
-        if (library.isEmpty(Movie.class)) {
-            consoleIO.println(NO_MOVIE_AVAILABLE_MESSAGE);
+        if (this.library.isEmpty(Movie.class)) {
+            this.consoleIO.println(NO_MOVIE_AVAILABLE_MESSAGE);
             return;
         }
-        consoleIO.print(ENTER_MOVIE_NAME_TO_CHECK_OUT);
-        String movieName = consoleIO.getInput();
+        this.consoleIO.print(ENTER_MOVIE_NAME_TO_CHECK_OUT);
+        String movieName = this.consoleIO.getInput();
         displayMessageBasedOnOutcome(library.checkoutItem(Movie.class, movieName));
     }
 
     private void displayMessageBasedOnOutcome(Optional<LibraryItem> item) {
         if (item.isPresent()) {
-            consoleIO.println(SUCCESS_MESSAGE);
+            this.consoleIO.println(SUCCESS_MESSAGE);
         } else {
-            consoleIO.println(UNSUCCESS_MESSAGE);
+            this.consoleIO.println(UNSUCCESS_MESSAGE);
         }
     }
 

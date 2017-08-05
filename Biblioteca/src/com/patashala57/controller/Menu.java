@@ -17,11 +17,11 @@ public class Menu {
     private static final String EMPTY_LINE = "";
     private static final String SELECT_OPTION = "Select an Option From Menu::";
 
-    private final IO io;
+    private final IO consoleIO;
     private final Factory commandFactory;
 
-    public Menu(Factory commandFactory, IO io) {
-        this.io = io;
+    public Menu(Factory commandFactory, IO consoleIO) {
+        this.consoleIO = consoleIO;
         this.commandFactory = commandFactory;
     }
 
@@ -30,7 +30,7 @@ public class Menu {
                 RETURN_BOOK_OPTION, LIST_MOVIES, CHECKOUT_MOVIE, RETURN_MOVIE,
                 QUIT, EMPTY_LINE};
         for (String option : options) {
-            io.println(option);
+            this.consoleIO.println(option);
         }
     }
 
@@ -39,8 +39,8 @@ public class Menu {
         Command command;
         boolean isQuit = false;
         while (!isQuit) {
-            displayMenu();
-            menuOption = readMenuOptionFromUser();
+            this.displayMenu();
+            menuOption = this.readMenuOptionFromUser();
             menuOption = menuOption.toLowerCase();
             command = commandFactory.getCommand(menuOption);
             command.execute();
@@ -51,17 +51,17 @@ public class Menu {
     }
 
     String readMenuOptionFromUser() {
-        io.print(SELECT_OPTION);
-        return io.getInput();
+        this.consoleIO.print(SELECT_OPTION);
+        return this.consoleIO.getInput();
     }
 
     public void launch() {
-        displayWelcomeMessage();
-        menuSelection();
+        this.displayWelcomeMessage();
+        this.menuSelection();
     }
 
     private void displayWelcomeMessage() {
-        io.println(WELCOME_MESSAGE);
+        consoleIO.println(WELCOME_MESSAGE);
     }
 
 }

@@ -7,15 +7,15 @@ public class QuitCommand implements Command {
 
     private static final String THANKS_FOR_YOUR_VALUABLE_TIME = "Thank you for your valuable time";
 
-    private final IO io;
+    private final IO consoleIO;
 
-    QuitCommand(IO io) {
-        this.io = io;
+    QuitCommand(IO consoleIO) {
+        this.consoleIO = consoleIO;
     }
 
     @Override
     public void execute() {
-        io.println(THANKS_FOR_YOUR_VALUABLE_TIME);
+        this.consoleIO.println(THANKS_FOR_YOUR_VALUABLE_TIME);
     }
 
 }

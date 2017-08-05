@@ -25,20 +25,20 @@ public class CheckoutBookCommand implements Command {
 
     @Override
     public void execute() {
-        if (library.isEmpty(Book.class)) {
-            consoleIO.println(NO_BOOK_AVAILABLE_MESSAGE);
+        if (this.library.isEmpty(Book.class)) {
+            this.consoleIO.println(NO_BOOK_AVAILABLE_MESSAGE);
             return;
         }
-        consoleIO.print(ENTER_BOOK_NAME_TO_CHECK_OUT);
+        this.consoleIO.print(ENTER_BOOK_NAME_TO_CHECK_OUT);
         String bookName = consoleIO.getInput();
         displayMessageBasedOnOutCome(library.checkoutItem(Book.class, bookName));
     }
 
     private void displayMessageBasedOnOutCome(Optional<LibraryItem> item) {
         if (item.isPresent()) {
-            consoleIO.println(SUCCESS_MESSAGE);
+            this.consoleIO.println(SUCCESS_MESSAGE);
         } else {
-            consoleIO.println(UNSUCCESS_MESSAGE);
+            this.consoleIO.println(UNSUCCESS_MESSAGE);
         }
     }
 

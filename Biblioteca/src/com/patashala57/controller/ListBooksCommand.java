@@ -20,19 +20,18 @@ public class ListBooksCommand implements Command {
 
     @Override
     public void execute() {
-        if (library.isEmpty(Book.class)) {
-            consoleIO.println(NO_BOOK_AVAILABLE_MESSAGE);
+        if (this.library.isEmpty(Book.class)) {
+            this.consoleIO.println(NO_BOOK_AVAILABLE_MESSAGE);
             return;
         }
-
-        consoleIO.println(BOOKS);
+        this.consoleIO.println(BOOKS);
         String format = "%-35s %-35s %-35s";
         String name = "Name";
         String author = "Author";
         String year = "Year Published";
         String header = String.format(format, name, author, year);
-        consoleIO.println(header);
-        consoleIO.println(library.stringRepresentationOfItems(Book.class));
+        this.consoleIO.println(header);
+        this.consoleIO.println(library.stringRepresentationOfItems(Book.class));
     }
 
 }

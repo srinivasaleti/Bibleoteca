@@ -25,38 +25,41 @@ class BibliotecaTest {
 
     @Nested
     class ListItems {
+
+        private Biblioteca biblioteca;
+
         @Test
         void noBooksInBiblioteca() {
-            biblioteca = new Biblioteca(null);
+            this.biblioteca = new Biblioteca(null);
             String empty = "";
 
-            assertEquals(empty, biblioteca.stringRepresentationOfItems(Book.class));
+            assertEquals(empty, this.biblioteca.stringRepresentationOfItems(Book.class));
         }
 
         @Test
         void noMoviesInBiblioteca() {
-            biblioteca = new Biblioteca(null);
+            this.biblioteca = new Biblioteca(null);
             String empty = "";
 
-            assertEquals(empty, biblioteca.stringRepresentationOfItems(Movie.class));
+            assertEquals(empty, this.biblioteca.stringRepresentationOfItems(Movie.class));
         }
 
         @Test
         void allBooksInBiblioteca() {
-            biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+            this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String result = loveStory.stringRepresentation() + lineSeparator +
                     firstLove.stringRepresentation() + lineSeparator;
 
-            assertEquals(result, biblioteca.stringRepresentationOfItems(Book.class));
+            assertEquals(result, this.biblioteca.stringRepresentationOfItems(Book.class));
         }
 
         @Test
         void allMoviesInBiblioteca() {
-            biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+            this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String result = twilight.stringRepresentation() + lineSeparator +
                     titanic.stringRepresentation() + lineSeparator;
 
-            assertEquals(result, biblioteca.stringRepresentationOfItems(Movie.class));
+            assertEquals(result, this.biblioteca.stringRepresentationOfItems(Movie.class));
         }
 
     }
@@ -64,20 +67,22 @@ class BibliotecaTest {
     @Nested
     class CheckoutItems {
 
+        private Biblioteca biblioteca;
+
         @Test
         void checkoutABookFromBiblioteca() {
-            biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+            this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String checkoutBook = "Love Story";
 
-            assertEquals(loveStory, biblioteca.checkoutItem(Book.class, checkoutBook).get());
+            assertEquals(loveStory, this.biblioteca.checkoutItem(Book.class, checkoutBook).get());
         }
 
         @Test
         void checkoutAMovieFromBiblioteca() {
-            biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+            this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String checkoutMovie = "titanic";
 
-            assertEquals(titanic, biblioteca.checkoutItem(Movie.class, checkoutMovie).get());
+            assertEquals(titanic, this.biblioteca.checkoutItem(Movie.class, checkoutMovie).get());
         }
 
     }
@@ -85,76 +90,78 @@ class BibliotecaTest {
     @Nested
     class ReturnItems {
 
+        private Biblioteca biblioteca;
+
         @Test
         void cannotReturnAUncheckedOutBook() {
-            biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+            this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String checkoutBook = "first Love";
             String returnBook = "love Story";
 
-            biblioteca.checkoutItem(Book.class, checkoutBook);
+            this.biblioteca.checkoutItem(Book.class, checkoutBook);
 
-            assertEquals(false, biblioteca.returnItem(Book.class, returnBook));
+            assertEquals(false, this.biblioteca.returnItem(Book.class, returnBook));
         }
 
         @Test
         void cannotReturnAUncheckedOutMovie() {
-            biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+            this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String checkoutMovie = "twilight";
             String returnMovie = "titanic";
 
-            biblioteca.checkoutItem(Movie.class, checkoutMovie);
+            this.biblioteca.checkoutItem(Movie.class, checkoutMovie);
 
-            assertEquals(false, biblioteca.returnItem(Movie.class, returnMovie));
+            assertEquals(false, this.biblioteca.returnItem(Movie.class, returnMovie));
         }
 
         @Test
         void returnCheckedOutBookToBiblioteca() {
-            biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+            this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String bookName = "first love";
 
-            biblioteca.checkoutItem(Book.class, bookName);
+            this.biblioteca.checkoutItem(Book.class, bookName);
 
-            assertEquals(true, biblioteca.returnItem(Book.class, bookName));
+            assertEquals(true, this.biblioteca.returnItem(Book.class, bookName));
         }
 
         @Test
         void returnCheckedOutMovieToBiblioteca() {
-            biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+            this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String movieName = "titanic";
 
-            biblioteca.checkoutItem(Movie.class, movieName);
+            this.biblioteca.checkoutItem(Movie.class, movieName);
 
-            assertEquals(true, biblioteca.returnItem(Movie.class, movieName));
+            assertEquals(true, this.biblioteca.returnItem(Movie.class, movieName));
         }
 
     }
 
     @Test
     void noBooksAvailableInBiblioteca() {
-        biblioteca = new Biblioteca(null);
+        this.biblioteca = new Biblioteca(null);
 
-        assertEquals(true, biblioteca.isEmpty(Book.class));
+        assertEquals(true, this.biblioteca.isEmpty(Book.class));
     }
 
     @Test
     void noMoviesAvailableInBiblioteca() {
-        biblioteca = new Biblioteca(null);
+        this.biblioteca = new Biblioteca(null);
 
-        assertEquals(true, biblioteca.isEmpty(Movie.class));
+        assertEquals(true, this.biblioteca.isEmpty(Movie.class));
     }
 
     @Test
     void booksAreAvailableInBiblioteca() {
-        biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic));
+        this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic));
 
-        assertEquals(false, biblioteca.isEmpty(Book.class));
+        assertEquals(false, this.biblioteca.isEmpty(Book.class));
     }
 
     @Test
     void moviesAreAvailableInBiblioteca() {
-        biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic));
+        this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic));
 
-        assertEquals(false, biblioteca.isEmpty(Movie.class));
+        assertEquals(false, this.biblioteca.isEmpty(Movie.class));
     }
 
 }

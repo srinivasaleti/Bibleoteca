@@ -21,17 +21,17 @@ public class ReturnBookCommand implements Command {
 
     @Override
     public void execute() {
-        consoleIO.print(ENTER_BOOK_Name);
+        this.consoleIO.print(ENTER_BOOK_Name);
         String bookName = consoleIO.getInput();
-        boolean isSuccessfulReturn = library.returnItem(Book.class, bookName);
-        displayMessageBasedOnReturnItemOutcome(isSuccessfulReturn);
+        boolean isSuccessfulReturn = this.library.returnItem(Book.class, bookName);
+        this.displayMessageBasedOnReturnItemOutcome(isSuccessfulReturn);
     }
 
     private void displayMessageBasedOnReturnItemOutcome(boolean isReturn) {
         if (isReturn) {
-            consoleIO.println(SUCCESS_MESSAGE);
+            this.consoleIO.println(SUCCESS_MESSAGE);
         } else {
-            consoleIO.println(UNSUCCESS_MESSAGE);
+            this.consoleIO.println(UNSUCCESS_MESSAGE);
         }
     }
 

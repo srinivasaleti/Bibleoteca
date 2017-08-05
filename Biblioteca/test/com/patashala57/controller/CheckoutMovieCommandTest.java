@@ -16,36 +16,36 @@ class CheckoutMovieCommandTest {
 
     @BeforeEach
     void beforeEach() {
-        mockIO = mock(IO.class);
-        library = mock(Library.class);
-        checkoutMovieCommand = new CheckoutMovieCommand(library, mockIO);
+        this.mockIO = mock(IO.class);
+        this.library = mock(Library.class);
+        this.checkoutMovieCommand = new CheckoutMovieCommand(this.library, mockIO);
     }
 
     @Test
     void displayNoMoviesAvailable() {
         String noMoviesAvailable = "No Movies Available";
 
-        when(library.isEmpty(Movie.class)).thenReturn(true);
-        checkoutMovieCommand.execute();
+        when(this.library.isEmpty(Movie.class)).thenReturn(true);
+        this.checkoutMovieCommand.execute();
 
-        verify(mockIO).println(noMoviesAvailable);
+        verify(this.mockIO).println(noMoviesAvailable);
     }
 
     @Test
     void checkoutAMovie() {
         String movieName = "BookName";
 
-        when(library.isEmpty(Movie.class)).thenReturn(false);
-        when(library.checkoutItem(Movie.class, movieName))
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
+        when(this.library.checkoutItem(Movie.class, movieName))
                 .thenReturn(java.util.Optional.empty());
-        when(mockIO.getInput()).thenReturn(movieName);
-        checkoutMovieCommand.execute();
+        when(this.mockIO.getInput()).thenReturn(movieName);
+        this.checkoutMovieCommand.execute();
 
-        verify(library).checkoutItem(Movie.class, movieName);
+        verify(this.library).checkoutItem(Movie.class, movieName);
     }
 
     @Test
-    void successFulReturn() {
+    void displaySuccessMessageAfterSuccessFulReturn() {
         String name = "Movie Name";
         int yearReleased = 1000;
         String director = "director";
@@ -53,27 +53,27 @@ class CheckoutMovieCommandTest {
         Movie movie = new Movie(name, yearReleased, director, rating);
         String successMessage = "Thank You Enjoy the Movie";
 
-        when(library.isEmpty(Movie.class)).thenReturn(false);
-        when(mockIO.getInput()).thenReturn(name);
-        when(library.checkoutItem(Movie.class, name))
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
+        when(this.mockIO.getInput()).thenReturn(name);
+        when(this.library.checkoutItem(Movie.class, name))
                 .thenReturn(java.util.Optional.of(movie));
-        checkoutMovieCommand.execute();
+        this.checkoutMovieCommand.execute();
 
-        verify(mockIO).println(successMessage);
+        verify(this.mockIO).println(successMessage);
     }
 
     @Test
-    void dipslayUnSuccessMessage() {
+    void displayUnSuccessMessageForUnSuccessfulCheckout() {
         String movieName = "Movie Name";
         String unSuccessMessage = "That Movie is not available";
 
-        when(library.isEmpty(Movie.class)).thenReturn(false);
-        when(mockIO.getInput()).thenReturn(movieName);
-        when(library.checkoutItem(Movie.class, movieName))
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
+        when(this.mockIO.getInput()).thenReturn(movieName);
+        when(this.library.checkoutItem(Movie.class, movieName))
                 .thenReturn(java.util.Optional.empty());
-        checkoutMovieCommand.execute();
+        this.checkoutMovieCommand.execute();
 
-        verify(mockIO).println(unSuccessMessage);
+        verify(this.mockIO).println(unSuccessMessage);
     }
 
 }

@@ -16,19 +16,19 @@ class ListBooksCommandTest {
 
     @BeforeEach
     void beforeEach() {
-        mockIO = mock(IO.class);
-        library = mock(Library.class);
-        listBooks = new ListBooksCommand(library, mockIO);
+        this.mockIO = mock(IO.class);
+        this.library = mock(Library.class);
+        this.listBooks = new ListBooksCommand(this.library, this.mockIO);
     }
 
     @Test
     void displayNoBooks() {
         String noBooksAvailable = "No Books Available";
 
-        when(library.isEmpty(Book.class)).thenReturn(true);
-        listBooks.execute();
+        when(this.library.isEmpty(Book.class)).thenReturn(true);
+        this.listBooks.execute();
 
-        verify(mockIO).println(noBooksAvailable);
+        verify(this.mockIO).println(noBooksAvailable);
     }
 
     @Test
@@ -40,10 +40,10 @@ class ListBooksCommandTest {
         String yearPublished = "Year Published";
         String header = String.format(format, name, author, yearPublished);
 
-        listBooks.execute();
+        this.listBooks.execute();
 
-        verify(mockIO).println(Books);
-        verify(mockIO).println(header);
+        verify(this.mockIO).println(Books);
+        verify(this.mockIO).println(header);
     }
 
     @Test
@@ -53,12 +53,12 @@ class ListBooksCommandTest {
         int yearPublished = 2014;
         Book halfGirlFriend = new Book(name, author, yearPublished);
 
-        when(library.isEmpty(Book.class)).thenReturn(false);
-        when(library.stringRepresentationOfItems(Book.class)).
+        when(this.library.isEmpty(Book.class)).thenReturn(false);
+        when(this.library.stringRepresentationOfItems(Book.class)).
                 thenReturn(halfGirlFriend.stringRepresentation());
-        listBooks.execute();
+        this.listBooks.execute();
 
-        verify(mockIO).println(halfGirlFriend.stringRepresentation());
+        verify(this.mockIO).println(halfGirlFriend.stringRepresentation());
     }
 
 }

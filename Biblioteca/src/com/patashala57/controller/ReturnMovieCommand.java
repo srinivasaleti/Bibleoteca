@@ -20,10 +20,10 @@ public class ReturnMovieCommand implements Command {
 
     @Override
     public void execute() {
-        consoleIO.print(ENTER_MOVIE_NAME);
-        String movieName = consoleIO.getInput();
-        boolean isSuccessfulReturn = library.returnItem(Movie.class, movieName);
-        displayMessageBasedOnReturnItemOutcome(isSuccessfulReturn);
+        this.consoleIO.print(ENTER_MOVIE_NAME);
+        String movieName = this.consoleIO.getInput();
+        boolean isSuccessfulReturn = this.library.returnItem(Movie.class, movieName);
+        this.displayMessageBasedOnReturnItemOutcome(isSuccessfulReturn);
     }
 
     private void displayMessageBasedOnReturnItemOutcome(boolean isReturn) {

@@ -15,18 +15,18 @@ class ListMoviesCommandTest {
 
     @BeforeEach
     void beforeEach() {
-        library = mock(Library.class);
-        mockIO = mock(IO.class);
-        listMoviesCommand = new ListMoviesCommand(library, mockIO);
+        this.library = mock(Library.class);
+        this.mockIO = mock(IO.class);
+        this.listMoviesCommand = new ListMoviesCommand(this.library, this.mockIO);
     }
 
     @Test
     void displayNoMoviesAvailable() {
-        when(library.isEmpty(Movie.class)).thenReturn(true);
-        listMoviesCommand.execute();
+        when(this.library.isEmpty(Movie.class)).thenReturn(true);
+        this.listMoviesCommand.execute();
         String noMoviesAvailable = "No Movies Available";
 
-        verify(mockIO).println(noMoviesAvailable);
+        verify(this.mockIO).println(noMoviesAvailable);
     }
 
     @Test
@@ -39,11 +39,11 @@ class ListMoviesCommandTest {
         String year = "Year";
         String header = String.format(format, name, director, rating, year);
 
-        when(library.isEmpty(Movie.class)).thenReturn(false);
-        listMoviesCommand.execute();
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
+        this.listMoviesCommand.execute();
 
-        verify(mockIO).println(movies);
-        verify(mockIO).println(header);
+        verify(this.mockIO).println(movies);
+        verify(this.mockIO).println(header);
     }
 
     @Test
@@ -54,12 +54,12 @@ class ListMoviesCommandTest {
         String rating = "9";
         Movie titanic = new Movie(name, yearReleased, cameron, rating);
 
-        when(library.isEmpty(Movie.class)).thenReturn(false);
-        when(library.stringRepresentationOfItems(Movie.class))
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
+        when(this.library.stringRepresentationOfItems(Movie.class))
                 .thenReturn(titanic.stringRepresentation());
-        listMoviesCommand.execute();
+        this.listMoviesCommand.execute();
 
-        verify(mockIO).println(titanic.stringRepresentation());
+        verify(this.mockIO).println(titanic.stringRepresentation());
     }
 
 }
