@@ -4,7 +4,7 @@ import com.patashala57.view.Command;
 
 public interface Factory {
 
-    void loadMaps();
+    void loadCommands();
 
     Command getCommand(String commandString);
 

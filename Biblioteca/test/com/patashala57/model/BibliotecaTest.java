@@ -1,15 +1,10 @@
 package com.patashala57.model;
 
-import com.patashala57.model.Biblioteca;
-import com.patashala57.model.Book;
-import com.patashala57.model.Movie;
-import com.patashala57.view.ConsoleIO;
 import com.patashala57.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,8 +19,7 @@ class BibliotecaTest {
 
     @BeforeEach
     void beforeEach() {
-        IO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
-        lineSeparator = consoleIO.lineSeparator();
+        lineSeparator = IO.LINE_SEPARATOR;
     }
 
     @Test

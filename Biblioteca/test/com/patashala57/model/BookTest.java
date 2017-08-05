@@ -1,6 +1,5 @@
 package com.patashala57.model;
 
-import com.patashala57.model.Book;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

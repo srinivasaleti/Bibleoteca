@@ -4,6 +4,7 @@ import com.patashala57.view.Command;
 import com.patashala57.view.IO;
 import com.patashala57.view.QuitCommand;
 
+//Represents menu For biblioteca
 public class Menu {
 
     private static final String WELCOME_MESSAGE = "Welcome To Bangalore Public Library";
@@ -26,7 +27,7 @@ public class Menu {
         this.commandFactory = commandFactory;
     }
 
-    public void displayMenu() {
+    void displayMenu() {
         String options[] = {EMPTY_LINE, MENU, LIST_BOOKS, CHECKOUT_A_BOOK,
                 RETURN_BOOK_OPTION, LIST_MOVIES, CHECKOUT_MOVIE, RETURN_MOVIE,
                 QUIT, EMPTY_LINE};
@@ -50,7 +51,7 @@ public class Menu {
         }
     }
 
-    public String readMenuOptionFromUser() {
+    String readMenuOptionFromUser() {
         io.print(SELECT_OPTION);
         return io.getInput();
     }

@@ -1,7 +1,9 @@
 package com.patashala57.controller;
 
 import com.patashala57.model.Biblioteca;
+import com.patashala57.view.Command;
 import com.patashala57.view.IO;
+import com.patashala57.view.QuitCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -58,8 +60,20 @@ class MenuTest {
     }
 
     @Test
-    void shouldExecuteACommand() {
+    void afterMenuSelectionProperCommandShouldExecute() {
+        Command command = mock(Command.class);
+        QuitCommand quitCommand = new QuitCommand(mockIO);
+        Factory commandFactory = mock(CommandFactory.class);
+        Menu menu = new Menu(commandFactory, mockIO);
 
+        when(commandFactory.getCommand("1")).thenReturn(command);
+        when(commandFactory.getCommand("quit")).thenReturn(quitCommand);
+        when(mockIO.getInput())
+                .thenReturn("1")
+                .thenReturn("quit");
+        menu.launch();
+
+        verify(command).execute();
     }
 
 }

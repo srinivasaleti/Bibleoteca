@@ -1,6 +1,5 @@
 package com.patashala57.view;
 
-import com.patashala57.view.ConsoleIO;
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;

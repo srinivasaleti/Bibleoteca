@@ -1,5 +1,7 @@
 package com.patashala57.model;
 
+import com.patashala57.view.IO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +27,7 @@ public class Biblioteca implements Library {
         StringBuilder result = new StringBuilder();
         List<LibraryItem> items = filterRequiredItemsInAList(this.allItems, className);
         for (LibraryItem item : items) {
-            result.append(item.stringRepresentation()).append(System.lineSeparator());
+            result.append(item.stringRepresentation()).append(IO.LINE_SEPARATOR);
         }
         return result.toString();
     }

@@ -2,14 +2,10 @@ package com.patashala57.view;
 
 import com.patashala57.model.Library;
 import com.patashala57.model.Movie;
-import com.patashala57.view.IO;
-import com.patashala57.view.ListMoviesCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ListMoviesCommandTest {
     private IO mockIO;

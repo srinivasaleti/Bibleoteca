@@ -18,13 +18,13 @@ public class CommandFactory implements Factory {
     private static final String CHECKOUT_MOVIE = "5";
     private static final String RETURN_MOVE = "6";
 
-    private IO io;
-    private Library library;
+    private final IO io;
+    private final Library library;
 
-    public CommandFactory(Library biblioteca, IO io) {
-        this.library = biblioteca;
+    public CommandFactory(Library library, IO io) {
+        this.library = library;
         this.io = io;
-        this.loadMaps();
+        this.loadCommands();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CommandFactory implements Factory {
     }
 
     @Override
-    public void loadMaps() {
+    public void loadCommands() {
         commandMap = new HashMap<>();
         commandMap.put(LIST_BOOKS, new ListBooksCommand(library, io));
         commandMap.put(CHECKOUT_BOOK, new CheckoutBookCommand(library, io));

@@ -3,14 +3,10 @@ package com.patashala57.view;
 import com.patashala57.model.Biblioteca;
 import com.patashala57.model.Library;
 import com.patashala57.model.Movie;
-import com.patashala57.view.IO;
-import com.patashala57.view.ReturnMovieCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ReturnMovieCommandTest {
 
@@ -26,7 +22,7 @@ class ReturnMovieCommandTest {
     }
 
     @Test
-    void readInputFromUserToReturnMovie(){
+    void readInputFromUserToReturnMovie() {
         String enterMovieName = "Enter Movie Name to return::";
         returnMovieCommand.execute();
 
@@ -43,24 +39,24 @@ class ReturnMovieCommandTest {
     }
 
     @Test
-    void displaySuccessMessage(){
+    void displaySuccessMessage() {
         String successMessage = "Thank you for returning the Movie";
 
         String movieName = "Harry Poter";
         when(mockIO.getInput()).thenReturn(movieName);
-        when(library.returnItem(Movie.class,movieName)).thenReturn(true);
+        when(library.returnItem(Movie.class, movieName)).thenReturn(true);
         returnMovieCommand.execute();
 
         verify(mockIO).println(successMessage);
     }
 
     @Test
-    void displayUnSuccessMessage(){
+    void displayUnSuccessMessage() {
         String unSuccessMessage = "That is not a valid Movie to return";
 
         String movieName = "Harry Poter";
         when(mockIO.getInput()).thenReturn(movieName);
-        when(library.returnItem(Movie.class,movieName)).thenReturn(false);
+        when(library.returnItem(Movie.class, movieName)).thenReturn(false);
         returnMovieCommand.execute();
 
         verify(mockIO).println(unSuccessMessage);

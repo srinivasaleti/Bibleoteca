@@ -2,14 +2,10 @@ package com.patashala57.view;
 
 import com.patashala57.model.Book;
 import com.patashala57.model.Library;
-import com.patashala57.view.IO;
-import com.patashala57.view.ReturnBookCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ReturnBookCommandTest {
 
@@ -25,7 +21,7 @@ class ReturnBookCommandTest {
     }
 
     @Test
-    void readInputFromUserForReturnABook(){
+    void readInputFromUserForReturnABook() {
         String enterBookName = "Enter Book Name to return::";
         returnBookCommand.execute();
 
@@ -42,24 +38,24 @@ class ReturnBookCommandTest {
     }
 
     @Test
-    void displaySuccessMessage(){
+    void displaySuccessMessage() {
         String successMessage = "Thank you for returning the book";
 
         String bookName = "Harry Poter";
         when(mockIO.getInput()).thenReturn(bookName);
-        when(library.returnItem(Book.class,bookName)).thenReturn(true);
+        when(library.returnItem(Book.class, bookName)).thenReturn(true);
         returnBookCommand.execute();
 
         verify(mockIO).println(successMessage);
     }
 
     @Test
-    void displayUnSuccessMessage(){
+    void displayUnSuccessMessage() {
         String unSuccessMessage = "That is not a valid book to return";
 
         String bookName = "Harry Poter";
         when(mockIO.getInput()).thenReturn(bookName);
-        when(library.returnItem(Book.class,bookName)).thenReturn(false);
+        when(library.returnItem(Book.class, bookName)).thenReturn(false);
         returnBookCommand.execute();
 
         verify(mockIO).println(unSuccessMessage);
