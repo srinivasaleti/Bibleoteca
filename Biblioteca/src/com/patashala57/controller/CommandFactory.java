@@ -6,7 +6,7 @@ import com.patashala57.view.*;
 import java.util.HashMap;
 import java.util.Map;
 
-//Represents maping between String to command
+//Represents factory which gives a command that is associated with input
 public class CommandFactory implements Factory {
 
     private static Map<String, Command> commandMap;
