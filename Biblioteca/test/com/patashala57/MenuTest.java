@@ -10,17 +10,14 @@ import static org.mockito.Mockito.*;
 class MenuTest {
 
     private IO mockIO;
-    private Biblioteca biblioteca;
     private Menu menu;
-    private Factory commandFactory;
-    private Command command;
 
     @BeforeEach
     void beforeEach() {
         this.mockIO = mock(IO.class);
-        this.biblioteca = mock(Biblioteca.class);
-        this.commandFactory = new CommandFactory(biblioteca, mockIO);
-        this.menu = new Menu(this.commandFactory, this.mockIO);
+        Biblioteca biblioteca = new Biblioteca(null);
+        Factory commandFactory = new CommandFactory(biblioteca, mockIO);
+        this.menu = new Menu(commandFactory, this.mockIO);
     }
 
     @Test

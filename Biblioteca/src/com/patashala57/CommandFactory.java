@@ -16,10 +16,10 @@ class CommandFactory implements Factory {
     private static final String RETURN_MOVE = "6";
 
     private IO io;
-    private Biblioteca biblioteca;
+    private Library library;
 
-    CommandFactory(Biblioteca biblioteca, IO io) {
-        this.biblioteca = biblioteca;
+    CommandFactory(Library biblioteca, IO io) {
+        this.library = biblioteca;
         this.io = io;
         this.loadMaps();
     }
@@ -36,12 +36,12 @@ class CommandFactory implements Factory {
     @Override
     public void loadMaps() {
         commandMap = new HashMap<>();
-        commandMap.put(LIST_BOOKS, new ListBooksCommand(biblioteca, io));
-        commandMap.put(CHECKOUT_BOOK, new CheckoutBookCommand(biblioteca, io));
-        commandMap.put(RETURN_BOOK, new ReturnBookCommand(biblioteca, io));
-        commandMap.put(LIST_MOVIES, new ListMoviesCommand(biblioteca, io));
-        commandMap.put(CHECKOUT_MOVIE, new CheckoutMovieCommand(biblioteca, io));
-        commandMap.put(RETURN_MOVE, new ReturnMovieCommand(biblioteca, io));
+        commandMap.put(LIST_BOOKS, new ListBooksCommand(library, io));
+        commandMap.put(CHECKOUT_BOOK, new CheckoutBookCommand(library, io));
+        commandMap.put(RETURN_BOOK, new ReturnBookCommand(library, io));
+        commandMap.put(LIST_MOVIES, new ListMoviesCommand(library, io));
+        commandMap.put(CHECKOUT_MOVIE, new CheckoutMovieCommand(library, io));
+        commandMap.put(RETURN_MOVE, new ReturnMovieCommand(library, io));
         commandMap.put(QUIT, new QuitCommand(io));
     }
 

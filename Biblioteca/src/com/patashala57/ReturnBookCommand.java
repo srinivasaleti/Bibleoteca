@@ -7,11 +7,11 @@ class ReturnBookCommand implements Command {
     private static final String SUCCESS_MESSAGE = "Thank you for returning the book";
     private static final String UNSUCCESS_MESSAGE = "That is not a valid book to return";
 
-    private Biblioteca biblioteca;
+    private Library library;
     private IO consoleIO;
 
-    ReturnBookCommand(Biblioteca biblioteca, IO consoleIO) {
-        this.biblioteca=biblioteca;
+    ReturnBookCommand(Library library, IO consoleIO) {
+        this.library = library;
         this.consoleIO=consoleIO;
     }
 
@@ -19,7 +19,7 @@ class ReturnBookCommand implements Command {
     public void execute() {
         consoleIO.print(ENTER_BOOK_Name);
         String bookName = consoleIO.getInput();
-        boolean isReturn=biblioteca.returnItem(Book.class,bookName);
+        boolean isReturn= library.returnItem(Book.class,bookName);
         displayMessage(isReturn);
     }
 

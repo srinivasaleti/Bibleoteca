@@ -9,20 +9,20 @@ import static org.mockito.Mockito.when;
 
 class ListMoviesCommandTest {
     private IO mockIO;
-    private Biblioteca biblioteca;
+    private Library library;
     private ListMoviesCommand listMoviesCommand;
 
     @BeforeEach
     void beforeEach() {
-        biblioteca = mock(Biblioteca.class);
+        library = mock(Library.class);
         mockIO = mock(IO.class);
-        listMoviesCommand = new ListMoviesCommand(biblioteca, mockIO);
+        listMoviesCommand = new ListMoviesCommand(library, mockIO);
 
     }
 
     @Test
     void displayNoMoviesAvailable() {
-        when(biblioteca.isNoItemsAvailable(Movie.class)).thenReturn(true);
+        when(library.isNoItemsAvailable(Movie.class)).thenReturn(true);
         listMoviesCommand.execute();
         String noMoviesAvailable = "No Movies Available";
 
@@ -39,7 +39,7 @@ class ListMoviesCommandTest {
         String year = "Year";
         String header = String.format(format, name, director, rating, year);
 
-        when(biblioteca.isNoItemsAvailable(Movie.class)).thenReturn(false);
+        when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
         listMoviesCommand.execute();
 
         verify(mockIO).println(movies);
@@ -50,8 +50,8 @@ class ListMoviesCommandTest {
     void displayMoviesInBiblioteca() {
         Movie titanic = new Movie("Titanic", 1997, "Cameron", "9");
 
-        when(biblioteca.isNoItemsAvailable(Movie.class)).thenReturn(false);
-        when(biblioteca.stringRepresentationOfItems(Movie.class))
+        when(library.isNoItemsAvailable(Movie.class)).thenReturn(false);
+        when(library.stringRepresentationOfItems(Movie.class))
                 .thenReturn(titanic.stringRepresentation());
         listMoviesCommand.execute();
 

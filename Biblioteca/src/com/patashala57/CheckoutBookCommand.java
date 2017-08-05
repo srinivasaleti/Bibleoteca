@@ -2,7 +2,7 @@ package com.patashala57;
 
 import java.util.Optional;
 
-//Responsible for checkout books from biblioteca
+//Responsible for checkout books from library
 class CheckoutBookCommand implements Command {
 
     private static final String NO_BOOK_AVAILABLE_MESSAGE = "No Books Available";
@@ -10,23 +10,23 @@ class CheckoutBookCommand implements Command {
     private static final String SUCCESS_MESSAGE = "Thank you! Enjoy the book";
     private static final String UNSUCCESS_MESSAGE = "That book is not available";
 
-    private Biblioteca biblioteca;
+    private Library library;
     private IO consoleIO;
 
-    CheckoutBookCommand(Biblioteca biblioteca, IO consoleIO) {
-        this.biblioteca = biblioteca;
+    CheckoutBookCommand(Library library, IO consoleIO) {
+        this.library = library;
         this.consoleIO = consoleIO;
     }
 
     @Override
     public void execute() {
-        if (biblioteca.isNoItemsAvailable(Book.class)) {
+        if (library.isNoItemsAvailable(Book.class)) {
             consoleIO.println(NO_BOOK_AVAILABLE_MESSAGE);
             return;
         }
         consoleIO.print(ENTER_BOOK_NAME_TO_CHECK_OUT);
         String bookName = consoleIO.getInput();
-        displayMessage(biblioteca.checkoutItem(Book.class, bookName));
+        displayMessage(library.checkoutItem(Book.class, bookName));
     }
 
     private void displayMessage(Optional<LibraryItem> item) {

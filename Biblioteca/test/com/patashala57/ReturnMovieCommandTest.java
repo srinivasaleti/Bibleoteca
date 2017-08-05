@@ -10,14 +10,14 @@ import static org.mockito.Mockito.when;
 class ReturnMovieCommandTest {
 
     private IO mockIO;
-    private Biblioteca biblioteca;
+    private Library library;
     private ReturnMovieCommand returnMovieCommand;
 
     @BeforeEach
     void beforeEach() {
         mockIO = mock(IO.class);
-        biblioteca = mock(Biblioteca.class);
-        returnMovieCommand = new ReturnMovieCommand(biblioteca, mockIO);
+        library = mock(Biblioteca.class);
+        returnMovieCommand = new ReturnMovieCommand(library, mockIO);
     }
 
     @Test
@@ -34,7 +34,7 @@ class ReturnMovieCommandTest {
         when(mockIO.getInput()).thenReturn("Movie");
         returnMovieCommand.execute();
 
-        verify(biblioteca).returnItem(Movie.class, "Movie");
+        verify(library).returnItem(Movie.class, "Movie");
     }
 
     @Test
@@ -43,7 +43,7 @@ class ReturnMovieCommandTest {
 
         String movieName = "Harry Poter";
         when(mockIO.getInput()).thenReturn(movieName);
-        when(biblioteca.returnItem(Movie.class,movieName)).thenReturn(true);
+        when(library.returnItem(Movie.class,movieName)).thenReturn(true);
         returnMovieCommand.execute();
 
         verify(mockIO).println(successMessage);
@@ -55,7 +55,7 @@ class ReturnMovieCommandTest {
 
         String movieName = "Harry Poter";
         when(mockIO.getInput()).thenReturn(movieName);
-        when(biblioteca.returnItem(Movie.class,movieName)).thenReturn(false);
+        when(library.returnItem(Movie.class,movieName)).thenReturn(false);
         returnMovieCommand.execute();
 
         verify(mockIO).println(unSuccessMessage);

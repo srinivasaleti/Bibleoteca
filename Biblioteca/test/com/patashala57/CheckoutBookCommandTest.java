@@ -9,18 +9,18 @@ class CheckoutBookCommandTest {
 
     private IO mockIO;
     private CheckoutBookCommand checkoutBookCommand;
-    private Biblioteca biblioteca;
+    private Library library;
 
     @BeforeEach
     void beforeEach() {
-        biblioteca = mock(Biblioteca.class);
+        library = mock(Library.class);
         mockIO = mock(IO.class);
-        checkoutBookCommand = new CheckoutBookCommand(biblioteca, mockIO);
+        checkoutBookCommand = new CheckoutBookCommand(library, mockIO);
     }
 
     @Test
     void displayNoBooksAvailableMessage() {
-        when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(true);
+        when(library.isNoItemsAvailable(Book.class)).thenReturn(true);
         checkoutBookCommand.execute();
 
         verify(mockIO).println("No Books Available");
@@ -30,13 +30,13 @@ class CheckoutBookCommandTest {
     void checkOutABook() {
         String bookNameToCheckOut = "BookName";
 
-        when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
-        when(biblioteca.checkoutItem(Book.class, bookNameToCheckOut))
+        when(library.isNoItemsAvailable(Book.class)).thenReturn(false);
+        when(library.checkoutItem(Book.class, bookNameToCheckOut))
                 .thenReturn(java.util.Optional.empty());
         when(mockIO.getInput()).thenReturn(bookNameToCheckOut);
         checkoutBookCommand.execute();
 
-        verify(biblioteca).checkoutItem(Book.class, "BookName");
+        verify(library).checkoutItem(Book.class, "BookName");
     }
 
     @Test
@@ -45,8 +45,8 @@ class CheckoutBookCommandTest {
         Book book = new Book("name", "author", 1999);
         String successMessage = "Thank you! Enjoy the book";
 
-        when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
-        when(biblioteca.checkoutItem(Book.class, bookNameToCheckOut))
+        when(library.isNoItemsAvailable(Book.class)).thenReturn(false);
+        when(library.checkoutItem(Book.class, bookNameToCheckOut))
                 .thenReturn(java.util.Optional.of(book));
         when(mockIO.getInput()).thenReturn(bookNameToCheckOut);
         checkoutBookCommand.execute();
@@ -59,8 +59,8 @@ class CheckoutBookCommandTest {
         String bookName = "BookName";
         String unSuccessMessage = "That book is not available";
 
-        when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
-        when(biblioteca.checkoutItem(Book.class, bookName))
+        when(library.isNoItemsAvailable(Book.class)).thenReturn(false);
+        when(library.checkoutItem(Book.class, bookName))
                 .thenReturn(java.util.Optional.empty());
         when(mockIO.getInput()).thenReturn(bookName);
         checkoutBookCommand.execute();

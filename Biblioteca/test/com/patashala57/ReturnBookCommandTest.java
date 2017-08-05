@@ -10,14 +10,14 @@ import static org.mockito.Mockito.when;
 class ReturnBookCommandTest {
 
     private IO mockIO;
-    private Biblioteca biblioteca;
+    private Library library;
     private ReturnBookCommand returnBookCommand;
 
     @BeforeEach
     void before() {
         mockIO = mock(IO.class);
-        biblioteca = mock(Biblioteca.class);
-        returnBookCommand = new ReturnBookCommand(biblioteca, mockIO);
+        library = mock(Library.class);
+        returnBookCommand = new ReturnBookCommand(library, mockIO);
     }
 
     @Test
@@ -34,7 +34,7 @@ class ReturnBookCommandTest {
         when(mockIO.getInput()).thenReturn("Book");
         returnBookCommand.execute();
 
-        verify(biblioteca).returnItem(Book.class, "Book");
+        verify(library).returnItem(Book.class, "Book");
     }
 
     @Test
@@ -43,7 +43,7 @@ class ReturnBookCommandTest {
 
         String bookName = "Harry Poter";
         when(mockIO.getInput()).thenReturn(bookName);
-        when(biblioteca.returnItem(Book.class,bookName)).thenReturn(true);
+        when(library.returnItem(Book.class,bookName)).thenReturn(true);
         returnBookCommand.execute();
 
         verify(mockIO).println(successMessage);
@@ -55,7 +55,7 @@ class ReturnBookCommandTest {
 
         String bookName = "Harry Poter";
         when(mockIO.getInput()).thenReturn(bookName);
-        when(biblioteca.returnItem(Book.class,bookName)).thenReturn(false);
+        when(library.returnItem(Book.class,bookName)).thenReturn(false);
         returnBookCommand.execute();
 
         verify(mockIO).println(unSuccessMessage);

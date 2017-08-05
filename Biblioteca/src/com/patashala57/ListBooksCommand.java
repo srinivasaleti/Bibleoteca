@@ -6,16 +6,16 @@ class ListBooksCommand implements Command {
     private static final String NO_BOOK_AVAILABLE_MESSAGE = "No Books Available";
     private static final String BOOKS = "Books::";
 
-    private Biblioteca biblioteca;
+    private Library library;
     private IO consoleIO;
-    ListBooksCommand(Biblioteca biblioteca, IO io) {
-        this.biblioteca=biblioteca;
+    ListBooksCommand(Library library, IO io) {
+        this.library = library;
         this.consoleIO =io;
     }
 
     @Override
     public void execute() {
-        if (biblioteca.isNoItemsAvailable(Book.class)) {
+        if (library.isNoItemsAvailable(Book.class)) {
             consoleIO.println(NO_BOOK_AVAILABLE_MESSAGE);
             return;
         }
@@ -27,7 +27,7 @@ class ListBooksCommand implements Command {
         String year = "Year Published";
         String header = String.format(format, name, author, year);
         consoleIO.println(header);
-        consoleIO.println(biblioteca.stringRepresentationOfItems(Book.class));
+        consoleIO.println(library.stringRepresentationOfItems(Book.class));
     }
 
 }

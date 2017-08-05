@@ -8,24 +8,24 @@ import static org.mockito.Mockito.*;
 class ListBooksCommandTest {
 
     private IO mockIO;
-    private Biblioteca biblioteca;
+    private Library library;
     private ListBooksCommand listBooks;
 
     @BeforeEach
     void beforeEach() {
         mockIO = mock(IO.class);
-        biblioteca = mock(Biblioteca.class);
-        listBooks = new ListBooksCommand(biblioteca, mockIO);
+        library = mock(Library.class);
+        listBooks = new ListBooksCommand(library, mockIO);
     }
 
     @Test
     void displayNoBooks() {
-        String noBooksAvailale = "No Books Available";
+        String noBooksAvailable = "No Books Available";
 
-        when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(true);
+        when(library.isNoItemsAvailable(Book.class)).thenReturn(true);
         listBooks.execute();
 
-        verify(mockIO).println(noBooksAvailale);
+        verify(mockIO).println(noBooksAvailable);
     }
 
     @Test
@@ -47,8 +47,8 @@ class ListBooksCommandTest {
     void displayAllBooksInBiblioteca() {
         Book halfGirlFriend = new Book("Half GirlFriend", "Chetan Bhagat", 2014);
 
-        when(biblioteca.isNoItemsAvailable(Book.class)).thenReturn(false);
-        when(biblioteca.stringRepresentationOfItems(Book.class)).
+        when(library.isNoItemsAvailable(Book.class)).thenReturn(false);
+        when(library.stringRepresentationOfItems(Book.class)).
                 thenReturn(halfGirlFriend.stringRepresentation());
         listBooks.execute();
 
