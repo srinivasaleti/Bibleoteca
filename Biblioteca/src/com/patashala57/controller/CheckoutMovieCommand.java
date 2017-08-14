@@ -5,7 +5,7 @@ import com.patashala57.model.Movie;
 import com.patashala57.view.IO;
 
 //Responsible for checkout movies from library
-public class CheckoutMovieCommand extends CheckoutItems implements Command {
+public class CheckoutMovieCommand extends CheckoutItem implements Command {
 
     private static final String NO_MOVIE_AVAILABLE_MESSAGE = "No Movies Available";
     private static final String ENTER_MOVIE_NAME_TO_CHECK_OUT = "Enter a Movie Name to check Out::";
