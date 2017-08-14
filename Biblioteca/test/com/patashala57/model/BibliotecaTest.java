@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -74,7 +75,7 @@ class BibliotecaTest {
             this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String checkoutBook = "Love Story";
 
-            assertEquals(loveStory, this.biblioteca.checkoutItem(Book.class, checkoutBook).get());
+            assertEquals(Optional.of(loveStory), this.biblioteca.checkoutItem(Book.class, checkoutBook));
         }
 
         @Test
@@ -82,7 +83,7 @@ class BibliotecaTest {
             this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
             String checkoutMovie = "titanic";
 
-            assertEquals(titanic, this.biblioteca.checkoutItem(Movie.class, checkoutMovie).get());
+            assertEquals(Optional.of(titanic), this.biblioteca.checkoutItem(Movie.class, checkoutMovie));
         }
 
     }
