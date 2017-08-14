@@ -22,13 +22,11 @@ class CheckoutBookCommandTest {
     }
 
     @Test
-    void displayNoBooksAvailable() {
-        String noBooksAvailable = "No Books Available";
+    void cannotCheckoutWhenNoBooksAvailable(){
+        String bookNameToCheckout = "BookName";
+        when(this.library.isEmpty(Book.class)).thenReturn(true);
 
-        when(library.isEmpty(Book.class)).thenReturn(true);
-        this.checkoutBookCommand.execute();
-
-        verify(this.mockIO).println(noBooksAvailable);
+        verify(this.library,never()).checkoutItem(Book.class,bookNameToCheckout);
     }
 
     @Test
@@ -41,36 +39,7 @@ class CheckoutBookCommandTest {
         when(this.mockIO.getInput()).thenReturn(bookNameToCheckout);
         this.checkoutBookCommand.execute();
 
-        verify(this.library).checkoutItem(Book.class, "BookName");
-    }
-
-    @Test
-    void displaySuccessMessageAfterSuccessfulCheckout() {
-        String bookNameToCheckOut = "BookName";
-        Book book = new Book("name", "author", 1999);
-        String successMessage = "Thank you! Enjoy the book";
-
-        when(this.library.isEmpty(Book.class)).thenReturn(false);
-        when(this.library.checkoutItem(Book.class, bookNameToCheckOut))
-                .thenReturn(java.util.Optional.of(book));
-        when(this.mockIO.getInput()).thenReturn(bookNameToCheckOut);
-        this.checkoutBookCommand.execute();
-
-        verify(this.mockIO).println(successMessage);
-    }
-
-    @Test
-    void displayUnSuccessMessageForunSuccessfulCheckout() {
-        String bookName = "BookName";
-        String unSuccessMessage = "That book is not available";
-
-        when(this.library.isEmpty(Book.class)).thenReturn(false);
-        when(this.library.checkoutItem(Book.class, bookName))
-                .thenReturn(java.util.Optional.empty());
-        when(this.mockIO.getInput()).thenReturn(bookName);
-        this.checkoutBookCommand.execute();
-
-        verify(this.mockIO).println(unSuccessMessage);
+        verify(this.library).checkoutItem(Book.class, bookNameToCheckout);
     }
 
 }

@@ -22,18 +22,16 @@ class CheckoutMovieCommandTest {
     }
 
     @Test
-    void displayNoMoviesAvailable() {
-        String noMoviesAvailable = "No Movies Available";
+    void cannotCheckoutWhenNoMoviesAvailable() {
+        String movieName = "MovieName";
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
 
-        when(this.library.isEmpty(Movie.class)).thenReturn(true);
-        this.checkoutMovieCommand.execute();
-
-        verify(this.mockIO).println(noMoviesAvailable);
+        verify(this.library, never()).checkoutItem(Movie.class, movieName);
     }
 
     @Test
     void checkoutAMovie() {
-        String movieName = "BookName";
+        String movieName = "MovieName";
 
         when(this.library.isEmpty(Movie.class)).thenReturn(false);
         when(this.library.checkoutItem(Movie.class, movieName))
@@ -42,38 +40,6 @@ class CheckoutMovieCommandTest {
         this.checkoutMovieCommand.execute();
 
         verify(this.library).checkoutItem(Movie.class, movieName);
-    }
-
-    @Test
-    void displaySuccessMessageAfterSuccessFulReturn() {
-        String name = "Movie Name";
-        int yearReleased = 1000;
-        String director = "director";
-        String rating = "unrated";
-        Movie movie = new Movie(name, yearReleased, director, rating);
-        String successMessage = "Thank You Enjoy the Movie";
-
-        when(this.library.isEmpty(Movie.class)).thenReturn(false);
-        when(this.mockIO.getInput()).thenReturn(name);
-        when(this.library.checkoutItem(Movie.class, name))
-                .thenReturn(java.util.Optional.of(movie));
-        this.checkoutMovieCommand.execute();
-
-        verify(this.mockIO).println(successMessage);
-    }
-
-    @Test
-    void displayUnSuccessMessageForUnSuccessfulCheckout() {
-        String movieName = "Movie Name";
-        String unSuccessMessage = "That Movie is not available";
-
-        when(this.library.isEmpty(Movie.class)).thenReturn(false);
-        when(this.mockIO.getInput()).thenReturn(movieName);
-        when(this.library.checkoutItem(Movie.class, movieName))
-                .thenReturn(java.util.Optional.empty());
-        this.checkoutMovieCommand.execute();
-
-        verify(this.mockIO).println(unSuccessMessage);
     }
 
 }

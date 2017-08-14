@@ -4,6 +4,8 @@ import com.patashala57.model.Library;
 import com.patashala57.model.Movie;
 import com.patashala57.view.IO;
 
+
+//Responsible for return a movie from biblioteca
 public class ReturnMovieCommand implements Command {
 
     private static final String ENTER_MOVIE_NAME = "Enter Movie Name to return::";
