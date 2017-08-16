@@ -12,6 +12,9 @@ class CheckoutItem {
     final Library library;
     final IO consoleIO;
 
+    private static final String NO_BOOK_AVAILABLE_MESSAGE = "No Books Available";
+    private static final String BOOKS = "Books::";
+
     CheckoutItem(Library library, IO consoleIO) {
         this.library = library;
         this.consoleIO = consoleIO;

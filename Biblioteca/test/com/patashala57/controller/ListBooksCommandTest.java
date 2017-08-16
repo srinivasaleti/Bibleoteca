@@ -22,28 +22,14 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void displayNoBooks() {
+    void shouldNotListAnyBooksInLibraryIfThereAreNoBooks() {
         String noBooksAvailable = "No Books Available";
 
         when(this.library.isEmpty(Book.class)).thenReturn(true);
         this.listBooks.execute();
 
         verify(this.mockIO).println(noBooksAvailable);
-    }
-
-    @Test
-    void displayHeader() {
-        String Books = "Books::";
-        String format = "%-35s %-35s %-35s";
-        String name = "Name";
-        String author = "Author";
-        String yearPublished = "Year Published";
-        String header = String.format(format, name, author, yearPublished);
-
-        this.listBooks.execute();
-
-        verify(this.mockIO).println(Books);
-        verify(this.mockIO).println(header);
+        verify(this.library,never()).stringRepresentationOfItems(Book.class);
     }
 
     @Test
