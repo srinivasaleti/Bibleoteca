@@ -22,7 +22,7 @@ class ListBooksCommandTest {
     }
 
     @Test
-    void shouldNotListAnyBooksInLibraryIfThereAreNoBooks() {
+    void shouldNotInteractWithLibraryIfThereAreNoBooks() {
         String noBooksAvailable = "No Books Available";
 
         when(this.library.isEmpty(Book.class)).thenReturn(true);

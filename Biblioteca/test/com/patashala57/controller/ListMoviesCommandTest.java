@@ -21,7 +21,7 @@ class ListMoviesCommandTest {
     }
 
     @Test
-    void shouldNotListAnyMovieIfThereAreNoMoviesInLibrary() {
+    void shouldNotInteractWithLibraryIfThereAreNoMovies() {
         when(this.library.isEmpty(Movie.class)).thenReturn(true);
         this.listMoviesCommand.execute();
         String noMoviesAvailable = "No Movies Available";

@@ -22,7 +22,7 @@ class CheckoutBookCommandTest {
     }
 
     @Test
-    void cannotCheckoutWhenNoBooksAvailable(){
+    void cannotInteractWithLibraryIfNoBooksAvailable(){
         String bookNameToCheckout = "BookName";
         when(this.library.isEmpty(Book.class)).thenReturn(true);
 

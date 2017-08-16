@@ -22,7 +22,7 @@ class CheckoutMovieCommandTest {
     }
 
     @Test
-    void cannotCheckoutWhenNoMoviesAvailable() {
+    void cnanotInteractWithLibraryIfNoMoviesAvailable() {
         String movieName = "MovieName";
         when(this.library.isEmpty(Movie.class)).thenReturn(false);
 

@@ -17,51 +17,15 @@ class ListItems {
         this.consoleIO = io;
     }
 
-    void listAll(Class<? extends LibraryItem> itemClass) {
+    void listAll(Class<? extends LibraryItem> itemClass,String noItemsAvailable,String itemType,String header) {
         if (this.library.isEmpty(itemClass)) {
-            displayNoItemsAvailable(itemClass);
+            this.consoleIO.println(noItemsAvailable);
             return;
         }
-        displayItemType(itemClass);
-        displayHeader(itemClass);
+        this.consoleIO.println(itemType);
+        this.consoleIO.println(header);
         this.consoleIO.println(library.stringRepresentationOfItems(itemClass));
     }
 
-    private void displayNoItemsAvailable(Class<? extends LibraryItem> itemClass) {
-        if(itemClass==Book.class){
-            consoleIO.println("No Books Available");
-        }
-        if(itemClass==Movie.class){
-            consoleIO.println("No Movies Available");
-        }
-    }
-
-    private void displayItemType(Class<? extends LibraryItem> itemClass){
-        if(itemClass==Book.class){
-            consoleIO.println("Books::");
-        }
-        if (itemClass==Movie.class){
-            consoleIO.println("Movies::");
-        }
-    }
-
-    private void displayHeader(Class<? extends LibraryItem> itemClass) {
-        if (itemClass == Book.class) {
-            String format = "%-35s %-35s %-35s";
-            String name = "Name";
-            String author = "Author";
-            String year = "Year Published";
-            consoleIO.println(String.format(format, name, author, year));
-        }
-
-        if (itemClass == Movie.class) {
-            String format = "%-35s %-35s %-35s %-35s";
-            String name = "Name";
-            String director = "Director";
-            String rating = "Rating";
-            String year = "Year";
-            consoleIO.println(String.format(format, name, director, rating, year));
-        }
-    }
 
 }

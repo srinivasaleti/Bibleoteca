@@ -7,7 +7,9 @@ import com.patashala57.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class ListItemsTest {
 
@@ -25,9 +27,11 @@ class ListItemsTest {
     @Test
     void displayNoBooks() {
         String noBooksAvailable = "No Books Available";
+        String type="Books";
+        String header = "header";
 
         when(this.library.isEmpty(Book.class)).thenReturn(true);
-        this.listItems.listAll(Book.class);
+        this.listItems.listAll(Book.class,noBooksAvailable,type, header);
 
         verify(this.mockIO).println(noBooksAvailable);
     }
@@ -35,9 +39,11 @@ class ListItemsTest {
     @Test
     void displayNoMovies() {
         String noMoviesAvailable = "No Movies Available";
+        String type="Movies";
+        String header = "header";
 
         when(this.library.isEmpty(Movie.class)).thenReturn(true);
-        this.listItems.listAll(Movie.class);
+        this.listItems.listAll(Movie.class,noMoviesAvailable,type, header);
 
         verify(this.mockIO).println(noMoviesAvailable);
     }
@@ -45,50 +51,71 @@ class ListItemsTest {
 
     @Test
     void displayListBooksHeader() {
-        String type = "Books::";
+        String noBooksAvailable = "No Books Available";
+        String type="Books";
         String format = "%-35s %-35s %-35s";
         String name = "Name";
         String author = "Author";
         String yearPublished = "Year Published";
         String header = String.format(format, name, author, yearPublished);
 
-        this.listItems.listAll(Book.class);
+        this.listItems.listAll(Book.class,noBooksAvailable,type,header);
 
         verify(this.mockIO).println(type);
         verify(this.mockIO).println(header);
     }
 
     @Test
-    void displayListMoviesHeader() {
-        String type = "Movies::";
+    void displayHeader() {
         String format = "%-35s %-35s %-35s %-35s";
         String name = "Name";
         String director = "Director";
         String rating = "Rating";
         String year = "Year";
+        String noMoviesAvailable = "No Movies Available";
+        String type = "Movies::";
+
         String header = String.format(format, name, director, rating, year);
 
         when(this.library.isEmpty(Movie.class)).thenReturn(false);
-        this.listItems.listAll(Movie.class);
+        this.listItems.listAll(Movie.class,noMoviesAvailable,type,header);
 
         verify(this.mockIO).println(type);
         verify(this.mockIO).println(header);
     }
 
     @Test
-    void displayAllBooksInLibrary(){
-        when(this.library.isEmpty(Movie.class)).thenReturn(false);
-        this.listItems.listAll(Book.class);
+    void getRepresentationOfAllMoviesInLibrary(){
+        String format = "%-35s %-35s %-35s %-35s";
+        String name = "Name";
+        String director = "Director";
+        String rating = "Rating";
+        String year = "Year";
+        String noMoviesAvailable = "No Movies Available";
+        String type = "Movies::";
 
-        verify(this.library).stringRepresentationOfItems(Book.class);
+        String header = String.format(format, name, director, rating, year);
+
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
+        this.listItems.listAll(Movie.class,noMoviesAvailable,type,header);
+
+        verify(this.library).stringRepresentationOfItems(Movie.class);
     }
 
     @Test
-    void displayAllMoviesInLibrary(){
-        when(this.library.isEmpty(Movie.class)).thenReturn(false);
-        this.listItems.listAll(Movie.class);
+    void getRepresentationOfAllBooksInLibrary(){
+        String noBooksAvailable = "No Books Available";
+        String type="Books";
+        String format = "%-35s %-35s %-35s";
+        String name = "Name";
+        String author = "Author";
+        String yearPublished = "Year Published";
+        String header = String.format(format, name, author, yearPublished);
 
-        verify(this.library).stringRepresentationOfItems(Movie.class);
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
+        this.listItems.listAll(Book.class,noBooksAvailable,type,header);
+
+        verify(this.library).stringRepresentationOfItems(Book.class);
     }
 
 }
