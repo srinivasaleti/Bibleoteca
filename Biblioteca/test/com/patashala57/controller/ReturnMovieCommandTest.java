@@ -23,44 +23,11 @@ class ReturnMovieCommandTest {
     }
 
     @Test
-    void readInputFromUserToReturnMovie() {
-        String enterMovieName = "Enter Movie Name to return::";
-        this.returnMovieCommand.execute();
-
-        verify(this.mockIO).print(enterMovieName);
-        verify(this.mockIO).getInput();
-    }
-
-    @Test
     void returnMovieToBiblioteca() {
         when(this.mockIO.getInput()).thenReturn("Movie");
         this.returnMovieCommand.execute();
 
         verify(this.library).returnItem(Movie.class, "Movie");
-    }
-
-    @Test
-    void displaySuccessMessage() {
-        String successMessage = "Thank you for returning the Movie";
-        String movieName = "Harry Poter";
-
-        when(this.mockIO.getInput()).thenReturn(movieName);
-        when(this.library.returnItem(Movie.class, movieName)).thenReturn(true);
-        this.returnMovieCommand.execute();
-
-        verify(this.mockIO).println(successMessage);
-    }
-
-    @Test
-    void displayUnSuccessMessage() {
-        String unSuccessMessage = "That is not a valid Movie to return";
-        String movieName = "Harry Poter";
-
-        when(this.mockIO.getInput()).thenReturn(movieName);
-        when(this.library.returnItem(Movie.class, movieName)).thenReturn(false);
-        this.returnMovieCommand.execute();
-
-        verify(this.mockIO).println(unSuccessMessage);
     }
 
 }

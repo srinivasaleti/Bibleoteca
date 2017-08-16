@@ -6,34 +6,19 @@ import com.patashala57.view.IO;
 
 
 //Responsible for return a movie from biblioteca
-public class ReturnMovieCommand implements Command {
+public class ReturnMovieCommand extends ReturnItem implements Command {
 
     private static final String ENTER_MOVIE_NAME = "Enter Movie Name to return::";
     private static final String SUCCESS_MESSAGE = "Thank you for returning the Movie";
     private static final String UNSUCCESS_MESSAGE = "That is not a valid Movie to return";
 
-    private final Library library;
-    private final IO consoleIO;
-
     ReturnMovieCommand(Library library, IO consoleIO) {
-        this.library = library;
-        this.consoleIO = consoleIO;
+        super(library,consoleIO);
     }
 
     @Override
     public void execute() {
-        this.consoleIO.print(ENTER_MOVIE_NAME);
-        String movieName = this.consoleIO.getInput();
-        boolean isSuccessfulReturn = this.library.returnItem(Movie.class, movieName);
-        this.displayMessageBasedOnReturnItemOutcome(isSuccessfulReturn);
-    }
-
-    private void displayMessageBasedOnReturnItemOutcome(boolean isReturn) {
-        if (isReturn) {
-            consoleIO.println(SUCCESS_MESSAGE);
-        } else {
-            consoleIO.println(UNSUCCESS_MESSAGE);
-        }
+        super.returnAItem(Movie.class,ENTER_MOVIE_NAME,SUCCESS_MESSAGE,UNSUCCESS_MESSAGE);
     }
 
 }

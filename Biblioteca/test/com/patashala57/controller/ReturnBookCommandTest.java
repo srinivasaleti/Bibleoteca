@@ -22,15 +22,6 @@ class ReturnBookCommandTest {
     }
 
     @Test
-    void readInputFromUserForReturnABook() {
-        String enterBookName = "Enter Book Name to return::";
-        this.returnBookCommand.execute();
-
-        verify(this.mockIO).print(enterBookName);
-        verify(this.mockIO).getInput();
-    }
-
-    @Test
     void returnBookToBiblioteca() {
         String bookName = "name";
 
@@ -38,30 +29,6 @@ class ReturnBookCommandTest {
         this.returnBookCommand.execute();
 
         verify(this.library).returnItem(Book.class, bookName);
-    }
-
-    @Test
-    void displaySuccessfulReturnMessage() {
-        String successMessage = "Thank you for returning the book";
-        String bookName = "Harry Poter";
-
-        when(this.mockIO.getInput()).thenReturn(bookName);
-        when(this.library.returnItem(Book.class, bookName)).thenReturn(true);
-        this.returnBookCommand.execute();
-
-        verify(this.mockIO).println(successMessage);
-    }
-
-    @Test
-    void displayUnSuccessfulReturnMessage() {
-        String unSuccessMessage = "That is not a valid book to return";
-        String bookName = "Harry Poter";
-
-        when(this.mockIO.getInput()).thenReturn(bookName);
-        when(this.library.returnItem(Book.class, bookName)).thenReturn(false);
-        this.returnBookCommand.execute();
-
-        verify(this.mockIO).println(unSuccessMessage);
     }
 
 }
