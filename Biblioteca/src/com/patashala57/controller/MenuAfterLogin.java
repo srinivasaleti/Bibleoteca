@@ -1,5 +1,6 @@
 package com.patashala57.controller;
 
+import com.patashala57.model.User;
 import com.patashala57.view.IO;
 
 //Represents menu For biblioteca if user has login
@@ -18,10 +19,16 @@ public class MenuAfterLogin implements Menu {
 
     private final IO consoleIO;
     private final Factory commandFactory;
+    private final User currentUser;
 
     public MenuAfterLogin(Factory commandFactory, IO consoleIO) {
+        this(commandFactory, consoleIO, null);
+    }
+
+    public MenuAfterLogin(Factory commandFactory, IO consoleIO, User user) {
         this.consoleIO = consoleIO;
         this.commandFactory = commandFactory;
+        this.currentUser = user;
     }
 
     private void menuSelection() {

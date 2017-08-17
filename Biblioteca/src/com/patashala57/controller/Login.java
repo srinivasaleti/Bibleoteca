@@ -15,12 +15,10 @@ class Login implements Command {
 
     private final Library library;
     private final IO consoleIO;
-    private final Menu menuAfterLogin;
 
-    Login(Library library, IO io, Menu menu) {
+    Login(Library library, IO io) {
         this.library = library;
         this.consoleIO = io;
-        this.menuAfterLogin = menu;
     }
 
     @Override
@@ -31,7 +29,9 @@ class Login implements Command {
         String password = this.consoleIO.getInput();
         Optional<User> currentLibraryUser = this.library.isValidUserCredentials(libraryNo, password);
         if (currentLibraryUser.isPresent()) {
-            this.menuAfterLogin.launch();
+            Factory commandFactory = new CommandFactoryAfterLogin(this.library, this.consoleIO);
+            MenuAfterLogin menuAfterLogin = new MenuAfterLogin(commandFactory, this.consoleIO,currentLibraryUser.get());
+            menuAfterLogin.launch();
             return;
         }
         this.consoleIO.println(INVALID_CREDENTIALS);

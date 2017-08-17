@@ -2,6 +2,7 @@ package com.patashala57.controller;
 
 import com.patashala57.model.Library;
 import com.patashala57.model.Movie;
+import com.patashala57.model.User;
 import com.patashala57.view.IO;
 
 //Responsible for checkout movies from library
@@ -13,8 +14,8 @@ public class CheckoutMovieCommand extends CheckoutItem implements Command {
     private static final String UNSUCCESS_MESSAGE = "That Movie is not available";
 
 
-    CheckoutMovieCommand(Library library, IO consoleIO) {
-        super(library, consoleIO);
+    CheckoutMovieCommand(Library library, IO consoleIO,User user) {
+        super(library, consoleIO,user);
     }
 
     @Override

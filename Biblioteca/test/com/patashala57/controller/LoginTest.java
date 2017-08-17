@@ -15,14 +15,12 @@ class LoginTest {
     private Library library;
     private IO mockIO;
     private Login login;
-    private Menu menu;
 
     @BeforeEach
     void beforeEach() {
         this.library = mock(Library.class);
         this.mockIO = mock(IO.class);
-        this.menu = mock(Menu.class);
-        this.login = new Login(this.library, this.mockIO, this.menu);
+        this.login = new Login(this.library, this.mockIO);
     }
 
     @Test
@@ -69,17 +67,17 @@ class LoginTest {
         verify(this.mockIO).println(invalidCredentials);
     }
 
-    @Test
-    void launchMenuAfterSuccessfulLogin() {
-        String validLibraryNo = "validLibraryNo";
-        String validPassword = "validPassword";
-
-        when(this.mockIO.getInput()).thenReturn(validLibraryNo, validPassword);
-        when(this.library.isValidUserCredentials(validLibraryNo, validPassword)).thenReturn(Optional.of(new User("1", "1", "1", "1", "1")));
-
-        this.login.execute();
-
-        verify(this.menu).launch();
-    }
+//    @Test
+//    void launchMenuAfterSuccessfulLogin() {
+//        String validLibraryNo = "validLibraryNo";
+//        String validPassword = "validPassword";
+//
+//        when(this.mockIO.getInput()).thenReturn(validLibraryNo, validPassword);
+//        when(this.library.isValidUserCredentials(validLibraryNo, validPassword)).thenReturn(Optional.of(new User("1", "1", "1", "1", "1")));
+//
+//        this.login.execute();
+//
+//        verify(this.menu).launch();
+//    }
 
 }

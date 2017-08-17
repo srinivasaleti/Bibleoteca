@@ -23,9 +23,7 @@ public class CommandFactoryBeforeLogin implements Factory {
             return new ListMoviesCommand(library, io);
         }
         if (commandString.equalsIgnoreCase("3")) {
-            Factory commandFactory = new CommandFactoryAfterLogin(this.library, this.io);
-            MenuAfterLogin menuAfterLogin = new MenuAfterLogin(commandFactory, this.io);
-            return new Login(library, io, menuAfterLogin);
+            return new Login(library, io);
         }
         if (commandString.equalsIgnoreCase("quit")) {
             return new QuitCommand(io);

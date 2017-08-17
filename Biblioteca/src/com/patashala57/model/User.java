@@ -20,7 +20,7 @@ public class User {
         return this.libraryNo.equals(libraryNo) && this.password.equals(password);
     }
 
-    String representation() {
+    public String representation() {
         return String.format("%-35s %-35s %-35s", name, email, phoneNumber);
     }
 

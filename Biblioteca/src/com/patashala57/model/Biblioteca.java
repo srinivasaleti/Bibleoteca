@@ -1,8 +1,6 @@
 package com.patashala57.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.patashala57.view.IO.LINE_SEPARATOR;
@@ -13,6 +11,8 @@ public class Biblioteca implements Library {
     private final List<LibraryItem> allItems;
     private final List<LibraryItem> checkedOutItems;
     private final List<User> allUsers;
+
+    private final Map<Book, User> checkoutRegiser;
 
     public Biblioteca(List<LibraryItem> items) {
         this(items, null);
@@ -30,6 +30,7 @@ public class Biblioteca implements Library {
             this.allUsers = new ArrayList<>(users);
         }
         this.checkedOutItems = new ArrayList<>();
+        this.checkoutRegiser = new HashMap<>();
     }
 
     @Override

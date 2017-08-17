@@ -3,6 +3,7 @@ package com.patashala57.controller;
 import com.patashala57.model.Book;
 import com.patashala57.model.Library;
 import com.patashala57.model.Movie;
+import com.patashala57.model.User;
 import com.patashala57.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,12 +25,13 @@ class CheckoutItemTest {
     private IO mockIO;
     private CheckoutItem checkoutItems;
     private Library library;
-
+    private User currentUser;
     @BeforeEach
     void beforeEach() {
         library = mock(Library.class);
         mockIO = mock(IO.class);
-        checkoutItems = new CheckoutBookCommand(library, mockIO);
+        this.currentUser=new User("1","1","1","1","1");
+        checkoutItems = new CheckoutBookCommand(library, mockIO,this.currentUser);
     }
 
     @Test

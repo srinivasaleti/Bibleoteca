@@ -2,6 +2,7 @@ package com.patashala57.controller;
 
 import com.patashala57.model.Library;
 import com.patashala57.model.LibraryItem;
+import com.patashala57.model.User;
 import com.patashala57.view.IO;
 
 import java.util.Optional;
@@ -9,12 +10,14 @@ import java.util.Optional;
 //Responsible for checkout an item from library
 class CheckoutItem {
 
-    final Library library;
-    final IO consoleIO;
+    private final Library library;
+    private final IO consoleIO;
+    private final User currentUser;
 
-    CheckoutItem(Library library, IO consoleIO) {
+    CheckoutItem(Library library, IO consoleIO, User user) {
         this.library = library;
         this.consoleIO = consoleIO;
+        this.currentUser = user;
     }
 
     void checkOut(Class<? extends LibraryItem> itemClass, String noItemsAvailable, String enterBooksNameToCheckout,
