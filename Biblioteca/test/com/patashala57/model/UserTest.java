@@ -30,4 +30,25 @@ class UserTest {
         assertEquals(this.user.representation(), expected);
     }
 
+    @Test
+    void userNotEqualToNull(){
+        assertNotEquals(this.user,null);
+    }
+
+    @Test
+    void userNotEqualToString(){
+        assertNotEquals(this.user,"user");
+    }
+
+    @Test
+    void userEqualToItSelf(){
+        assertEquals(this.user,this.user);
+    }
+
+    @Test
+    void userEqualToSameUser(){
+        User sameUser = new User("srinu", "123-123424", "1234", "srinivas.aleti03@gmail.com", "9848981244");
+        assertEquals(this.user,sameUser);
+    }
+
 }

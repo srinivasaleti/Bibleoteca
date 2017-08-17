@@ -21,7 +21,23 @@ public class User {
     }
 
     String representation() {
-       return String.format("%-35s %-35s %-35s",name,email,phoneNumber);
+        return String.format("%-35s %-35s %-35s", name, email, phoneNumber);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (this.getClass() != other.getClass()) {
+            return false;
+        }
+        User that = (User) other;
+        return this.name.equals(that.name) &&
+                this.libraryNo.equals(that.libraryNo) &&
+                this.password.equals(that.password) &&
+                this.email.equals(that.email) &&
+                this.phoneNumber.equals(that.phoneNumber);
     }
 
 }
