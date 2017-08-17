@@ -1,8 +1,9 @@
 package com.patashala57;
 
-import com.patashala57.controller.CommandFactory;
+import com.patashala57.controller.CommandFactoryAfterLogin;
+import com.patashala57.controller.CommandFactoryBeforeLogin;
 import com.patashala57.controller.Factory;
-import com.patashala57.controller.Menu;
+import com.patashala57.controller.MenuBeforeLogin;
 import com.patashala57.model.*;
 import com.patashala57.view.ConsoleIO;
 
@@ -25,8 +26,8 @@ class Runner {
     public static void main(String args[]) {
         ConsoleIO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
         Library library = new Biblioteca(generateItems());
-        Factory commandFactory = new CommandFactory(library, consoleIO);
-        Menu menu = new Menu(commandFactory, consoleIO);
+        Factory commandFactory = new CommandFactoryBeforeLogin(library, consoleIO);
+        MenuBeforeLogin menu = new MenuBeforeLogin(commandFactory, consoleIO);
 
         menu.launch();
     }

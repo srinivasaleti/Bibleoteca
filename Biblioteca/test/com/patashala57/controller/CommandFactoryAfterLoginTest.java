@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
-class CommandFactoryTest {
+class CommandFactoryAfterLoginTest {
 
-    private CommandFactory factory;
+    private CommandFactoryAfterLogin factory;
 
     @BeforeEach
     void beforeEach() {
         IO mockIO = mock(IO.class);
         Library library = new Biblioteca(null);
-        this.factory = new CommandFactory(library, mockIO);
+        this.factory = new CommandFactoryAfterLogin(library, mockIO);
     }
 
     @Test
