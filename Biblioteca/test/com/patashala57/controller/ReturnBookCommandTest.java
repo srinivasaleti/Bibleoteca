@@ -7,6 +7,8 @@ import com.patashala57.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.*;
 
 class ReturnBookCommandTest {
@@ -26,12 +28,13 @@ class ReturnBookCommandTest {
 
     @Test
     void returnBookToBiblioteca() {
-        String bookName = "name";
+        String itemName = "name";
 
-        when(this.mockIO.getInput()).thenReturn(bookName);
+        when(this.mockIO.getInput()).thenReturn(itemName);
+        when(this.library.whoCheckedOut(itemName, Book.class)).thenReturn(Optional.of(this.currentUser));
         this.returnBookCommand.execute();
 
-        verify(this.library).returnItem(Book.class, bookName);
+        verify(this.library).returnItem(Book.class, itemName, this.currentUser);
     }
 
 }

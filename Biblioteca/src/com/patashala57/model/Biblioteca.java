@@ -58,7 +58,13 @@ public class Biblioteca implements Library {
     }
 
     @Override
-    public boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName) {
+    public Optional<User> whoCheckedOut(String itemName, Class<? extends LibraryItem> itemClass) {
+        Optional<LibraryItem> item = this.findItem(itemClass, this.checkedOutItems, itemName);
+        return item.map(this.checkoutRegister::get);
+    }
+
+    @Override
+    public boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName, User user) {
         Optional<LibraryItem> item = this.findItem(itemClass, this.checkedOutItems, itemName);
         if (!item.isPresent()) {
             return false;

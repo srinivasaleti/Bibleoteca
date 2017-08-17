@@ -24,7 +24,7 @@ class Runner {
 
     private static List<User> generateUsers() {
         User user1 = new User("srinu", "123", "123", "srinivas.aleti03@gmail.com", "9838918493");
-        User user2 = new User("srinu", "1234", "1234", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new User("ramu", "1234", "1234", "srinivas.aleti03@gmail.com", "9838918493");
 
         return Arrays.asList(user1, user2);
     }

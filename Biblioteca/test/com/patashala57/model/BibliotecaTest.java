@@ -5,11 +5,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class BibliotecaTest {
 
@@ -19,12 +20,10 @@ class BibliotecaTest {
     private Movie twilight = new Movie("Twilight", 2009, "HardWicke", "8");
     private Movie titanic = new Movie("Titanic", 1997, "Cameron", "9");
     private String lineSeparator;
-
     private User user;
-
     @BeforeEach
     void beforeEach() {
-        this.user = new User("1", "1", "1", "1", "1");
+        user = new User("1", "1", "1", "1", "1");
         this.lineSeparator = IO.LINE_SEPARATOR;
     }
 
@@ -74,7 +73,6 @@ class BibliotecaTest {
 
         private Biblioteca biblioteca;
         private User user = new User("1", "1", "1", "1", "1");
-        ;
 
         @Test
         void checkoutABookFromBiblioteca() {
@@ -108,7 +106,7 @@ class BibliotecaTest {
 
             this.biblioteca.checkoutItem(Book.class, checkoutBook, this.user);
 
-            assertEquals(false, this.biblioteca.returnItem(Book.class, returnBook));
+            assertEquals(false, this.biblioteca.returnItem(Book.class, returnBook, user));
         }
 
         @Test
@@ -119,7 +117,7 @@ class BibliotecaTest {
 
             this.biblioteca.checkoutItem(Movie.class, checkoutMovie, this.user);
 
-            assertEquals(false, this.biblioteca.returnItem(Movie.class, returnMovie));
+            assertEquals(false, this.biblioteca.returnItem(Movie.class, returnMovie, this.user));
         }
 
         @Test
@@ -129,7 +127,7 @@ class BibliotecaTest {
 
             this.biblioteca.checkoutItem(Book.class, bookName, this.user);
 
-            assertEquals(true, this.biblioteca.returnItem(Book.class, bookName));
+            assertEquals(true, this.biblioteca.returnItem(Book.class, bookName, this.user));
         }
 
         @Test
@@ -139,7 +137,7 @@ class BibliotecaTest {
 
             this.biblioteca.checkoutItem(Movie.class, movieName, this.user);
 
-            assertEquals(true, this.biblioteca.returnItem(Movie.class, movieName));
+            assertEquals(true, this.biblioteca.returnItem(Movie.class, movieName, user));
         }
 
     }
@@ -176,7 +174,7 @@ class BibliotecaTest {
     void validUser() {
         User user1 = new User("srinu", "123", "1234", "s@gmaill.com", "124");
 
-        this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic), Arrays.asList(user1));
+        this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic), Collections.singletonList(user1));
 
         assertEquals(Optional.of(user1), this.biblioteca.isValidUserCredentials("123", "1234"));
     }
@@ -185,9 +183,20 @@ class BibliotecaTest {
     void inValidUser() {
         User user1 = new User("srinu", "123", "1234", "s@gmaill.com", "124");
 
-        this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic), Arrays.asList(user1));
+        this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic), Collections.singletonList(user1));
 
         assertNotEquals(Optional.of(user1), this.biblioteca.isValidUserCredentials("123", "123"));
+    }
+
+    @Test
+    void expectedUserWhoCheckedOutTheBook(){
+        this.biblioteca = new Biblioteca(Arrays.asList(loveStory, firstLove, twilight, titanic));
+        String bookName = "first love";
+
+        this.biblioteca.checkoutItem(Book.class, bookName, user);
+        this.biblioteca.addDetailsToCheckOutRegister(firstLove,user);
+
+        assertEquals(Optional.of(user), this.biblioteca.whoCheckedOut(bookName, Book.class));
     }
 
 }

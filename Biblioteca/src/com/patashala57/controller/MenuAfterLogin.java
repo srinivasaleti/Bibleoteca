@@ -21,11 +21,11 @@ public class MenuAfterLogin implements Menu {
     private final Factory commandFactory;
     private final User currentUser;
 
-    public MenuAfterLogin(Factory commandFactory, IO consoleIO) {
+    MenuAfterLogin(Factory commandFactory, IO consoleIO) {
         this(commandFactory, consoleIO, null);
     }
 
-    public MenuAfterLogin(Factory commandFactory, IO consoleIO, User user) {
+    MenuAfterLogin(Factory commandFactory, IO consoleIO, User user) {
         this.consoleIO = consoleIO;
         this.commandFactory = commandFactory;
         this.currentUser = user;

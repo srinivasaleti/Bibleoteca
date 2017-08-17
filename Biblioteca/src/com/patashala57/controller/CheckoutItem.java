@@ -1,6 +1,5 @@
 package com.patashala57.controller;
 
-import com.patashala57.model.Book;
 import com.patashala57.model.Library;
 import com.patashala57.model.LibraryItem;
 import com.patashala57.model.User;
@@ -37,7 +36,7 @@ class CheckoutItem {
             this.consoleIO.println(unsucessMessage);
             return;
         }
-        this.library.addDetailsToCheckOutRegister((LibraryItem) optional.get(),this.currentUser);
+        this.library.addDetailsToCheckOutRegister((LibraryItem) optional.get(), this.currentUser);
         this.consoleIO.println(successMessage);
 
     }
