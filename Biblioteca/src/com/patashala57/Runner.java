@@ -22,9 +22,16 @@ class Runner {
         return Arrays.asList(halfGirlFriend, loveStory, firstLove, twilight, titanic);
     }
 
+    private static List<User> generateUsers() {
+        User user1 = new User("srinu", "123", "123", "srinivas.aleti03@gmail.com", "9838918493");
+        User user2 = new User("srinu", "1234", "1234", "srinivas.aleti03@gmail.com", "9838918493");
+
+        return Arrays.asList(user1, user2);
+    }
+
     public static void main(String args[]) {
         ConsoleIO consoleIO = new ConsoleIO(System.out, new Scanner(System.in));
-        Library library = new Biblioteca(generateItems());
+        Library library = new Biblioteca(generateItems(), generateUsers());
         Factory commandFactory = new CommandFactoryBeforeLogin(library, consoleIO);
         MenuBeforeLogin menu = new MenuBeforeLogin(commandFactory, consoleIO);
 

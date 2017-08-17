@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BibliotecaTest {
 
@@ -163,6 +165,24 @@ class BibliotecaTest {
         this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic));
 
         assertEquals(false, this.biblioteca.isEmpty(Movie.class));
+    }
+
+    @Test
+    void validUser() {
+        User user1 = new User("srinu", "123", "1234", "s@gmaill.com", "124");
+
+        this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic), Arrays.asList(user1));
+
+        assertTrue(this.biblioteca.isValidUserCredentials("123", "1234"));
+    }
+
+    @Test
+    void inValidUser() {
+        User user1 = new User("srinu", "123", "1234", "s@gmaill.com", "124");
+
+        this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic), Arrays.asList(user1));
+
+        assertFalse(this.biblioteca.isValidUserCredentials("123", "123"));
     }
 
 }

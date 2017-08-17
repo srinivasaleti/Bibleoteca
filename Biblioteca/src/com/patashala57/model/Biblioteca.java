@@ -12,12 +12,22 @@ public class Biblioteca implements Library {
 
     private final List<LibraryItem> allItems;
     private final List<LibraryItem> checkedOutItems;
+    private final List<User> allUsers;
 
     public Biblioteca(List<LibraryItem> items) {
+        this(items, null);
+    }
+
+    public Biblioteca(List<LibraryItem> items, List<User> users) {
         if (items == null) {
             this.allItems = new ArrayList<>();
         } else {
             this.allItems = new ArrayList<>(items);
+        }
+        if (users == null) {
+            this.allUsers = new ArrayList<>();
+        } else {
+            this.allUsers = new ArrayList<>(users);
         }
         this.checkedOutItems = new ArrayList<>();
     }
@@ -53,7 +63,9 @@ public class Biblioteca implements Library {
 
     @Override
     public boolean isValidUserCredentials(String validLibraryNo, String validPassword) {
-        return true;
+        return this.allUsers
+                .stream()
+                .anyMatch(user -> user.hasSameCredentials(validLibraryNo, validPassword));
     }
 
     @Override

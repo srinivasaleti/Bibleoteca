@@ -1,6 +1,6 @@
 package com.patashala57.model;
 
-class User {
+public class User {
 
     private final String name;
     private final String libraryNo;
