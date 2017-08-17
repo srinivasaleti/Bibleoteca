@@ -12,7 +12,7 @@ public class Biblioteca implements Library {
     private final List<LibraryItem> checkedOutItems;
     private final List<User> allUsers;
 
-    private final Map<Book, User> checkoutRegiser;
+    private final Map<LibraryItem, User> checkoutRegister;
 
     public Biblioteca(List<LibraryItem> items) {
         this(items, null);
@@ -30,7 +30,7 @@ public class Biblioteca implements Library {
             this.allUsers = new ArrayList<>(users);
         }
         this.checkedOutItems = new ArrayList<>();
-        this.checkoutRegiser = new HashMap<>();
+        this.checkoutRegister = new HashMap<>();
     }
 
     @Override
@@ -45,11 +45,16 @@ public class Biblioteca implements Library {
 
     @Override
     public Optional<LibraryItem> checkoutItem(Class<? extends LibraryItem> itemClass,
-                                              String itemName) {
+                                              String itemName, User currentUser) {
         Optional<LibraryItem> itemWithGivenName = this.findItem(itemClass, this.allItems, itemName);
         itemWithGivenName.ifPresent(libraryItem -> this.moveItem(libraryItem, this.allItems,
                 this.checkedOutItems));
         return itemWithGivenName;
+    }
+
+    @Override
+    public void addDetailsToCheckOutRegister(LibraryItem item, User currentUser) {
+        this.checkoutRegister.put(item, currentUser);
     }
 
     @Override

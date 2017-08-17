@@ -14,14 +14,14 @@ class CheckoutMovieCommandTest {
     private IO mockIO;
     private Library library;
     private CheckoutMovieCommand checkoutMovieCommand;
-    private User currentUser;
+    private User user;
 
     @BeforeEach
     void beforeEach() {
         this.mockIO = mock(IO.class);
         this.library = mock(Library.class);
-        this.currentUser=new User("1","1","1","1","1");
-        this.checkoutMovieCommand = new CheckoutMovieCommand(this.library, mockIO,this.currentUser);
+        this.user =new User("1","1","1","1","1");
+        this.checkoutMovieCommand = new CheckoutMovieCommand(this.library, mockIO,this.user);
     }
 
     @Test
@@ -29,7 +29,7 @@ class CheckoutMovieCommandTest {
         String movieName = "MovieName";
         when(this.library.isEmpty(Movie.class)).thenReturn(false);
 
-        verify(this.library, never()).checkoutItem(Movie.class, movieName);
+        verify(this.library, never()).checkoutItem(Movie.class, movieName,this.user);
     }
 
     @Test
@@ -37,12 +37,12 @@ class CheckoutMovieCommandTest {
         String movieName = "MovieName";
 
         when(this.library.isEmpty(Movie.class)).thenReturn(false);
-        when(this.library.checkoutItem(Movie.class, movieName))
+        when(this.library.checkoutItem(Movie.class, movieName,this.user))
                 .thenReturn(java.util.Optional.empty());
         when(this.mockIO.getInput()).thenReturn(movieName);
         this.checkoutMovieCommand.execute();
 
-        verify(this.library).checkoutItem(Movie.class, movieName);
+        verify(this.library).checkoutItem(Movie.class, movieName,this.user);
     }
 
 }

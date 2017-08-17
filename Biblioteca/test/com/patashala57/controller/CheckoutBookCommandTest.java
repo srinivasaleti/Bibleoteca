@@ -29,7 +29,7 @@ class CheckoutBookCommandTest {
         String bookNameToCheckout = "BookName";
         when(this.library.isEmpty(Book.class)).thenReturn(true);
 
-        verify(this.library, never()).checkoutItem(Book.class, bookNameToCheckout);
+        verify(this.library, never()).checkoutItem(Book.class, bookNameToCheckout,null);
     }
 
     @Test
@@ -37,12 +37,12 @@ class CheckoutBookCommandTest {
         String bookNameToCheckout = "BookName";
 
         when(this.library.isEmpty(Book.class)).thenReturn(false);
-        when(this.library.checkoutItem(Book.class, bookNameToCheckout))
+        when(this.library.checkoutItem(Book.class, bookNameToCheckout,null))
                 .thenReturn(java.util.Optional.empty());
         when(this.mockIO.getInput()).thenReturn(bookNameToCheckout);
         this.checkoutBookCommand.execute();
 
-        verify(this.library).checkoutItem(Book.class, bookNameToCheckout);
+        verify(this.library).checkoutItem(Book.class, bookNameToCheckout,null);
     }
 
 }

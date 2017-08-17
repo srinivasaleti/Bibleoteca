@@ -1,5 +1,6 @@
 package com.patashala57.controller;
 
+import com.patashala57.model.Book;
 import com.patashala57.model.Library;
 import com.patashala57.model.LibraryItem;
 import com.patashala57.model.User;
@@ -28,15 +29,17 @@ class CheckoutItem {
         }
         this.consoleIO.print(enterBooksNameToCheckout);
         String bookName = consoleIO.getInput();
-        displayMessageBasedOnResponse(library.checkoutItem(itemClass, bookName), successMessage, unsucessMessage);
+        displayMessageBasedOnResponse(library.checkoutItem(itemClass, bookName, this.currentUser), successMessage, unsucessMessage);
     }
 
     private void displayMessageBasedOnResponse(Optional optional, String successMessage, String unsucessMessage) {
-        if (optional.isPresent()) {
-            this.consoleIO.println(successMessage);
-        } else {
+        if (!optional.isPresent()) {
             this.consoleIO.println(unsucessMessage);
+            return;
         }
+        this.library.addDetailsToCheckOutRegister((LibraryItem) optional.get(),this.currentUser);
+        this.consoleIO.println(successMessage);
+
     }
 
 }

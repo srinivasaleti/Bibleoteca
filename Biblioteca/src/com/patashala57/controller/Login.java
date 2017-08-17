@@ -29,8 +29,8 @@ class Login implements Command {
         String password = this.consoleIO.getInput();
         Optional<User> currentLibraryUser = this.library.isValidUserCredentials(libraryNo, password);
         if (currentLibraryUser.isPresent()) {
-            Factory commandFactory = new CommandFactoryAfterLogin(this.library, this.consoleIO);
-            MenuAfterLogin menuAfterLogin = new MenuAfterLogin(commandFactory, this.consoleIO,currentLibraryUser.get());
+            Factory commandFactory = new CommandFactoryAfterLogin(this.library, this.consoleIO,currentLibraryUser.get());
+            MenuAfterLogin menuAfterLogin = new MenuAfterLogin(commandFactory, this.consoleIO, currentLibraryUser.get());
             menuAfterLogin.launch();
             return;
         }

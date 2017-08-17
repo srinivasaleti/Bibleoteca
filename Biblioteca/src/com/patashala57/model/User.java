@@ -16,7 +16,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    boolean hasSameCredentials(String libraryNo, String password) {
+    public boolean hasSameCredentials(String libraryNo, String password) {
         return this.libraryNo.equals(libraryNo) && this.password.equals(password);
     }
 

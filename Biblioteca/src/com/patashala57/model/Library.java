@@ -7,12 +7,13 @@ public interface Library {
 
     String stringRepresentationOfItems(Class<? extends LibraryItem> className);
 
-    Optional<LibraryItem> checkoutItem(Class<? extends LibraryItem> itemClass, String itemName);
-
     boolean isEmpty(Class<? extends LibraryItem> itemClass);
 
     boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName);
 
     Optional<User> isValidUserCredentials(String validLibraryNo, String validPassword);
 
+    Optional checkoutItem(Class<? extends LibraryItem> itemClass, String bookName, User currentUser);
+
+    void addDetailsToCheckOutRegister(LibraryItem item, User currentUser);
 }

@@ -1,7 +1,6 @@
 package com.patashala57.controller;
 
 import com.patashala57.model.Library;
-import com.patashala57.model.User;
 import com.patashala57.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -15,7 +15,7 @@ class ReturnItem {
     ReturnItem(Library library, IO consoleIO, User currentUser) {
         this.library = library;
         this.consoleIO = consoleIO;
-        this.currentUser=currentUser;
+        this.currentUser = currentUser;
     }
 
     void returnAItem(Class<? extends LibraryItem> itemClass, String enterItemMessage,

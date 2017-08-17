@@ -1,9 +1,6 @@
 package com.patashala57.controller;
 
-import com.patashala57.model.Book;
-import com.patashala57.model.Library;
-import com.patashala57.model.Movie;
-import com.patashala57.model.User;
+import com.patashala57.model.*;
 import com.patashala57.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,13 +22,14 @@ class CheckoutItemTest {
     private IO mockIO;
     private CheckoutItem checkoutItems;
     private Library library;
-    private User currentUser;
+    private User user;
+
     @BeforeEach
     void beforeEach() {
         library = mock(Library.class);
         mockIO = mock(IO.class);
-        this.currentUser=new User("1","1","1","1","1");
-        checkoutItems = new CheckoutBookCommand(library, mockIO,this.currentUser);
+        this.user =new User("1","1","1","1","1");
+        checkoutItems = new CheckoutBookCommand(library, mockIO,this.user);
     }
 
     @Test
@@ -61,13 +59,13 @@ class CheckoutItemTest {
         String bookNameToCheckout = "BookName";
 
         when(this.library.isEmpty(Book.class)).thenReturn(false);
-        when(this.library.checkoutItem(Book.class, bookNameToCheckout))
+        when(this.library.checkoutItem(Book.class, bookNameToCheckout,this.user))
                 .thenReturn(java.util.Optional.empty());
         when(this.mockIO.getInput()).thenReturn(bookNameToCheckout);
         this.checkoutItems.checkOut(Book.class, NO_BOOK_AVAILABLE_MESSAGE, ENTER_BOOK_NAME_TO_CHECK_OUT,
                 CHECKOUT_BOOK_SUCCESS_MESSAGE, CHECKOUT_BOOK_UNSUCCESS_MESSAGE);
 
-        verify(this.library).checkoutItem(Book.class, bookNameToCheckout);
+        verify(this.library).checkoutItem(Book.class, bookNameToCheckout,this.user);
     }
 
     @Test
@@ -75,13 +73,13 @@ class CheckoutItemTest {
         String movieName = "MovieName";
 
         when(this.library.isEmpty(Movie.class)).thenReturn(false);
-        when(this.library.checkoutItem(Movie.class, movieName))
+        when(this.library.checkoutItem(Movie.class, movieName,this.user))
                 .thenReturn(java.util.Optional.empty());
         when(this.mockIO.getInput()).thenReturn(movieName);
         this.checkoutItems.checkOut(Movie.class, NO_MOVIE_AVAILABLE_MESSAGE, ENTER_MOVIE_NAME_TO_CHECK_OUT,
                 CHECKOUT_MOVIE_SUCCESS_MESSAGE, CHECKOUT_MOVIE_UNSUCCESS_MESSAGE);
 
-        verify(this.library).checkoutItem(Movie.class, movieName);
+        verify(this.library).checkoutItem(Movie.class, movieName,this.user);
     }
 
     @Test
@@ -91,7 +89,7 @@ class CheckoutItemTest {
         String successMessage = "Thank you! Enjoy the book";
 
         when(this.library.isEmpty(Book.class)).thenReturn(false);
-        when(this.library.checkoutItem(Book.class, bookNameToCheckOut))
+        when(this.library.checkoutItem(Book.class, bookNameToCheckOut,this.user))
                 .thenReturn(java.util.Optional.of(book));
         when(this.mockIO.getInput()).thenReturn(bookNameToCheckOut);
         this.checkoutItems.checkOut(Book.class, NO_BOOK_AVAILABLE_MESSAGE, ENTER_BOOK_NAME_TO_CHECK_OUT,
@@ -107,7 +105,7 @@ class CheckoutItemTest {
         String unSuccessMessage = "That book is not available";
 
         when(this.library.isEmpty(Book.class)).thenReturn(false);
-        when(this.library.checkoutItem(Book.class, bookName))
+        when(this.library.checkoutItem(Book.class, bookName,this.user))
                 .thenReturn(java.util.Optional.empty());
         when(this.mockIO.getInput()).thenReturn(bookName);
         this.checkoutItems.checkOut(Book.class, NO_BOOK_AVAILABLE_MESSAGE, ENTER_BOOK_NAME_TO_CHECK_OUT,
@@ -128,7 +126,7 @@ class CheckoutItemTest {
 
         when(this.library.isEmpty(Movie.class)).thenReturn(false);
         when(this.mockIO.getInput()).thenReturn(name);
-        when(this.library.checkoutItem(Movie.class, name))
+        when(this.library.checkoutItem(Movie.class, name,this.user))
                 .thenReturn(java.util.Optional.of(movie));
         this.checkoutItems.checkOut(Movie.class, NO_MOVIE_AVAILABLE_MESSAGE, ENTER_MOVIE_NAME_TO_CHECK_OUT,
                 CHECKOUT_MOVIE_SUCCESS_MESSAGE, CHECKOUT_MOVIE_UNSUCCESS_MESSAGE);
@@ -144,12 +142,30 @@ class CheckoutItemTest {
 
         when(this.library.isEmpty(Movie.class)).thenReturn(false);
         when(this.mockIO.getInput()).thenReturn(movieName);
-        when(this.library.checkoutItem(Movie.class, movieName))
+        when(this.library.checkoutItem(Movie.class, movieName,this.user))
                 .thenReturn(java.util.Optional.empty());
         this.checkoutItems.checkOut(Movie.class, NO_MOVIE_AVAILABLE_MESSAGE, ENTER_MOVIE_NAME_TO_CHECK_OUT,
                 CHECKOUT_MOVIE_SUCCESS_MESSAGE, CHECKOUT_MOVIE_UNSUCCESS_MESSAGE);
 
         verify(this.mockIO).println(unSuccessMessage);
+    }
+
+    @Test
+    void afterSuccessFulCheckoutDetailsShouldAddToCheckoutRegister(){
+        String name = "Movie Name";
+        int yearReleased = 1000;
+        String director = "director";
+        String rating = "unrated";
+        Movie movie = new Movie(name, yearReleased, director, rating);
+
+        when(this.library.isEmpty(Movie.class)).thenReturn(false);
+        when(this.mockIO.getInput()).thenReturn(name);
+        when(this.library.checkoutItem(Movie.class, name,this.user))
+                .thenReturn(java.util.Optional.of(movie));
+        this.checkoutItems.checkOut(Movie.class, NO_MOVIE_AVAILABLE_MESSAGE, ENTER_MOVIE_NAME_TO_CHECK_OUT,
+                CHECKOUT_MOVIE_SUCCESS_MESSAGE, CHECKOUT_MOVIE_UNSUCCESS_MESSAGE);
+
+        verify(this.library).addDetailsToCheckOutRegister(movie,this.user);
     }
 
 }
