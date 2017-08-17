@@ -8,9 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BibliotecaTest {
 
@@ -173,7 +171,7 @@ class BibliotecaTest {
 
         this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic), Arrays.asList(user1));
 
-        assertTrue(this.biblioteca.isValidUserCredentials("123", "1234"));
+        assertEquals(Optional.of(user1),this.biblioteca.isValidUserCredentials("123", "1234"));
     }
 
     @Test
@@ -182,7 +180,7 @@ class BibliotecaTest {
 
         this.biblioteca = new Biblioteca(Arrays.asList(firstLove, titanic), Arrays.asList(user1));
 
-        assertFalse(this.biblioteca.isValidUserCredentials("123", "123"));
+        assertNotEquals(Optional.of(user1),this.biblioteca.isValidUserCredentials("123", "123"));
     }
 
 }

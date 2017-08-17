@@ -62,10 +62,11 @@ public class Biblioteca implements Library {
     }
 
     @Override
-    public boolean isValidUserCredentials(String validLibraryNo, String validPassword) {
+    public Optional<User> isValidUserCredentials(String validLibraryNo, String validPassword) {
         return this.allUsers
                 .stream()
-                .anyMatch(user -> user.hasSameCredentials(validLibraryNo, validPassword));
+                .filter(user -> user.hasSameCredentials(validLibraryNo, validPassword))
+                .findFirst();
     }
 
     @Override

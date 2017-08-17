@@ -1,7 +1,10 @@
 package com.patashala57.controller;
 
 import com.patashala57.model.Library;
+import com.patashala57.model.User;
 import com.patashala57.view.IO;
+
+import java.util.Optional;
 
 //Responsible for user login to access bibiloteca
 class Login implements Command {
@@ -26,7 +29,8 @@ class Login implements Command {
         String libraryNo = this.consoleIO.getInput();
         this.consoleIO.print(ENTER_PASSWORD);
         String password = this.consoleIO.getInput();
-        if (this.library.isValidUserCredentials(libraryNo, password)) {
+        Optional<User> currentLibraryUser = this.library.isValidUserCredentials(libraryNo, password);
+        if (currentLibraryUser.isPresent()) {
             this.menuAfterLogin.launch();
             return;
         }

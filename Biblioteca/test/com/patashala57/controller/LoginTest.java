@@ -1,9 +1,12 @@
 package com.patashala57.controller;
 
 import com.patashala57.model.Library;
+import com.patashala57.model.User;
 import com.patashala57.view.IO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -26,6 +29,11 @@ class LoginTest {
     void readLibraryNoAndPasswordFromUser() {
         String enterLibraryNo = "Enter libraryNo::";
         String enterPassword = "Enter password::";
+        String inValidLibraryNo = "inValidLibraryNo";
+        String inValidPassword = "inValidPassword";
+
+        when(this.mockIO.getInput()).thenReturn(inValidLibraryNo, inValidPassword);
+        when(this.library.isValidUserCredentials(inValidLibraryNo, inValidPassword)).thenReturn(Optional.empty());
 
         this.login.execute();
 
@@ -40,6 +48,7 @@ class LoginTest {
         String inValidPassword = "inValidPassword";
 
         when(this.mockIO.getInput()).thenReturn(inValidLibraryNo, inValidPassword);
+        when(this.library.isValidUserCredentials(inValidLibraryNo, inValidPassword)).thenReturn(Optional.empty());
 
         this.login.execute();
 
@@ -53,7 +62,7 @@ class LoginTest {
         String invalidCredentials = "Invalid Credentials";
 
         when(this.mockIO.getInput()).thenReturn(inValidLibraryNo, inValidPassword);
-        when(this.library.isValidUserCredentials(inValidLibraryNo, inValidPassword)).thenReturn(false);
+        when(this.library.isValidUserCredentials(inValidLibraryNo, inValidPassword)).thenReturn(Optional.empty());
 
         this.login.execute();
 
@@ -66,7 +75,7 @@ class LoginTest {
         String validPassword = "validPassword";
 
         when(this.mockIO.getInput()).thenReturn(validLibraryNo, validPassword);
-        when(this.library.isValidUserCredentials(validLibraryNo, validPassword)).thenReturn(true);
+        when(this.library.isValidUserCredentials(validLibraryNo, validPassword)).thenReturn(Optional.of(new User("1", "1", "1", "1", "1")));
 
         this.login.execute();
 
