@@ -13,4 +13,6 @@ public interface Library {
 
     boolean returnItem(Class<? extends LibraryItem> itemClass, String itemName);
 
+    boolean isValidUserCredentials(String validLibraryNo, String validPassword);
+
 }

@@ -52,6 +52,11 @@ public class Biblioteca implements Library {
     }
 
     @Override
+    public boolean isValidUserCredentials(String validLibraryNo, String validPassword) {
+        return true;
+    }
+
+    @Override
     public boolean isEmpty(Class<? extends LibraryItem> itemClass) {
         return this.filterRequiredItemsInAList(this.allItems, itemClass).isEmpty();
     }
